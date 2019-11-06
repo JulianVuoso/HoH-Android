@@ -1,4 +1,4 @@
-package ar.edu.itba.hci.hoh.ui.home;
+package ar.edu.itba.hci.hoh.ui.rooms;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import ar.edu.itba.hci.hoh.R;
 
-public class HomeFragment extends Fragment {
+public class RoomsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private RoomsViewModel roomsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_rooms, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        roomsViewModel =
+                ViewModelProviders.of(this).get(RoomsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_devices, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        roomsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

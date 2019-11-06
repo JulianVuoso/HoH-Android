@@ -1,4 +1,4 @@
-package ar.edu.itba.hci.hoh.ui.dashboard;
+package ar.edu.itba.hci.hoh.ui.devices;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import ar.edu.itba.hci.hoh.R;
 
-public class DashboardFragment extends Fragment {
+public class DevicesFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private DevicesViewModel devicesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_devices, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        devicesViewModel =
+                ViewModelProviders.of(this).get(DevicesViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_favorites, container, false);
+        final TextView textView = root.findViewById(R.id.text_notifications);
+        devicesViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
