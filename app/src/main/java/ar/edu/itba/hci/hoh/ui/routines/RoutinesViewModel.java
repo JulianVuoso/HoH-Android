@@ -10,7 +10,7 @@ public class RoutinesViewModel extends ViewModel {
 
     public RoutinesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is routines fragment");
     }
 
     public LiveData<String> getText() {
