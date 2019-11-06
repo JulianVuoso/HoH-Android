@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HOH</string>
+    <string name="title_rooms">Rooms</string>
+    <string name="title_devices">Devices</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_routines">Routines</string>
+</resources>
