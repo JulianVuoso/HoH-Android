@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_rooms"
-        android:name="ar.edu.itba.hci.hoh.ui.home.HomeFragment"
+        android:name="ar.edu.itba.hci.hoh.ui.rooms.RoomsFragment"
         android:label="@string/title_rooms"
         tools:layout="@layout/fragment_rooms" />
 
     <fragment
         android:id="@+id/navigation_devices"
-        android:name="ar.edu.itba.hci.hoh.ui.dashboard.DashboardFragment"
+        android:name="ar.edu.itba.hci.hoh.ui.devices.DevicesFragment"
         android:label="@string/title_devices"
         tools:layout="@layout/fragment_devices" />
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="ar.edu.itba.hci.hoh.ui.notifications.NotificationsFragment"
+        android:name="ar.edu.itba.hci.hoh.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/navigation_routines"
-        android:name="ar.edu.itba.hci.hoh.ui.notifications.NotificationsFragment"
+        android:name="ar.edu.itba.hci.hoh.ui.routines.RoutinesFragment"
         android:label="@string/title_routines"
         tools:layout="@layout/fragment_favorites" />
 </navigation>
