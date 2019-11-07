@@ -40,7 +40,9 @@ public class DeviceFragment extends Fragment {
         rvDevices = root.findViewById(R.id.rv_devices_dev);
         // Para numero automatico, ver:
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
-        gridLayoutManager = new GridLayoutManager(this.getContext(), 3);
+        gridLayoutManager = new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false);
+//        new GridLayoutManager(this.getContext(), 3, )
+
         rvDevices.setLayoutManager(gridLayoutManager);
         adapter = new DeviceAdapter(data);
         rvDevices.setAdapter(adapter);
