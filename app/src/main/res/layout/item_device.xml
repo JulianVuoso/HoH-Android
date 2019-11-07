@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
             android:text="Locked"
-            android:textColor="@color/colorDevCardContent"
+            android:textColor="@color/colorDevCardContentFaded"
             android:textSize="12sp"
             android:textStyle="italic" />
 
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
             android:text="Living Room"
-            android:textColor="@color/colorDevCardContent"
+            android:textColor="@color/colorDevCardContentFaded"
             android:textSize="12sp"
             android:textStyle="italic" />
 

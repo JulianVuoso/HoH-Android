@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.Elements.Room;
@@ -26,11 +27,11 @@ public class DevicesFragment extends Fragment {
 
     private DevicesViewModel devicesViewModel;
 
-    private RecyclerView rvDevices;
+    private RecyclerView rvCategories;
     private GridLayoutManager gridLayoutManager;
     private DevicesAdapter adapter;
 
-    List<Device> data = new ArrayList<>();
+    List<Category> data = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,27 +41,22 @@ public class DevicesFragment extends Fragment {
         // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
         fillData();
 
-        rvDevices = root.findViewById(R.id.rv_devices_dev);
+        rvCategories = root.findViewById(R.id.rv_categories);
         // Para numero automatico, ver:
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
         gridLayoutManager = new GridLayoutManager(this.getContext(), 3);
-        rvDevices.setLayoutManager(gridLayoutManager);
+        rvCategories.setLayoutManager(gridLayoutManager);
         adapter = new DevicesAdapter(data);
-        rvDevices.setAdapter(adapter);
+        rvCategories.setAdapter(adapter);
 
         return root;
     }
 
     private void fillData() {
-        DeviceType lamp = new DeviceType("1234", "lamp");
-        DeviceType speaker = new DeviceType("2345", "speaker");
-        Room living = new Room("1122", "Living Room", "...", false);
-        Room kitchen = new Room("2233", "Kitchen", "...", false);
-        data.add(new Device("1234", "Table Lamp", lamp, kitchen, false));
-        data.add(new Device("1234", "Front Light", lamp, living, false));
-        data.add(new Device("1234", "Garden Light", lamp, kitchen, false));
-
-        data.add(new Device("1234", "Table Speaker", speaker, kitchen, false));
-        data.add(new Device("1234", "Juli's Speaker", speaker, living, false));
+        data.add(new Category("Lights", R.drawable.ic_light_black_60dp));
+        data.add(new Category("Doors & Blinds", R.drawable.ic_door_black_60dp));
+        data.add(new Category("Air Conditioning", R.drawable.ic_door_black_60dp));
+        data.add(new Category("Appliances", R.drawable.ic_fridge_black_60dp));
+        data.add(new Category("Entertainment", R.drawable.ic_entertainment_black_60dp));
     }
 }

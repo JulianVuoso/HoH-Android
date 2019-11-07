@@ -1,4 +1,4 @@
-package ar.edu.itba.hci.hoh.ui.devices;
+package ar.edu.itba.hci.hoh.ui.device;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.R;
 
-public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesViewHolder> {
-    private List<Category> data;
+public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DevicesViewHolder> {
+    private List<Device> data;
 
-    public DevicesAdapter(List<Category> data) {
+    public DeviceAdapter(List<Device> data) {
         this.data = data;
     }
 
@@ -27,14 +26,16 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
     @Override
     public DevicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new DevicesViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_category, parent, false));
+                .inflate(R.layout.item_device, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull DevicesViewHolder holder, int position) {
-        Category category = data.get(position);
-        holder.tvCategoryName.setText(category.getName());
-        holder.ivCategoryImage.setImageResource(category.getDrawableId());
+        Device device = data.get(position);
+        holder.tvDeviceName.setText(device.getName());
+        holder.tvDeviceRoom.setText(device.getRoom().getName());
+        holder.tvDeviceState.setText(device.getState());
+        holder.ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
     }
 
     @Override
@@ -44,14 +45,18 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
 
 
     class DevicesViewHolder extends RecyclerView.ViewHolder {
-        TextView tvCategoryName;
-        ImageView ivCategoryImage;
+        TextView tvDeviceState;
+        TextView tvDeviceName;
+        TextView tvDeviceRoom;
+        ImageView ivDeviceImage;
 
 
         public DevicesViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvCategoryName = itemView.findViewById(R.id.cat_name);
-            ivCategoryImage = itemView.findViewById(R.id.cat_img);
+            tvDeviceName = itemView.findViewById(R.id.dev_name);
+            tvDeviceRoom = itemView.findViewById(R.id.dev_room);
+            tvDeviceState = itemView.findViewById(R.id.dev_state);
+            ivDeviceImage = itemView.findViewById(R.id.dev_img);
         }
     }
 }
