@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
-INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
-INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
-INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
+ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
 MERGED from [androidx.navigation:navigation-ui:2.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/fe479a07fa9cbb0b6f43f5ed29e623b6/jetified-navigation-ui-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/2946ca0ea6c89dab7d7d9fbc18e54292/material-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.0.2] /home/julian/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/AndroidManifest.xml:17:1-22:12
@@ -42,25 +42,25 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] /home/julian/.gradle/cach
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/8cf450d11667f9427b289f08c2115f5c/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/d31a9dbc3f8404c541e987748c42963b/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/699bc310780b1730bce8fe271ffeca8b/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
-INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
-INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
 	package
 		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:3:5-34
 		INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml
 		INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml
-		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
+		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
 		INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml
-		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-23:12
+		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:1-26:12
 		INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:5:5-21:19
+ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:5:5-24:19
 MERGED from [com.google.android.material:material:1.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/2946ca0ea6c89dab7d7d9fbc18e54292/material-1.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/2946ca0ea6c89dab7d7d9fbc18e54292/material-1.0.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /home/julian/.gradle/caches/transforms-2/files-2.1/508ac768b50158a079142e4dc4915061/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
@@ -103,6 +103,12 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:18:17-77
 	android:name
 		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:18:27-74
+meta-data#preloaded_fonts
+ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:21:9-23:57
+	android:resource
+		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:23:13-54
+	android:name
+		ADDED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:22:13-43
 uses-sdk
 INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml
