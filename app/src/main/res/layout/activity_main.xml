@@ -5,7 +5,6 @@
     android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize"
     >
 <!--VER COMO INSRETAR BIEN LA TOOLBAR, SACAR EL PADDING TOP ESE-->
 

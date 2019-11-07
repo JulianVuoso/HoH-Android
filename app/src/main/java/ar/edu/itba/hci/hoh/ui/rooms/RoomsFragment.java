@@ -23,13 +23,13 @@ public class RoomsFragment extends Fragment {
         roomsViewModel =
                 ViewModelProviders.of(this).get(RoomsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_devices, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        roomsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.text_dashboard);
+//        roomsViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         return root;
     }
 }
