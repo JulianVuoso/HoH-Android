@@ -36,7 +36,7 @@ public class DevicesFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private DevicesAdapter adapter;
 
-    List<Category> data = new ArrayList<>();
+    private List<Category> data = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class DevicesFragment extends Fragment {
         adapter = new DevicesAdapter(data, new DevicesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Category category) {
-                DevicesFragmentDirections.ActionSelectCategory action = DevicesFragmentDirections.actionSelectCategory(category);
+                DevicesFragmentDirections.ActionSelectCategory action = DevicesFragmentDirections.actionSelectCategory(category, category.getName());
                 Navigation.findNavController(root).navigate(action);
             }
         });

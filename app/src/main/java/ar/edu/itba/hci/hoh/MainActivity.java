@@ -21,13 +21,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.kebab_menu, menu);
+        inflater.inflate(R.menu.appbar_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_search:
+                Toast.makeText(this, "Search Selected", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.kebab_settings:
                 Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
                 break;

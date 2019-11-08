@@ -25,12 +25,15 @@
     <fragment
         android:id="@+id/navigation_device"
         android:name="ar.edu.itba.hci.hoh.ui.device.DeviceFragment"
-        android:label="@string/title_device"
+        android:label="{appbar_title}"
         tools:layout="@layout/fragment_devices" >
         <argument
             android:name="category"
             app:argType="ar.edu.itba.hci.hoh.Elements.Category"
             app:nullable="true" />
+        <argument
+            android:name="appbar_title"
+            app:argType="string" />
     </fragment>
 
     <fragment
