@@ -27,7 +27,6 @@ import ar.edu.itba.hci.hoh.Elements.Room;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.device.DeviceFragment;
 
-import static ar.edu.itba.hci.hoh.ui.devices.DevicesFragmentDirections.actionNavigationDevicesToNavigationDevice;
 
 public class DevicesFragment extends Fragment {
 
@@ -55,8 +54,8 @@ public class DevicesFragment extends Fragment {
         adapter = new DevicesAdapter(data, new DevicesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Category category) {
-//                NavDirections action = DevicesFragmentDirections.actionNavigationDevicesToNavigationDevice();
-//                Navigation.findNavController(root);
+                DevicesFragmentDirections.ActionSelectCategory action = DevicesFragmentDirections.actionSelectCategory(category);
+                Navigation.findNavController(root).navigate(action);
             }
         });
         rvCategories.setAdapter(adapter);
@@ -65,10 +64,10 @@ public class DevicesFragment extends Fragment {
     }
 
     private void fillData() {
-        data.add(new Category("Lights", R.drawable.ic_light_black_60dp));
-        data.add(new Category("Doors & Blinds", R.drawable.ic_door_black_60dp));
-        data.add(new Category("Air Conditioning", R.drawable.ic_door_black_60dp));
-        data.add(new Category("Appliances", R.drawable.ic_fridge_black_60dp));
-        data.add(new Category("Entertainment", R.drawable.ic_entertainment_black_60dp));
+        data.add(new Category("Lights", R.drawable.ic_light_black_60dp, "lamp"));
+        data.add(new Category("Doors & Blinds", R.drawable.ic_door_black_60dp, "door", "blinds"));
+        data.add(new Category("Air Conditioning", R.drawable.ic_door_black_60dp, "ac"));
+        data.add(new Category("Appliances", R.drawable.ic_fridge_black_60dp, "refrigerator", "oven"));
+        data.add(new Category("Entertainment", R.drawable.ic_entertainment_black_60dp, "speaker"));
     }
 }

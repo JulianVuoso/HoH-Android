@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.Elements.Room;
@@ -29,10 +31,15 @@ public class DeviceFragment extends Fragment {
 
     List<Device> data = new ArrayList<>();
 
+    private Category category;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         devicesViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_device, container, false);
+
+        if (getArguments() != null)
+            category = DeviceFragmentArgs.fromBundle(getArguments()).getCategory();
 
         // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
         fillData();
@@ -51,15 +58,22 @@ public class DeviceFragment extends Fragment {
     }
 
     private void fillData() {
+        List<Device> auxList = new ArrayList<>();
+
         DeviceType lamp = new DeviceType("1234", "lamp");
         DeviceType speaker = new DeviceType("2345", "speaker");
         Room living = new Room("1122", "Living Room", "...", false);
         Room kitchen = new Room("2233", "Kitchen", "...", false);
-        data.add(new Device("1234", "Table Lamp", lamp, kitchen, false));
-        data.add(new Device("1234", "Front Light", lamp, living, false));
-        data.add(new Device("1234", "Garden Light", lamp, kitchen, false));
+        auxList.add(new Device("1234", "Table Lamp", lamp, kitchen, false));
+        auxList.add(new Device("1234", "Front Light", lamp, living, false));
+        auxList.add(new Device("1234", "Garden Light", lamp, kitchen, false));
 
-        data.add(new Device("1234", "Table Speaker", speaker, kitchen, false));
-        data.add(new Device("1234", "Juli's Speaker", speaker, living, false));
+        auxList.add(new Device("1234", "Table Speaker", speaker, kitchen, false));
+        auxList.add(new Device("1234", "Juli's Speaker", speaker, living, false));
+
+        for (Device dev : auxList) {
+            if (category != null && category.checkDeviceType(dev.getType()))
+                data.add(dev);
+        }
     }
 }
