@@ -15,12 +15,15 @@ import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesViewHolder> {
     private List<Category> data;
+    private OnItemClickListener<Category> listener;
 
-    public DevicesAdapter(List<Category> data) {
+    public DevicesAdapter(List<Category> data, OnItemClickListener<Category> onClickListener) {
         this.data = data;
+        this.listener = onClickListener;
     }
 
     @NonNull
@@ -32,16 +35,13 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
 
     @Override
     public void onBindViewHolder(@NonNull DevicesViewHolder holder, int position) {
-        Category category = data.get(position);
-        holder.tvCategoryName.setText(category.getName());
-        holder.ivCategoryImage.setImageResource(category.getDrawableId());
+        holder.bind(data.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
         return data.size();
     }
-
 
     class DevicesViewHolder extends RecyclerView.ViewHolder {
         TextView tvCategoryName;
@@ -52,6 +52,16 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
             super(itemView);
             tvCategoryName = itemView.findViewById(R.id.cat_name);
             ivCategoryImage = itemView.findViewById(R.id.cat_img);
+        }
+
+        public void bind(final Category category, final OnItemClickListener<Category> listener) {
+            tvCategoryName.setText(category.getName());
+            ivCategoryImage.setImageResource(category.getDrawableId());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(category);
+                }
+            });
         }
     }
 }
