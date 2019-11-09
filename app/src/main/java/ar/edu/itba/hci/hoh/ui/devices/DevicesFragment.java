@@ -37,7 +37,7 @@ public class DevicesFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private DevicesAdapter adapter;
 
-    private List<Category> categories = createCategoryList();
+    private static List<Category> categories = createCategoryList();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class DevicesFragment extends Fragment {
         return root;
     }
 
-    private List<Category> createCategoryList() {
+    private static List<Category> createCategoryList() {
         List<Category> list = new ArrayList<>();
         list.add(new Category("Lights", R.drawable.ic_light_black_60dp, "lamp"));
         list.add(new Category("Doors & Blinds", R.drawable.ic_door_black_60dp, "door", "blinds"));

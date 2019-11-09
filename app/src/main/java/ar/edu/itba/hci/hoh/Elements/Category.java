@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.hoh.Elements;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Category implements Serializable {
@@ -41,5 +42,13 @@ public class Category implements Serializable {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    public Category getCategoryFromType(DeviceType type, List<Category> categoryList) {
+        for (Category category : categoryList) {
+            if (category.checkDeviceType(type))
+                return category;
+        }
+        return null;
     }
 }

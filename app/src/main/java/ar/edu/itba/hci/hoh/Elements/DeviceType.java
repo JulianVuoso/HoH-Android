@@ -5,6 +5,7 @@ import ar.edu.itba.hci.hoh.R;
 public class DeviceType {
     private String id;
     private String name;
+    // VER SI HACE FALTA PONER ALGO DE ACTIONS (Si rompe el GSON, sino no)
 
     public DeviceType(String id, String name) {
         this.id = id;

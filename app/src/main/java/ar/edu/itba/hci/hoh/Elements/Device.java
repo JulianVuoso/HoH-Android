@@ -6,16 +6,24 @@ public class Device {
     private String id;
     private String name;
     private DeviceType type;
+    private String state = "On";   // QUE ONDA ESTE STATE? VER SI HACE FALTA UNO POR TIPO DE DISP
     private Room room;
-    private String state = "On";   // QUE ONDA ESTE STATE?
-    private boolean favorite;
+    private DeviceMeta meta;
 
     public Device(String id, String name, DeviceType type, Room room, boolean favorite) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.room = room;
-        this.favorite = favorite;
+        this.meta = new DeviceMeta(favorite);
+    }
+
+    public Device(String id, String name, DeviceType type, Room room, DeviceMeta meta) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.room = room;
+        this.meta = meta;
     }
 
     public String getId() {
@@ -30,6 +38,10 @@ public class Device {
         return type;
     }
 
+    public void setType(DeviceType type) {
+        this.type = type;
+    }
+
     public Room getRoom() {
         return room;
     }
@@ -38,7 +50,19 @@ public class Device {
         return state;
     }
 
-    public boolean isFavorite() {
-        return favorite;
+    public DeviceMeta getMeta() {
+        return meta;
+    }
+
+    private class DeviceMeta {
+        private boolean favorite;
+
+        public DeviceMeta(boolean favorite) {
+            this.favorite = favorite;
+        }
+
+        public boolean isFavorite() {
+            return favorite;
+        }
     }
 }
