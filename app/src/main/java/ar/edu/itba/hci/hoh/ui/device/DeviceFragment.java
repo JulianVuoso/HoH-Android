@@ -22,6 +22,7 @@ import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.Elements.Room;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DeviceFragment extends Fragment {
 
@@ -58,10 +59,13 @@ public class DeviceFragment extends Fragment {
         // Para numero automatico, ver:
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
         gridLayoutManager = new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false);
-//        new GridLayoutManager(this.getContext(), 3, )
-
         rvDevices.setLayoutManager(gridLayoutManager);
-        adapter = new DeviceAdapter(data);
+        adapter = new DeviceAdapter(data, new OnItemClickListener<Device>() {
+            @Override
+            public void onItemClick(Device element) {
+                // TODO: OPEN DIALOG
+            }
+        });
         rvDevices.setAdapter(adapter);
 
         return root;

@@ -15,16 +15,13 @@ import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesViewHolder> {
-    interface OnItemClickListener {
-        void onItemClick(Category category);
-    }
-
     private List<Category> data;
-    private OnItemClickListener listener;
+    private OnItemClickListener<Category> listener;
 
-    public DevicesAdapter(List<Category> data, OnItemClickListener onClickListener) {
+    public DevicesAdapter(List<Category> data, OnItemClickListener<Category> onClickListener) {
         this.data = data;
         this.listener = onClickListener;
     }
@@ -46,7 +43,6 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
         return data.size();
     }
 
-
     class DevicesViewHolder extends RecyclerView.ViewHolder {
         TextView tvCategoryName;
         ImageView ivCategoryImage;
@@ -58,7 +54,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
             ivCategoryImage = itemView.findViewById(R.id.cat_img);
         }
 
-        public void bind(final Category category, final OnItemClickListener listener) {
+        public void bind(final Category category, final OnItemClickListener<Category> listener) {
             tvCategoryName.setText(category.getName());
             ivCategoryImage.setImageResource(category.getDrawableId());
             itemView.setOnClickListener(new View.OnClickListener() {

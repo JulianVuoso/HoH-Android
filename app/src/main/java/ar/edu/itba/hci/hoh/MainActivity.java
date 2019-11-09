@@ -9,14 +9,17 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.FragmentManager;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,6 +66,32 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager != null) {
+            fragmentManager.addOnBackStackChangedListener(this);
+        }
     }
 
+    @Override
+    public void onBackStackChanged() {
+        shouldDisplayHomeUp();
+    }
+
+    private void shouldDisplayHomeUp() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager != null) {
+            boolean canGoBack = fragmentManager.getBackStackEntryCount() > 0;
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(canGoBack);
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager != null)
+            fragmentManager.popBackStack();
+        return true;
+    }
 }

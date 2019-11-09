@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context="ar.edu.itba.hci.hoh.ui.device.DeviceFragment">
 
-<!-- VER COMO HACER UNA LISTA DE LISTAS (ENCADENAR DOS RECYCLER VIEWS?) -->
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rv_category_dev"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-<!--        -->
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
-
     <TextView
         android:id="@+id/devices_room_name"
         android:layout_width="wrap_content"
@@ -27,7 +19,7 @@
         android:textStyle="bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_devices_dev"
+        android:id="@+id/rv_room_devices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/devices_room_name">

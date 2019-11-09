@@ -14,12 +14,15 @@ import java.util.List;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DevicesViewHolder> {
     private List<Device> data;
+    private OnItemClickListener<Device> listener;
 
-    public DeviceAdapter(List<Device> data) {
+    public DeviceAdapter(List<Device> data, OnItemClickListener<Device> listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,11 +34,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DevicesVie
 
     @Override
     public void onBindViewHolder(@NonNull DevicesViewHolder holder, int position) {
-        Device device = data.get(position);
-        holder.tvDeviceName.setText(device.getName());
-        holder.tvDeviceRoom.setText(device.getRoom().getName());
-        holder.tvDeviceState.setText(device.getState());
-        holder.ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
+        holder.bind(data.get(position), listener);
     }
 
     @Override
@@ -57,6 +56,19 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DevicesVie
             tvDeviceRoom = itemView.findViewById(R.id.dev_room);
             tvDeviceState = itemView.findViewById(R.id.dev_state);
             ivDeviceImage = itemView.findViewById(R.id.dev_img);
+        }
+
+        public void bind(final Device device, final OnItemClickListener<Device> listener) {
+            tvDeviceName.setText(device.getName());
+            tvDeviceRoom.setText(device.getRoom().getName());
+            tvDeviceState.setText(device.getState());
+            ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(device);
+                }
+            });
         }
     }
 }
