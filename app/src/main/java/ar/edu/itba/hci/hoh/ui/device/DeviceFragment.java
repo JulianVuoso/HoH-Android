@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.ui.device;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.Elements.Room;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DeviceFragment extends Fragment {
@@ -36,6 +38,8 @@ public class DeviceFragment extends Fragment {
     private List<Device> data = new ArrayList<>();
 
     private Category category;
+
+    private List<String> requestTag = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,12 @@ public class DeviceFragment extends Fragment {
 
         // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
         fillData();
+
+        /*if (category != null) {
+            for (String type : category.getTypes()) {
+
+            }
+        }*/
 
         rvDevices = root.findViewById(R.id.rv_list_category_devices);
         // Para numero automatico, ver:

@@ -23,6 +23,10 @@ public class Category implements Serializable {
         return drawableId;
     }
 
+    public String[] getTypes() {
+        return types;
+    }
+
     public boolean checkDeviceType(DeviceType type) {
         for (String name : types) {
             if (name.equals(type.getName()))

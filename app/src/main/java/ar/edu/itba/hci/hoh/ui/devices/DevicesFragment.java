@@ -61,6 +61,7 @@ public class DevicesFragment extends Fragment {
         return root;
     }
 
+    // TODO: EN VEZ DE MANDARLE EL STRING DE TYPE, IR A BUSCAR LOS TIPOS Y GUARDARSE VECTOR DE DEVTYPE DE LOS QUE TENGAN ESE NOMBRE
     private static List<Category> createCategoryList() {
         List<Category> list = new ArrayList<>();
         list.add(new Category("Lights", R.drawable.ic_light_black_60dp, "lamp"));
