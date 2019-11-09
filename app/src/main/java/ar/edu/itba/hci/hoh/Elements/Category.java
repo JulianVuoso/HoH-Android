@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.hoh.Elements;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Category implements Serializable {
     private String name;
@@ -27,5 +28,18 @@ public class Category implements Serializable {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
+        return name.equals(category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

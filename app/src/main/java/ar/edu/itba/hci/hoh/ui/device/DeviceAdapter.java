@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.ui.device;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
-public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DevicesViewHolder> {
+public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> {
     private List<Device> data;
     private OnItemClickListener<Device> listener;
 
@@ -27,13 +28,13 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DevicesVie
 
     @NonNull
     @Override
-    public DevicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new DevicesViewHolder(LayoutInflater.from(parent.getContext())
+    public DeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new DeviceViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_device, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DevicesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DeviceViewHolder holder, int position) {
         holder.bind(data.get(position), listener);
     }
 
@@ -43,14 +44,14 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DevicesVie
     }
 
 
-    class DevicesViewHolder extends RecyclerView.ViewHolder {
+    class DeviceViewHolder extends RecyclerView.ViewHolder {
         TextView tvDeviceState;
         TextView tvDeviceName;
         TextView tvDeviceRoom;
         ImageView ivDeviceImage;
 
 
-        public DevicesViewHolder(@NonNull View itemView) {
+        public DeviceViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDeviceName = itemView.findViewById(R.id.dev_name);
             tvDeviceRoom = itemView.findViewById(R.id.dev_room);

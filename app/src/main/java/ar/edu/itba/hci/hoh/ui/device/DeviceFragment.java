@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class DeviceFragment extends Fragment {
 
     private RecyclerView rvDevices;
     private GridLayoutManager gridLayoutManager;
-    private DeviceAdapter adapter;
+    private DeviceListAdapter adapter;
 
     private List<Device> data = new ArrayList<>();
 
@@ -55,12 +56,15 @@ public class DeviceFragment extends Fragment {
         // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
         fillData();
 
-        rvDevices = root.findViewById(R.id.rv_devices_dev);
+        rvDevices = root.findViewById(R.id.rv_list_category_devices);
         // Para numero automatico, ver:
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
-        gridLayoutManager = new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false);
-        rvDevices.setLayoutManager(gridLayoutManager);
-        adapter = new DeviceAdapter(data, new OnItemClickListener<Device>() {
+        // SI PONGO ESTO DE ABAJO, QUEDA PIOLA PARA CUANDO ROTO. PODRIAMOS VER DE ADAPTAR EL SPAN COUNT
+//        gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
+//        rvDevices.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        rvDevices.setLayoutManager(manager);
+        adapter = new DeviceListAdapter(data, new OnItemClickListener<Device>() {
             @Override
             public void onItemClick(Device element) {
                 // TODO: OPEN DIALOG
