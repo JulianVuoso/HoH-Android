@@ -1,5 +1,7 @@
 package ar.edu.itba.hci.hoh.Elements;
 
+import ar.edu.itba.hci.hoh.R;
+
 public class RoomMeta {
     private String image;
     private boolean favorite;
@@ -10,7 +12,8 @@ public class RoomMeta {
     }
 
     public String getImage() {
-        return image;
+        // NO PUEDO MOVER ESTO AL CONSTRUCTOR PORQUE EL GSON NO LO USA
+        return image.substring(0, image.length() - ".jpg".length());
     }
 
     public boolean isFavorite() {

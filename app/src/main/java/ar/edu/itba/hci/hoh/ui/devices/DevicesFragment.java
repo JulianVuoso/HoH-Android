@@ -47,7 +47,7 @@ public class DevicesFragment extends Fragment {
 
     private List<Category> categories = new ArrayList<>();
 
-    private static String requestTag;
+    private String requestTag;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -116,5 +116,11 @@ public class DevicesFragment extends Fragment {
                 Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR CATEGORIAS. El error es %s", error.toString()));
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Api.getInstance(this.getContext()).cancelRequest(requestTag);
     }
 }
