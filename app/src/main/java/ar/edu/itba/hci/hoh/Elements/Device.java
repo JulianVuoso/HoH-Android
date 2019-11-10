@@ -6,7 +6,7 @@ public class Device {
     private String id;
     private String name;
     private DeviceType type;
-    private String state = "On";   // QUE ONDA ESTE STATE? VER SI HACE FALTA UNO POR TIPO DE DISP
+    private Object state;   // TODO: QUE ONDA ESTE STATE? VER SI HACE FALTA UNO POR TIPO DE DISP
     private Room room;
     private DeviceMeta meta;
 
@@ -47,7 +47,8 @@ public class Device {
     }
 
     public String getState() {
-        return state;
+//        return state;
+        return "On";
     }
 
     public DeviceMeta getMeta() {

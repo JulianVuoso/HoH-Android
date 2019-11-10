@@ -232,7 +232,7 @@ public class Api {
     public String getDeviceTypes(Response.Listener<ArrayList<DeviceType>> listener, Response.ErrorListener errorListener) {
         String url = URL + "devicetypes/";
         GsonRequest<Object, ArrayList<DeviceType>> request =
-                new GsonRequest<>(Request.Method.GET, url, null, "devices", new TypeToken<ArrayList<DeviceType>>(){}, null, listener, errorListener);
+                new GsonRequest<>(Request.Method.GET, url, null, "result", new TypeToken<ArrayList<DeviceType>>(){}, null, listener, errorListener);
         String uuid = UUID.randomUUID().toString();
         request.setTag(uuid);
         requestQueue.add(request);

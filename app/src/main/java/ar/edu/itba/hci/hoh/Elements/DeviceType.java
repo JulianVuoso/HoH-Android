@@ -1,5 +1,7 @@
 package ar.edu.itba.hci.hoh.Elements;
 
+import java.util.Objects;
+
 import ar.edu.itba.hci.hoh.R;
 
 public class DeviceType {
@@ -20,7 +22,22 @@ public class DeviceType {
         return name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DeviceType)) return false;
+        DeviceType type = (DeviceType) o;
+        return id.equals(type.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
     public static int getDeviceTypeDrawable(DeviceType type) {
+        if (type == null) return R.drawable.ic_nodev_black_40dp;
+
         switch (type.name) {
             case "speaker":         return R.drawable.ic_speaker_black_40dp;
 //            case "blinds":          return R.drawable.ic_blinds_black_50dp;
