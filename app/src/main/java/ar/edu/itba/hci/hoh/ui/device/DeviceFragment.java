@@ -1,6 +1,8 @@
 package ar.edu.itba.hci.hoh.ui.device;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +17,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +27,9 @@ import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.Elements.Room;
+import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DeviceFragment extends Fragment {
@@ -36,6 +43,8 @@ public class DeviceFragment extends Fragment {
     private List<Device> data = new ArrayList<>();
 
     private Category category;
+
+    private List<String> requestTag = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,9 +62,6 @@ public class DeviceFragment extends Fragment {
         if (getArguments() != null)
             category = DeviceFragmentArgs.fromBundle(getArguments()).getCategory();
 
-        // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
-        fillData();
-
         rvDevices = root.findViewById(R.id.rv_list_category_devices);
         // Para numero automatico, ver:
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
@@ -71,6 +77,32 @@ public class DeviceFragment extends Fragment {
             }
         });
         rvDevices.setAdapter(adapter);
+
+
+        // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
+//        fillData();
+
+        if (category != null) {
+            for (final DeviceType type : category.getTypes()) {
+                requestTag.add(Api.getInstance(this.getContext()).getDevicesFromType(type.getId(), new Response.Listener<ArrayList<Device>>() {
+                    @Override
+                    public void onResponse(ArrayList<Device> response) {
+                        for (Device device : response)
+                            device.setType(type);
+
+                        data.addAll(response);
+                        adapter.updatedDataSet();
+                        Log.v(MainActivity.LOG_TAG, "ACTUALICE DISPOSITIVOS");
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: VER QUE HACER CON ERROR
+                        Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR DISPOSITIVOS. El error es %s", error.toString()));
+                    }
+                }));
+            }
+        }
 
         return root;
     }

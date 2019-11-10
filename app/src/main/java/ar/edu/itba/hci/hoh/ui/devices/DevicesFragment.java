@@ -2,6 +2,7 @@ package ar.edu.itba.hci.hoh.ui.devices;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,21 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
 import ar.edu.itba.hci.hoh.Elements.DeviceType;
 import ar.edu.itba.hci.hoh.Elements.Room;
+import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 import ar.edu.itba.hci.hoh.ui.device.DeviceFragment;
 
@@ -37,7 +45,9 @@ public class DevicesFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private DevicesAdapter adapter;
 
-    private List<Category> categories = createCategoryList();
+    private List<Category> categories = new ArrayList<>();
+
+    private static String requestTag;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,16 +68,53 @@ public class DevicesFragment extends Fragment {
         });
         rvCategories.setAdapter(adapter);
 
+        if (categories.size() == 0) getCategoryList();
+
         return root;
     }
 
-    private List<Category> createCategoryList() {
-        List<Category> list = new ArrayList<>();
-        list.add(new Category("Lights", R.drawable.ic_light_black_60dp, "lamp"));
-        list.add(new Category("Doors & Blinds", R.drawable.ic_door_black_60dp, "door", "blinds"));
-        list.add(new Category("Air Conditioning", R.drawable.ic_door_black_60dp, "ac"));
-        list.add(new Category("Appliances", R.drawable.ic_fridge_black_60dp, "refrigerator", "oven"));
-        list.add(new Category("Entertainment", R.drawable.ic_entertainment_black_60dp, "speaker"));
-        return list;
+    // TODO: EN VEZ DE MANDARLE EL STRING DE TYPE, IR A BUSCAR LOS TIPOS Y GUARDARSE VECTOR DE DEVTYPE DE LOS QUE TENGAN ESE NOMBRE
+    private void getCategoryList() {
+        requestTag = Api.getInstance(this.getContext()).getDeviceTypes(new Response.Listener<ArrayList<DeviceType>>() {
+            @Override
+            public void onResponse(ArrayList<DeviceType> response) {
+                Category lights = new Category("Lights", R.drawable.ic_light_black_60dp);
+                Category openings = new Category("Doors & Blinds", R.drawable.ic_door_black_60dp);
+                Category ac = new Category("Air Conditioning", R.drawable.ic_door_black_60dp); // TODO: CHANGE CATEGORY PIC
+                Category appliances = new Category("Appliances", R.drawable.ic_fridge_black_60dp);
+                Category entertainment = new Category("Entertainment", R.drawable.ic_entertainment_black_60dp);
+
+                for (DeviceType type : response) {
+                    switch (type.getName()) {
+                        case "lamp":    lights.addType(type);
+                                        break;
+                        case "door":
+                        case "blinds":  openings.addType(type);
+                                        break;
+                        case "ac":      ac.addType(type);
+                                        break;
+                        case "refrigerator":
+                        case "oven":    appliances.addType(type);
+                                        break;
+                        case "speaker": entertainment.addType(type);
+                                        break;
+                    }
+                }
+                categories.add(lights);
+                categories.add(openings);
+                categories.add(ac);
+                categories.add(appliances);
+                categories.add(entertainment);
+                adapter.notifyDataSetChanged();
+                Log.v(MainActivity.LOG_TAG, "ACTUALICE CATEGORIAS");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                MainActivity.handleError(error);
+                // TODO: VER QUE HACER ACA
+                Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR CATEGORIAS. El error es %s", error.toString()));
+            }
+        });
     }
 }

@@ -1,12 +1,17 @@
 package ar.edu.itba.hci.hoh;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -18,8 +23,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.fragment.app.FragmentManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+
+import ar.edu.itba.hci.hoh.api.Error;
+
 
 public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
+
+    public static final String LOG_TAG = "ar.edu.itba.hci.hoh";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,5 +107,38 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         if (fragmentManager != null)
             fragmentManager.popBackStack();
         return true;
+    }
+
+    public void handleError(VolleyError error) {
+        Error response = null;
+        Boolean handled = false;
+
+        NetworkResponse networkResponse = error.networkResponse;
+        if ((networkResponse != null) && (error.networkResponse.data != null)) {
+            try {
+                String json = new String(
+                        error.networkResponse.data,
+                        HttpHeaderParser.parseCharset(networkResponse.headers));
+
+                JSONObject jsonObject = new JSONObject(json);
+                json = jsonObject.getJSONObject("error").toString();
+
+                Gson gson = new Gson();
+                response = gson.fromJson(json, Error.class);
+                handled = true;
+            } catch (JSONException e) {
+            } catch (UnsupportedEncodingException e) {
+            }
+        }
+
+        if (handled) {
+            String text = getResources().getString(R.string.error_message);
+            if (response != null)
+                text += " " + response.getDescription().get(0);
+
+            Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
+        }
+        else
+            Log.e(LOG_TAG, error.toString());
     }
 }

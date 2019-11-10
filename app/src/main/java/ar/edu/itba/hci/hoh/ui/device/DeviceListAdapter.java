@@ -26,22 +26,16 @@ import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder> {
     private Map<Room, List<Device>> map = new HashMap<>();
-    private List<Room> data = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
     private OnItemClickListener<Device> listener;
 
+    private List<Device> data;
+    private List<DeviceAdapter> adapterList = new ArrayList<>();
+
     public DeviceListAdapter(List<Device> data, OnItemClickListener<Device> listener) {
-        for (Device dev : data) {
-            if (map.containsKey(dev.getRoom()))
-                map.get(dev.getRoom()).add(dev);
-            else {
-                List<Device> list = new ArrayList<>();
-                list.add(dev);
-                map.put(dev.getRoom(), list);
-                this.data.add(dev.getRoom());
-            }
-        }
-//        this.data = data; // TODO: VER SI HACE FALTA ESTA LISTA
+        this.data = data;
         this.listener = listener;
+        updateMap();
     }
 
     @NonNull
@@ -53,13 +47,33 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
 
     @Override
     public void onBindViewHolder(@NonNull DeviceListViewHolder holder, int position) {
-        Log.v("TAG", String.format("OnBindViewHolder with %d, %s", position, data.get(position).getName()));
-        holder.bind(data.get(position), listener);
+        Log.v("TAG", String.format("OnBindViewHolder with %d, %s", position, rooms.get(position).getName()));
+        holder.bind(rooms.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return rooms.size();
+    }
+
+    public void updatedDataSet() {
+        updateMap();
+        for (DeviceAdapter adapter : adapterList)
+            adapter.notifyDataSetChanged();
+        this.notifyDataSetChanged();
+    }
+
+    private void updateMap() {
+        for (Device dev : data) {
+            if (map.containsKey(dev.getRoom()) && !map.get(dev.getRoom()).contains(dev))
+                map.get(dev.getRoom()).add(dev);
+            else {
+                List<Device> list = new ArrayList<>();
+                list.add(dev);
+                map.put(dev.getRoom(), list);
+                this.rooms.add(dev.getRoom());
+            }
+        }
     }
 
     class DeviceListViewHolder extends RecyclerView.ViewHolder {
@@ -77,7 +91,9 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
         public void bind(final Room room, final OnItemClickListener<Device> listener) {
             tvRoomName.setText(room.getName());
             rvRoomDevices.setLayoutManager(new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false));
-            rvRoomDevices.setAdapter(new DeviceAdapter(map.get(room), listener));
+            DeviceAdapter adapter = new DeviceAdapter(map.get(room), listener);
+            adapterList.add(adapter);
+            rvRoomDevices.setAdapter(adapter);
         }
 
     }

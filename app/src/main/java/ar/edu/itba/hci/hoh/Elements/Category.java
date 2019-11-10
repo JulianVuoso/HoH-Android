@@ -1,17 +1,24 @@
 package ar.edu.itba.hci.hoh.Elements;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Category implements Serializable {
     private String name;
     private int drawableId;
-    private String[] types;
+    private List<DeviceType> types = new ArrayList<>();
 
-    public Category(String name, int drawableId, String ... types) {
+    public Category(String name, int drawableId, List<DeviceType> types) {
         this.name = name;
         this.drawableId = drawableId;
         this.types = types;
+    }
+
+    public Category(String name, int drawableId) {
+        this.name = name;
+        this.drawableId = drawableId;
     }
 
     public String getName() {
@@ -22,9 +29,17 @@ public class Category implements Serializable {
         return drawableId;
     }
 
+    public List<DeviceType> getTypes() {
+        return types;
+    }
+
+    public void addType(DeviceType type) {
+        types.add(type);
+    }
+
     public boolean checkDeviceType(DeviceType type) {
-        for (String name : types) {
-            if (name.equals(type.getName()))
+        for (DeviceType element : types) {
+            if (element.equals(type))
                 return true;
         }
         return false;
@@ -41,5 +56,13 @@ public class Category implements Serializable {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    public Category getCategoryFromType(DeviceType type, List<Category> categoryList) {
+        for (Category category : categoryList) {
+            if (category.checkDeviceType(type))
+                return category;
+        }
+        return null;
     }
 }

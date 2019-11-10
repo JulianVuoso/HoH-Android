@@ -1,18 +1,20 @@
 package ar.edu.itba.hci.hoh.Elements;
 
-import java.util.Objects;
-
 public class Room {
     private String id;
     private String name;
-    private String image;   // HACE FALTA? SE USA ACA?
-    private boolean favorite;
+    private RoomMeta meta;
 
     public Room(String id, String name, String image, boolean favorite) {
         this.id = id;
         this.name = name;
-        this.image = image;
-        this.favorite = favorite;
+        this.meta = new RoomMeta(image, favorite);
+    }
+
+    public Room(String id, String name, RoomMeta meta) {
+        this.id = id;
+        this.name = name;
+        this.meta = meta;
     }
 
     public String getId() {
@@ -23,12 +25,8 @@ public class Room {
         return name;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public boolean isFavorite() {
-        return favorite;
+    public RoomMeta getMeta() {
+        return meta;
     }
 
     @Override
