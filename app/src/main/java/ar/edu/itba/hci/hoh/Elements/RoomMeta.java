@@ -19,4 +19,8 @@ public class RoomMeta {
     public boolean isFavorite() {
         return favorite;
     }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 }

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_rooms"  >
         <action
             android:id="@+id/action_select_room"
-            app:destination="@+id/navigation_room"
+            app:destination="@id/navigation_room"
             app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
 
@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_devices" >
         <action
             android:id="@+id/action_select_category"
-            app:destination="@+id/navigation_device"
+            app:destination="@id/navigation_device"
             app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
 

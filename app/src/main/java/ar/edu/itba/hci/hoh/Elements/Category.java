@@ -58,7 +58,7 @@ public class Category implements Serializable {
         return name.hashCode();
     }
 
-    public Category getCategoryFromType(DeviceType type, List<Category> categoryList) {
+    public static Category getCategoryFromType(DeviceType type, List<Category> categoryList) {
         for (Category category : categoryList) {
             if (category.checkDeviceType(type))
                 return category;
