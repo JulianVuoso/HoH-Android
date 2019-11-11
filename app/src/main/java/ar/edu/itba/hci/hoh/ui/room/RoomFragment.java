@@ -115,7 +115,6 @@ public class RoomFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         if (item.getItemId() != R.id.action_favorite)
             return super.onOptionsItemSelected(item);
-        // TODO: TOGGLEAR FAVORITES BIEN
 
         room.getMeta().setFavorite(!room.getMeta().isFavorite());
 

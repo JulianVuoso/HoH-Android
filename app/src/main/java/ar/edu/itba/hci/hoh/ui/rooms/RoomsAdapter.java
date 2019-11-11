@@ -44,7 +44,6 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
         return data.size();
     }
 
-    // TODO: CAMBIAR ESTO CUANDO HAGA EL item_room.xml
     class RoomsViewHolder extends RecyclerView.ViewHolder {
         TextView tvRoomName;
         ImageView ivRoomImage;

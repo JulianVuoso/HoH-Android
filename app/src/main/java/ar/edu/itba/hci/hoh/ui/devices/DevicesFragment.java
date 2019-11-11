@@ -74,7 +74,6 @@ public class DevicesFragment extends Fragment {
         return root;
     }
 
-    // TODO: EN VEZ DE MANDARLE EL STRING DE TYPE, IR A BUSCAR LOS TIPOS Y GUARDARSE VECTOR DE DEVTYPE DE LOS QUE TENGAN ESE NOMBRE
     private static void getCategoryList(Context context) {
         requestTag = Api.getInstance(context).getDeviceTypes(new Response.Listener<ArrayList<DeviceType>>() {
             @Override
@@ -113,7 +112,7 @@ public class DevicesFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 //                MainActivity.handleError(error);
-                // TODO: VER QUE HACER ACA
+                // TODO: VER QUE HACER CON ERROR
                 Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR CATEGORIAS. El error es %s", error.toString()));
             }
         });
