@@ -62,7 +62,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         public void bind(final Device device, final OnItemClickListener<Device> listener) {
             tvDeviceName.setText(device.getName());
             tvDeviceRoom.setText(device.getRoom().getName());
-            tvDeviceState.setText(device.getState());
+            tvDeviceState.setText(device.getState().getStatus());
             ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
