@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.Elements;
 
+// TODO: PASARLO A UN GSON DESERIALIZER Y HACER UN STATE GENERICO Y QUE TODOS EXTIENDAN DE EL
 public class DeviceState {
     private String status;
     /* Light: status + */
