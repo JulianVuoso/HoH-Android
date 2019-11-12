@@ -10,6 +10,7 @@
     <string name="option_help">Help</string>
     <string name="option_website">WebSite</string>
     <string name="option_search">Search</string>
+    <string name="option_favorite">Favorite</string>
 
     <string name="error_message">Error with API</string>
     <string name="categories_subtitle">Categories</string>
