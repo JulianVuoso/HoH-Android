@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import ar.edu.itba.hci.hoh.api.Api;
+
 public class RoomsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;

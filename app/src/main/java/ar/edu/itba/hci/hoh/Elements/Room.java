@@ -1,6 +1,8 @@
 package ar.edu.itba.hci.hoh.Elements;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
     private String id;
     private String name;
     private RoomMeta meta;

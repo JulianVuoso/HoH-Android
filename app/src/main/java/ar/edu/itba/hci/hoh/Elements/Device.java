@@ -46,6 +46,10 @@ public class Device {
         return room;
     }
 
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
     public String getState() {
 //        return state;
         return "On";

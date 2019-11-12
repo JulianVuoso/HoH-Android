@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.ui.devices;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,9 +44,9 @@ public class DevicesFragment extends Fragment {
 
     private RecyclerView rvCategories;
     private GridLayoutManager gridLayoutManager;
-    private DevicesAdapter adapter;
+    private static DevicesAdapter adapter;
 
-    private List<Category> categories = new ArrayList<>();
+    public static List<Category> categories = new ArrayList<>();
 
     private static String requestTag;
 
@@ -68,14 +69,13 @@ public class DevicesFragment extends Fragment {
         });
         rvCategories.setAdapter(adapter);
 
-        if (categories.size() == 0) getCategoryList();
+        if (categories.size() == 0) getCategoryList(this.getContext());
 
         return root;
     }
 
-    // TODO: EN VEZ DE MANDARLE EL STRING DE TYPE, IR A BUSCAR LOS TIPOS Y GUARDARSE VECTOR DE DEVTYPE DE LOS QUE TENGAN ESE NOMBRE
-    private void getCategoryList() {
-        requestTag = Api.getInstance(this.getContext()).getDeviceTypes(new Response.Listener<ArrayList<DeviceType>>() {
+    private static void getCategoryList(Context context) {
+        requestTag = Api.getInstance(context).getDeviceTypes(new Response.Listener<ArrayList<DeviceType>>() {
             @Override
             public void onResponse(ArrayList<DeviceType> response) {
                 Category lights = new Category("Lights", R.drawable.ic_light_black_60dp);
@@ -112,9 +112,15 @@ public class DevicesFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 //                MainActivity.handleError(error);
-                // TODO: VER QUE HACER ACA
+                // TODO: VER QUE HACER CON ERROR
                 Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR CATEGORIAS. El error es %s", error.toString()));
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Api.getInstance(this.getContext()).cancelRequest(requestTag);
     }
 }

@@ -9,7 +9,26 @@
         android:id="@+id/navigation_rooms"
         android:name="ar.edu.itba.hci.hoh.ui.rooms.RoomsFragment"
         android:label="@string/title_rooms"
-        tools:layout="@layout/fragment_rooms" />
+        tools:layout="@layout/fragment_rooms"  >
+        <action
+            android:id="@+id/action_select_room"
+            app:destination="@id/navigation_room"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_room"
+        android:name="ar.edu.itba.hci.hoh.ui.room.RoomFragment"
+        android:label="{appbar_title}"
+        tools:layout="@layout/fragment_room" >
+        <argument
+            android:name="room"
+            app:argType="ar.edu.itba.hci.hoh.Elements.Room"
+            app:nullable="true" />
+        <argument
+            android:name="appbar_title"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_devices"
@@ -18,7 +37,7 @@
         tools:layout="@layout/fragment_devices" >
         <action
             android:id="@+id/action_select_category"
-            app:destination="@+id/navigation_device"
+            app:destination="@id/navigation_device"
             app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
 
@@ -26,7 +45,7 @@
         android:id="@+id/navigation_device"
         android:name="ar.edu.itba.hci.hoh.ui.device.DeviceFragment"
         android:label="{appbar_title}"
-        tools:layout="@layout/fragment_devices" >
+        tools:layout="@layout/fragment_device" >
         <argument
             android:name="category"
             app:argType="ar.edu.itba.hci.hoh.Elements.Category"

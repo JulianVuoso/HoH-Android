@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     public void handleError(VolleyError error) {
         Error response = null;
-        Boolean handled = false;
+        boolean handled = false;
 
         NetworkResponse networkResponse = error.networkResponse;
         if ((networkResponse != null) && (error.networkResponse.data != null)) {
@@ -140,5 +141,9 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         }
         else
             Log.e(LOG_TAG, error.toString());
+    }
+
+    public static int getDrawableFromString(Context context, String imgName) {
+        return context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
     }
 }

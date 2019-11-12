@@ -46,18 +46,10 @@ public class DeviceFragment extends Fragment {
 
     private List<String> requestTag = new ArrayList<>();
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         devicesViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_device, container, false);
-
-        root.setLabelFor(R.id.navigation_device);
 
         if (getArguments() != null)
             category = DeviceFragmentArgs.fromBundle(getArguments()).getCategory();
@@ -105,24 +97,6 @@ public class DeviceFragment extends Fragment {
         }
 
         return root;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO: VER COMO SETEAR EL BOTON SEGUN ESTADO DE FAVORITO (ROOM)
-//        menu.getItem(R.id.action_favorite).setIcon(R.drawable.ic_star_white_24dp);
-        inflater.inflate(R.menu.appbar_room_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() != R.id.action_favorite)
-            return super.onOptionsItemSelected(item);
-        // TODO: TOGGLEAR FAVORITES BIEN
-        item.setIcon(R.drawable.ic_star_border_white_24dp);
-        return true;
     }
 
     private void fillData() {
