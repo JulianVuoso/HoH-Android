@@ -50,7 +50,6 @@ public class RoomFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    // TODO: QUE PASA CON LOS NOMBRES DE HABITACION MUY LARGOS? SEGUN MATERIAL, NO DEBERIA VER GUESTS R...
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         roomViewModel = ViewModelProviders.of(this).get(RoomViewModel.class);
