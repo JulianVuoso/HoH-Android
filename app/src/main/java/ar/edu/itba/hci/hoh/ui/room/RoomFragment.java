@@ -50,7 +50,6 @@ public class RoomFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    // TODO: QUE PASA CON LOS NOMBRES DE HABITACION MUY LARGOS? SEGUN MATERIAL, NO DEBERIA VER GUESTS R...
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         roomViewModel = ViewModelProviders.of(this).get(RoomViewModel.class);
@@ -100,9 +99,12 @@ public class RoomFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.appbar_room_menu, menu);
+        if (room != null && room.getMeta().isFavorite())
+            inflater.inflate(R.menu.appbar_room_menu_fav, menu);
+        else
+            inflater.inflate(R.menu.appbar_room_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        // TODO: VER COMO SETEAR EL BOTON SEGUN ESTADO DE FAVORITO (ROOM) --> NO PUEDO COMO ABAJO PORQUE AUN NO ESTA CREADO
+        // TODO: VER COMO SETEAR BIEN EL BOTON SEGUN ESTADO DE FAVORITO (ROOM) --> NO PUEDO COMO ABAJO PORQUE AUN NO ESTA CREADO
 //        if (room != null && room.getMeta().isFavorite())
 //            menu.getItem(R.id.action_favorite).setIcon(R.drawable.ic_star_white_24dp);
 //        else

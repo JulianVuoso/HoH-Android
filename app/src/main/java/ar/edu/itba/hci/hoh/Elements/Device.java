@@ -6,7 +6,7 @@ public class Device {
     private String id;
     private String name;
     private DeviceType type;
-    private Object state;   // TODO: QUE ONDA ESTE STATE? VER SI HACE FALTA UNO POR TIPO DE DISP
+    private DeviceState state;   // TODO: QUE ONDA ESTE STATE? VER SI HACE FALTA UNO POR TIPO DE DISP
     private Room room;
     private DeviceMeta meta;
 
@@ -50,15 +50,15 @@ public class Device {
         this.room = room;
     }
 
-    public String getState() {
-//        return state;
-        return "On";
+    public DeviceState getState() {
+        return state;
     }
 
     public DeviceMeta getMeta() {
         return meta;
     }
 
+    // TODO: VER SI TIENE QUE SER UNA CLASE PUBLICA AFUERA O FUNCA ASI
     private class DeviceMeta {
         private boolean favorite;
 
