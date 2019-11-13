@@ -40,7 +40,7 @@ import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "ar.edu.itba.hci.hoh";
 
@@ -97,15 +97,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        // For UP navigation add backstack listener
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
-
-    }
-
-    @Override
-    public void onBackStackChanged() {
-        shouldDisplayHomeUp();
     }
 
     private void shouldDisplayHomeUp() {
@@ -116,9 +107,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     @Override
     public boolean onSupportNavigateUp() {
-//        return Navigation.findNavController(this, R.id.main_fragment).navigateUp() || super.onSupportNavigateUp();
-        getSupportFragmentManager().popBackStack();
-        return true;
+        return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp() || super.onSupportNavigateUp();
     }
 
     public void handleError(VolleyError error) {
