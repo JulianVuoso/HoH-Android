@@ -18,6 +18,7 @@ import java.util.Map;
 
 import ar.edu.itba.hci.hoh.Elements.Category;
 import ar.edu.itba.hci.hoh.Elements.Device;
+import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 import ar.edu.itba.hci.hoh.ui.device.DeviceAdapter;
@@ -66,7 +67,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
     // todo: ASI COMO ESTA, SI O SI DEBO PRIMERO ABRIR CATEGORIES ANTES DE ENTRAR EN UN ROOM
     private void updateMap() {
         for (Device dev : data) {
-            Category category = Category.getCategoryFromType(dev.getType(), DevicesFragment.categories);
+            Category category = Category.getCategoryFromType(dev.getType(), MainActivity.categories);
             if (map.containsKey(category) && !map.get(category).contains(dev))
                 map.get(category).add(dev);
             else {

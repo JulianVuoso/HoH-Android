@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_rooms"
+        android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_rooms"
+        android:icon="@drawable/ic_rooms_black_24dp"
         android:title="@string/title_rooms" />
 
     <item
         android:id="@+id/navigation_devices"
         android:icon="@drawable/ic_devices_black_24dp"
         android:title="@string/title_devices" />
-
-    <item
-        android:id="@+id/navigation_favorites"
-        android:icon="@drawable/ic_star_border_black_24dp"
-        android:title="@string/title_favorites" />
 
     <item
         android:id="@+id/navigation_routines"

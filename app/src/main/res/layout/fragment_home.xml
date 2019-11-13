@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/card_spacing"
+    android:layout_marginBottom="@dimen/card_spacing"
+    tools:context="ar.edu.itba.hci.hoh.ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/favorite_devices_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/colorFragmentSubtitle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/title_favorite_devices"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favorite_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favorite_devices_title"
+        android:orientation="horizontal">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/favorite_rooms_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/colorFragmentSubtitle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/title_favorite_rooms"
+        android:layout_below="@+id/rv_favorite_devices"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favorite_rooms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favorite_rooms_title"
+        android:orientation="horizontal">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/favorite_routines_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/colorFragmentSubtitle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/title_favorite_routines"
+        android:layout_below="@+id/rv_favorite_rooms"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favorite_routines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favorite_routines_title"
+        android:orientation="horizontal">
+    </androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

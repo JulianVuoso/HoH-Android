@@ -3,7 +3,7 @@
     <string name="title_rooms">Rooms</string>
     <string name="title_devices">Devices</string>
     <string name="title_device">Device</string>
-    <string name="title_favorites">Favorites</string>
+    <string name="title_home">Home</string>
     <string name="title_routines">Routines</string>
 
     <string name="option_settings">Settings</string>
@@ -14,5 +14,9 @@
 
     <string name="error_message">Error with API</string>
     <string name="categories_subtitle">Categories</string>
-    <string name="room_img_description">Room image</string>
+    <string name="img_default_description">Image</string>
+
+    <string name="title_favorite_devices">Favorite Devices</string>
+    <string name="title_favorite_rooms">Favorite Rooms</string>
+    <string name="title_favorite_routines">Favorite Routines</string>
 </resources>

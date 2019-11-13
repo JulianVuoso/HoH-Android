@@ -59,7 +59,7 @@ public class Device {
     }
 
     // TODO: VER SI TIENE QUE SER UNA CLASE PUBLICA AFUERA O FUNCA ASI
-    private class DeviceMeta {
+    public class DeviceMeta {
         private boolean favorite;
 
         public DeviceMeta(boolean favorite) {

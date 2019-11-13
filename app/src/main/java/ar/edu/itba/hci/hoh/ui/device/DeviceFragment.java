@@ -76,6 +76,7 @@ public class DeviceFragment extends Fragment {
 
         if (category != null) {
             for (final DeviceType type : category.getTypes()) {
+                // TODO: SACAR CONTEXT
                 requestTag.add(Api.getInstance(this.getContext()).getDevicesFromType(type.getId(), new Response.Listener<ArrayList<Device>>() {
                     @Override
                     public void onResponse(ArrayList<Device> response) {

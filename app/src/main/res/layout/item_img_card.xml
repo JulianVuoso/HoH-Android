@@ -8,9 +8,9 @@
     android:layout_marginTop="@dimen/card_spacing"
     android:layout_marginRight="@dimen/card_spacing"
     android:layout_marginBottom="@dimen/card_spacing"
-    app:cardBackgroundColor="@color/colorDevCardBackgroundLight"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="10dp">
+    app:cardBackgroundColor="@color/colorImgCardBackground"
+    app:cardCornerRadius="@dimen/cardCornerRadius"
+    app:cardElevation="@dimen/cardElevation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,22 +18,22 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/room_img"
+            android:id="@+id/card_item_img"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:contentDescription="@string/room_img_description"
+            android:contentDescription="@string/img_default_description"
             />
 
 <!--  TODO: VER COMO HACER PARA QUE LAS IMAGENES QUEDEN BIEN, NO CADA UNA COMO QUIERE      -->
 
         <TextView
-            android:id="@+id/room_name"
+            android:id="@+id/card_item_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/open_sans_semibold"
-            android:textColor="@color/colorDevCardContent"
+            android:textColor="@color/colorImgCardTitle"
             android:textSize="12sp" />
 
 

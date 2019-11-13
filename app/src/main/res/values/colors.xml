@@ -17,7 +17,11 @@
     <color name="colorCategoryCardBackground">#CBCBCB</color>
     <color name="colorCategoryTitle">#FFFFFF</color>
 
-    <color name="colorRoomCardBackground">#EBEBEB</color>
+    <!-- IMAGE CARD -->
+    <color name="colorImgCardBackground">#EBEBEB</color>
+    <color name="colorImgCardTitle">#000000</color>
+
+
     <color name="colorBottomNavTrue">#0F3ED9</color>
     <color name="colorBottomNavFalse">#000000</color>
     <color name="colorBottomNavBackground">#87919D</color>
