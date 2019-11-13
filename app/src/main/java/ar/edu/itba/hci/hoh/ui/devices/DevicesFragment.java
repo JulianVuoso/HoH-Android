@@ -46,9 +46,8 @@ public class DevicesFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private static DevicesAdapter adapter;
 
-    public static List<Category> categories = new ArrayList<>();
-
-    private static String requestTag;
+//    public static List<Category> categories = new ArrayList<>();
+//    private static String requestTag;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class DevicesFragment extends Fragment {
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
         gridLayoutManager = new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false);
         rvCategories.setLayoutManager(gridLayoutManager);
-        adapter = new DevicesAdapter(categories, new OnItemClickListener<Category>() {
+        adapter = new DevicesAdapter(MainActivity.categories, new OnItemClickListener<Category>() {
             @Override
             public void onItemClick(Category category) {
                 DevicesFragmentDirections.ActionSelectCategory action = DevicesFragmentDirections.actionSelectCategory(category, category.getName());
@@ -69,12 +68,17 @@ public class DevicesFragment extends Fragment {
         });
         rvCategories.setAdapter(adapter);
 
-        if (categories.size() == 0) getCategoryList(this.getContext());
+//        if (categories.size() == 0) getCategoryList(this.getContext());
 
         return root;
     }
 
-    private static void getCategoryList(Context context) {
+    public static void notifyAdapter() {
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
+    }
+
+    /*private static void getCategoryList(Context context) {
         requestTag = Api.getInstance(context).getDeviceTypes(new Response.Listener<ArrayList<DeviceType>>() {
             @Override
             public void onResponse(ArrayList<DeviceType> response) {
@@ -116,11 +120,11 @@ public class DevicesFragment extends Fragment {
                 Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR CATEGORIAS. El error es %s", error.toString()));
             }
         });
-    }
+    }*/
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        Api.getInstance(this.getContext()).cancelRequest(requestTag);
-    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        Api.getInstance(this.getContext()).cancelRequest(requestTag);
+//    }
 }

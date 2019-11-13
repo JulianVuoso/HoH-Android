@@ -36,7 +36,7 @@ public class RoomFragment extends Fragment {
 
     private RecyclerView rvDevices;
     private GridLayoutManager gridLayoutManager;
-    private RoomListAdapter adapter;
+    private static RoomListAdapter adapter;
 
     private List<Device> data = new ArrayList<>();
 
@@ -75,6 +75,7 @@ public class RoomFragment extends Fragment {
         rvDevices.setAdapter(adapter);
 
         if (room != null) {
+            // TODO: SACAR CONTEXT
             requestTag.add(Api.getInstance(this.getContext()).getDevicesFromRoom(room.getId(), new Response.Listener<ArrayList<Device>>() {
                 @Override
                 public void onResponse(ArrayList<Device> response) {
@@ -97,8 +98,13 @@ public class RoomFragment extends Fragment {
         return root;
     }
 
+    public static void notifyAdapter() {
+        if (adapter != null)
+            adapter.updatedDataSet();
+    }
+
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         if (room != null && room.getMeta().isFavorite())
             inflater.inflate(R.menu.appbar_room_menu_fav, menu);
         else
@@ -120,6 +126,7 @@ public class RoomFragment extends Fragment {
 
         room.getMeta().setFavorite(!room.getMeta().isFavorite());
 
+        // TODO: SACAR CONTEXT
         requestTag.add(Api.getInstance(this.getContext()).modifyRoom(room, new Response.Listener<Boolean>() {
             @Override
             public void onResponse(Boolean response) {

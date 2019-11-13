@@ -68,6 +68,7 @@ public class RoomsFragment extends Fragment {
     }
 
     private void getRoomList() {
+        // TODO: SACAR CONTEXT
         requestTag = Api.getInstance(this.getContext()).getRooms(new Response.Listener<ArrayList<Room>>() {
             @Override
             public void onResponse(ArrayList<Room> response) {
@@ -87,6 +88,7 @@ public class RoomsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        // TODO: SACAR CONTEXT
         Api.getInstance(this.getContext()).cancelRequest(requestTag);
     }
 }
