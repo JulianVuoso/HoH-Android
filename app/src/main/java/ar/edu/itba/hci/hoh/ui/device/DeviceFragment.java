@@ -1,14 +1,16 @@
 package ar.edu.itba.hci.hoh.ui.device;
 
-import android.content.Context;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +50,10 @@ public class DeviceFragment extends Fragment {
 
     private List<String> requestTag = new ArrayList<>();
 
+    //Dialog dialog;
+    AlertDialog.Builder dialog;
+    Button close_dialog, close;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         devicesViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
@@ -60,12 +68,22 @@ public class DeviceFragment extends Fragment {
         // SI PONGO ESTO DE ABAJO, QUEDA PIOLA PARA CUANDO ROTO. PODRIAMOS VER DE ADAPTAR EL SPAN COUNT
 //        gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
 //        rvDevices.setLayoutManager(gridLayoutManager);
+
+        close = root.findViewById(R.id.close_dialog);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
         adapter = new DeviceListAdapter(data, new OnItemClickListener<Device>() {
             @Override
             public void onItemClick(Device element) {
                 // TODO: OPEN DIALOG
+                createDialog(element);
+                dialog.show();
+                /*close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });*/
             }
         });
         rvDevices.setAdapter(adapter);
@@ -73,6 +91,8 @@ public class DeviceFragment extends Fragment {
 
         // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
 //        fillData();
+
+        //close_dialog = root.findViewById(R.id.close_dialog);
 
         if (category != null) {
             for (final DeviceType type : category.getTypes()) {
@@ -98,6 +118,34 @@ public class DeviceFragment extends Fragment {
 
         return root;
     }
+
+    private void createDialog(Device element){
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View mView = inflater.inflate(R.layout.settings_door, null);
+
+        dialog = new AlertDialog.Builder(getActivity())
+                .setView(mView);
+
+        TextView name = mView.findViewById(R.id.dev_name);
+        TextView room = mView.findViewById(R.id.dev_room);
+        ImageView img = mView.findViewById(R.id.dev_img);
+        LinearLayout panel = mView.findViewById(R.id.panel);
+        LinearLayout panel2 = mView.findViewById(R.id.panel2);
+
+        name.setText(element.getName());
+        room.setText(element.getRoom().getName());
+        img.setImageResource(DeviceType.getDeviceTypeDrawable(element.getType()));
+        panel.setVisibility(View.GONE);
+        panel2.setVisibility(View.VISIBLE);
+
+        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.40);
+
+        //dialog.getWindow().setLayout(width, height);
+        //close = dialog.findViewById(R.id.close_dialog);
+    }
+
 
     private void fillData() {
         List<Device> auxList = new ArrayList<>();
