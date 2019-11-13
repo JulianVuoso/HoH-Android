@@ -69,7 +69,7 @@ public class RoomFragment extends Fragment {
         adapter = new RoomListAdapter(data, new OnItemClickListener<Device>() {
             @Override
             public void onItemClick(Device element) {
-                // TODO: OPEN DIALOG
+                // TODO: OPEN DIALOGue
             }
         });
         rvDevices.setAdapter(adapter);
