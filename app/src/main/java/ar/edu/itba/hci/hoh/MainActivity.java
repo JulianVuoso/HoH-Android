@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_rooms, R.id.navigation_devices, R.id.navigation_favorites, R.id.navigation_routines)
+                R.id.navigation_rooms, R.id.navigation_devices, R.id.navigation_home, R.id.navigation_routines)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     @Override
     public boolean onSupportNavigateUp() {
+//        return Navigation.findNavController(this, R.id.main_fragment).navigateUp() || super.onSupportNavigateUp();
         getSupportFragmentManager().popBackStack();
         return true;
     }

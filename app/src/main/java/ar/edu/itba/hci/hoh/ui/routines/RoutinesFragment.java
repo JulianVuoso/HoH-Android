@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.ui.routines;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class RoutinesFragment extends Fragment {
 
     private List<Routine> routines = new ArrayList<>();
 
-    private List<String> requestTag = new ArrayList<>();
+    private static List<String> requestTag = new ArrayList<>();
 
     // TODO: GUARDAR LAS PNG DE LAS RUTINAS
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,7 +59,7 @@ public class RoutinesFragment extends Fragment {
             @Override
             public void onItemClick(Routine routine) {
                 // TODO: OPEN CONFIRMATION DIALOG TO EXECUTE ROUTINE
-                executeRoutine(routine);
+                executeRoutine(routine, getContext());
             }
         });
         rvRoutines.setAdapter(adapter);
@@ -87,16 +88,16 @@ public class RoutinesFragment extends Fragment {
         }));
     }
 
-    private void executeRoutine(final Routine routine) {
-        requestTag.add(Api.getInstance(this.getContext()).execRoutine(routine.getId(), new Response.Listener<Boolean>() {
+    public static void executeRoutine(final Routine routine, final Context context) {
+        requestTag.add(Api.getInstance(context).execRoutine(routine.getId(), new Response.Listener<Boolean>() {
             @Override
             public void onResponse(Boolean response) {
-                Toast.makeText(getContext(), String.format("Routine %s executed", routine.getName()), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, String.format("Routine %s executed", routine.getName()), Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Error executing routine", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error executing routine", Toast.LENGTH_LONG).show();
             }
         }));
     }

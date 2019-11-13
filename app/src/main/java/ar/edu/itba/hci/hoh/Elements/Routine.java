@@ -11,10 +11,10 @@ public class Routine {
         this.meta = meta;
     }
 
-    public Routine(String id, String name, String img) {
+    public Routine(String id, String name, String img, boolean favorite) {
         this.id = id;
         this.name = name;
-        this.meta = new RoutineMeta(img);
+        this.meta = new RoutineMeta(img, favorite);
     }
 
     public String getId() {
@@ -31,13 +31,19 @@ public class Routine {
 
     public class RoutineMeta {
         private String img;
+        private boolean favorite;
 
-        public RoutineMeta(String img) {
+        public RoutineMeta(String img, boolean favorite) {
             this.img = img;
+            this.favorite = favorite;
         }
 
         public String getImg() {
             return img;
+        }
+
+        public boolean isFavorite() {
+            return favorite;
         }
     }
 }

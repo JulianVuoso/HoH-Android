@@ -61,13 +61,13 @@ public class RoomsFragment extends Fragment {
         });
         rvRooms.setAdapter(adapter);
 
-        rooms.clear();
         getRoomList();
 
         return root;
     }
 
     private void getRoomList() {
+        rooms.clear();
         // TODO: SACAR CONTEXT
         requestTag = Api.getInstance(this.getContext()).getRooms(new Response.Listener<ArrayList<Room>>() {
             @Override
