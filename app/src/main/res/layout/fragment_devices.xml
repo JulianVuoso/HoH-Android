@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context="ar.edu.itba.hci.hoh.ui.devices.DevicesFragment">
 
+<!-- TODO: SACAMOS ESTE TITULO??   -->
     <TextView
         android:id="@+id/categories_title"
         android:layout_width="wrap_content"

@@ -29,7 +29,7 @@ public class Routine {
         return meta;
     }
 
-    private class RoutineMeta {
+    public class RoutineMeta {
         private String img;
 
         public RoutineMeta(String img) {

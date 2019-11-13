@@ -14,5 +14,5 @@
 
     <string name="error_message">Error with API</string>
     <string name="categories_subtitle">Categories</string>
-    <string name="room_img_description">Room image</string>
+    <string name="img_default_description">Image</string>
 </resources>

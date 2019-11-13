@@ -31,7 +31,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
     @Override
     public RoomsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new RoomsViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_room, parent, false));
+                .inflate(R.layout.item_img_card, parent, false));
     }
 
     @Override
@@ -51,8 +51,8 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
 
         public RoomsViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvRoomName = itemView.findViewById(R.id.room_name);
-            ivRoomImage = itemView.findViewById(R.id.room_img);
+            tvRoomName = itemView.findViewById(R.id.card_item_name);
+            ivRoomImage = itemView.findViewById(R.id.card_item_img);
             context = itemView.getContext();
         }
 

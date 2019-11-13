@@ -15,13 +15,13 @@
         android:layout_marginRight="@dimen/card_spacing"
         app:cardBackgroundColor="@color/colorCategoryCardBackground"
         app:cardCornerRadius="50dp"
-        app:cardElevation="10dp">
+        app:cardElevation="@dimen/cardElevation">
 
         <ImageView
             android:id="@+id/cat_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_door_black_60dp"
+            android:contentDescription="@string/img_default_description"
             android:layout_gravity="center"
             />
     </androidx.cardview.widget.CardView>
@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/roboto_italic"
-        android:text="Doors &amp; Blinds"
         android:textColor="@color/colorCategoryTitle"
         android:textSize="16sp"
         android:textStyle="bold"/>

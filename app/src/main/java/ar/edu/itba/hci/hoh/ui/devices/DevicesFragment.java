@@ -57,6 +57,7 @@ public class DevicesFragment extends Fragment {
         rvCategories = root.findViewById(R.id.rv_categories);
         // Para numero automatico, ver:
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
+        // TODO: VER SI NO HACEMOS CARDS COMO EN ROOM
         gridLayoutManager = new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false);
         rvCategories.setLayoutManager(gridLayoutManager);
         adapter = new DevicesAdapter(MainActivity.categories, new OnItemClickListener<Category>() {

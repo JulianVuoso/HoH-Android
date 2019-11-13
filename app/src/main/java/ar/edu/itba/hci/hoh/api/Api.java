@@ -187,6 +187,7 @@ public class Api {
         return uuid;
     }
 
+    // TODO: ME DEVUELVE STRINGS O BOOLEANS SEGUN LA ACCION. COMO UNIFICO?
     /* Execute an action in a specific device with params {[]} */
     public String execAction(String id, String action, String[] param, Response.Listener<Boolean> listener, Response.ErrorListener errorListener) {
         String url = URL + "devices/" + id + "/" + action;
@@ -206,8 +207,9 @@ public class Api {
         String url = URL + "devices/" + id + "/" + action;
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
+        // TODO: CHECK SI ES {} o []
         GsonRequest<String, Boolean> request =
-                new GsonRequest<>(Request.Method.PUT, url, "{}", "result", new TypeToken<Boolean>(){}, headers, listener, errorListener);
+                new GsonRequest<>(Request.Method.PUT, url, "[]", "result", new TypeToken<Boolean>(){}, headers, listener, errorListener);
         String uuid = UUID.randomUUID().toString();
         request.setTag(uuid);
         requestQueue.add(request);
@@ -263,6 +265,21 @@ public class Api {
         return uuid;
     }
 
+    // TODO: ME DEVUELVE UN VECTOR DE STRINGS Y BOOLEANS. COMO UNIFICO?
+    /* Execute a specific routine */
+    public String execRoutine(String id, Response.Listener<Boolean> listener, Response.ErrorListener errorListener) {
+        String url = URL + "routines/" + id + "/execute";
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        // TODO: CHECK SI ES {} o []
+        GsonRequest<String, Boolean> request =
+                new GsonRequest<>(Request.Method.PUT, url, "[]", "result", new TypeToken<Boolean>(){}, headers, listener, errorListener);
+        String uuid = UUID.randomUUID().toString();
+        request.setTag(uuid);
+        requestQueue.add(request);
+
+        return uuid;
+    }
 
     public void cancelRequest(String uuid) {
         if ((uuid != null) && (requestQueue != null)) {

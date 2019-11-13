@@ -8,8 +8,8 @@
     android:layout_marginTop="@dimen/card_spacing"
     android:layout_marginRight="@dimen/card_spacing"
     app:cardBackgroundColor="@color/colorDevCardBackgroundLight"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="10dp">
+    app:cardCornerRadius="@dimen/cardCornerRadius"
+    app:cardElevation="@dimen/cardElevation">
 
 
 
@@ -27,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
-            android:text="Locked"
             android:textColor="@color/colorDevCardContentFaded"
             android:textSize="12sp"
             android:textStyle="italic" />
@@ -36,7 +35,7 @@
             android:id="@+id/dev_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_door_black_40dp"
+            android:contentDescription="@string/img_default_description"
             android:layout_gravity="center"
             />
 
@@ -46,7 +45,6 @@
             android:layout_height="wrap_content"
 
             android:fontFamily="@font/open_sans_semibold"
-            android:text="Front Door"
             android:textColor="@color/colorDevCardContent"
             android:textSize="12sp" />
 
@@ -55,7 +53,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
-            android:text="Living Room"
             android:textColor="@color/colorDevCardContentFaded"
             android:textSize="12sp"
             android:textStyle="italic" />
