@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // TODO: VER QUE ONDA LA OPCION DE LAS LISTAS DE VISTA A MOSTRAR EN CASO DE LISTA VACIA
     // TODO: SI VUELVO DE SETTINGS, DEBERIA RECARGAR LA VISTA? O NO DEBERIA?
     // TODO: REVISAR MENSAJE I/Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
 
