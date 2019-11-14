@@ -22,10 +22,18 @@ public class Api {
     private static RequestQueue requestQueue;
     // Use IP 10.0.2.2 instead of 127.0.0.1 when running Android emulator in the
     // same computer that runs the API.
-    private final String URL = "http://10.0.2.2:8080/api/";
+    private static String URL = "http://10.0.2.2:8080/api/";
+
+    public static String getURL() {
+        return URL;
+    }
+
+    public static void setURL(String URL) {
+        Api.URL = URL;
+    }
 
     private Api(Context context) {
-        this.requestQueue = VolleySingleton.getInstance(context).getRequestQueue();
+        requestQueue = VolleySingleton.getInstance(context).getRequestQueue();
     }
 
     public static synchronized Api getInstance(Context context) {
