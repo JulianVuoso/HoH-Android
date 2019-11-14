@@ -1,8 +1,10 @@
 package ar.edu.itba.hci.hoh.Elements;
 
+import java.io.Serializable;
+
 import ar.edu.itba.hci.hoh.R;
 
-public class RoomMeta {
+public class RoomMeta implements Serializable {
     private String image;
     private boolean favorite;
 

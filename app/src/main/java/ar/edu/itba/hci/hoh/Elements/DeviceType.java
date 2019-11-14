@@ -1,10 +1,11 @@
 package ar.edu.itba.hci.hoh.Elements;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import ar.edu.itba.hci.hoh.R;
 
-public class DeviceType {
+public class DeviceType implements Serializable {
     private String id;
     private String name;
     // VER SI HACE FALTA PONER ALGO DE ACTIONS (Si rompe el GSON, sino no)

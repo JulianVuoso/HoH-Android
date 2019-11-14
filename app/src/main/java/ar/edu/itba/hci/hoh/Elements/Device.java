@@ -1,8 +1,10 @@
 package ar.edu.itba.hci.hoh.Elements;
 
+import java.io.Serializable;
+
 import ar.edu.itba.hci.hoh.R;
 
-public class Device {
+public class Device implements Serializable {
     private String id;
     private String name;
     private DeviceType type;
@@ -59,7 +61,7 @@ public class Device {
     }
 
     // TODO: VER SI TIENE QUE SER UNA CLASE PUBLICA AFUERA O FUNCA ASI
-    public class DeviceMeta {
+    public class DeviceMeta implements Serializable{
         private boolean favorite;
 
         public DeviceMeta(boolean favorite) {

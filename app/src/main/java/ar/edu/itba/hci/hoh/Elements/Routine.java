@@ -1,6 +1,8 @@
 package ar.edu.itba.hci.hoh.Elements;
 
-public class Routine {
+import java.io.Serializable;
+
+public class Routine implements Serializable {
     private String id;
     private String name;
     private RoutineMeta meta;

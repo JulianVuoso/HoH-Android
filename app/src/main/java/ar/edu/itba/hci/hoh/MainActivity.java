@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO: SI VUELVO DE SETTINGS, DEBERIA RECARGAR LA VISTA? O NO DEBERIA?
+    // TODO: REVISAR MENSAJE I/Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
