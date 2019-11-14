@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.hoh;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -38,6 +39,7 @@ import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.api.Error;
 import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
+import ar.edu.itba.hci.hoh.ui.rooms.RoomsFragmentDirections;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
 
     public static List<Category> categories = new ArrayList<>();
     private static String requestTag;
+
+    private static boolean notifications;
+
+    public static boolean isNotifications() {
+        return notifications;
+    }
+
+    public static void setNotifications(boolean notifications) {
+        MainActivity.notifications = notifications;
+        if (notifications) {
+            // TODO: ENABLE WORK MANAGER
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Search Selected", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.kebab_settings:
-                Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.kebab_help:
                 Toast.makeText(this, "Help Selected", Toast.LENGTH_SHORT).show();
@@ -74,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    // TODO: SI VUELVO DE SETTINGS, DEBERIA RECARGAR LA VISTA? O NO DEBERIA?
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,16 +118,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-    private void shouldDisplayHomeUp() {
-        boolean canGoBack = getSupportFragmentManager().getBackStackEntryCount() > 0;
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(canGoBack);
-    }
-
     @Override
     public boolean onSupportNavigateUp() {
         return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp() || super.onSupportNavigateUp();
     }
+
+
 
     public void handleError(VolleyError error) {
         Error response = null;
