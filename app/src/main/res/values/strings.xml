@@ -17,6 +17,7 @@
     <string name="error_message">Error with API</string>
     <string name="categories_subtitle">Categories</string>
     <string name="img_default_description">Image</string>
+    <string name="search_hint">Search…</string>
 
     <string name="title_favorite_devices">Favorite Devices</string>
     <string name="title_favorite_rooms">Favorite Rooms</string>

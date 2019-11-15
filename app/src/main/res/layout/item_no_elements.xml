@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/card_spacing"
+    android:layout_marginTop="@dimen/card_spacing"
+    android:layout_marginRight="@dimen/card_spacing"
+    android:layout_marginBottom="@dimen/card_spacing"
+    app:cardBackgroundColor="@color/colorImgCardBackground"
+    app:cardCornerRadius="@dimen/cardCornerRadius"
+    app:cardElevation="@dimen/cardElevation">
+
+    <TextView
+        android:id="@+id/card_no_element_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textColor="@color/colorImgCardTitle"
+        android:textSize="20sp"
+        android:text="NO HAY ELEMENTOS"/>
+
+</androidx.cardview.widget.CardView>
+
+<!-- TODO: VER COMO METER ESTO EN CADA RECYCLER VIEW -->

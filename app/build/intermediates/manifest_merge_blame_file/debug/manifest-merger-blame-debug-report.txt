@@ -15,7 +15,7 @@
 11-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:5:22-64
 12
 13    <application
-13-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:7:5-39:19
+13-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:7:5-46:19
 14        android:allowBackup="true"
 14-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:8:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -72,24 +72,41 @@
 42                android:value=".MainActivity" />
 42-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:34:17-46
 43        </activity>
-44
-45        <meta-data
-45-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:36:9-38:57
-46            android:name="preloaded_fonts"
-46-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:37:13-43
-47            android:resource="@array/preloaded_fonts" />
-47-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:38:13-54
+44        <activity android:name="ar.edu.itba.hci.hoh.SearchableActivity" >
+44-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:36:9-42:20
+44-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:36:19-53
+45            <intent-filter>
+45-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:37:13-39:29
+46                <action android:name="android.intent.action.SEARCH" />
+46-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:38:17-71
+46-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:38:25-68
+47            </intent-filter>
 48
-49        <provider
-49-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:23:9-27:43
-50            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-50-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:24:13-79
-51            android:authorities="ar.edu.itba.hci.hoh.lifecycle-process"
-51-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:25:13-69
-52            android:exported="false"
-52-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:26:13-37
-53            android:multiprocess="true" />
-53-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:27:13-40
-54    </application>
-55
-56</manifest>
+49            <meta-data
+49-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:40:13-41:53
+50                android:name="android.app.searchable"
+50-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:40:24-61
+51                android:resource="@xml/searchable" />
+51-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:41:17-51
+52        </activity>
+53
+54        <meta-data
+54-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:43:9-45:57
+55            android:name="preloaded_fonts"
+55-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:44:13-43
+56            android:resource="@array/preloaded_fonts" />
+56-->/home/julian/Desktop/HOH/app/src/main/AndroidManifest.xml:45:13-54
+57
+58        <provider
+58-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:23:9-27:43
+59            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+59-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:24:13-79
+60            android:authorities="ar.edu.itba.hci.hoh.lifecycle-process"
+60-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:25:13-69
+61            android:exported="false"
+61-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:26:13-37
+62            android:multiprocess="true" />
+62-->[androidx.lifecycle:lifecycle-process:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/a8209e1eba53f3860c08b693a4d1f38c/lifecycle-process-2.1.0/AndroidManifest.xml:27:13-40
+63    </application>
+64
+65</manifest>
