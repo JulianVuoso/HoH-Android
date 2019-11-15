@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -42,6 +43,8 @@ public class RoutinesFragment extends Fragment {
 
     private List<Routine> routines = new ArrayList<>();
 
+    private CardView emptyCard;
+
     private static List<String> requestTag = new ArrayList<>();
 
     // TODO: GUARDAR LAS PNG DE LAS RUTINAS
@@ -66,6 +69,9 @@ public class RoutinesFragment extends Fragment {
 
         routines.clear();
         getRoutineList();
+        emptyCard = root.findViewById(R.id.empty_routines_card);
+        TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
+        tvEmptyRoom.setText(R.string.empty_routine_list);
 
         return root;
     }
@@ -76,6 +82,8 @@ public class RoutinesFragment extends Fragment {
             @Override
             public void onResponse(ArrayList<Routine> response) {
                 routines.addAll(response);
+                if (!routines.isEmpty())
+                    emptyCard.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE ROUTINES");
             }

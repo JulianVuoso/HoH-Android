@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -50,6 +52,8 @@ public class HomeFragment extends Fragment {
 
     private List<String> requestTag = new ArrayList<>();
 
+    private CardView emptyDeviceCard, emptyRoomCard, emptyRoutineCard;
+
     // TODO: VER SI HACE FALTA PONERLE LAS FLECHAS PARA SCROLLEAR ENTRE ELEMENTOS O SE ENTIENDE SIN ESO
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +72,9 @@ public class HomeFragment extends Fragment {
         });
         rvFavDevices.setAdapter(adapterFavDevices);
         getFavDeviceList();
+        emptyDeviceCard = root.findViewById(R.id.empty_fav_devices_card);
+        TextView tvEmptyDevice = emptyDeviceCard.findViewById(R.id.card_no_element_text);
+        tvEmptyDevice.setText(R.string.empty_fav_device_list);
 
         rvFavRooms = root.findViewById(R.id.rv_favorite_rooms);
         managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
@@ -82,6 +89,9 @@ public class HomeFragment extends Fragment {
         });
         rvFavRooms.setAdapter(adapterFavRooms);
         getFavRoomList();
+        emptyRoomCard = root.findViewById(R.id.empty_fav_rooms_card);
+        TextView tvEmptyRoom = emptyRoomCard.findViewById(R.id.card_no_element_text);
+        tvEmptyRoom.setText(R.string.empty_fav_room_list);
 
         rvFavRoutines = root.findViewById(R.id.rv_favorite_routines);
         managerFavRoutines = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
@@ -96,6 +106,9 @@ public class HomeFragment extends Fragment {
         });
         rvFavRoutines.setAdapter(adapterFavRoutines);
         getFavRoutineList();
+        emptyRoutineCard = root.findViewById(R.id.empty_fav_routines_card);
+        TextView tvEmptyRoutine = emptyRoutineCard.findViewById(R.id.card_no_element_text);
+        tvEmptyRoutine.setText(R.string.empty_fav_routine_list);
 
         return root;
     }
@@ -110,6 +123,8 @@ public class HomeFragment extends Fragment {
                     if (device.getMeta().isFavorite())
                         favDevices.add(device);
                 }
+                if (!favDevices.isEmpty())
+                    emptyDeviceCard.setVisibility(View.GONE);
                 adapterFavDevices.notifyDataSetChanged();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV DEVICES");
 
@@ -133,6 +148,8 @@ public class HomeFragment extends Fragment {
                     if (room.getMeta().isFavorite())
                         favRooms.add(room);
                 }
+                if (!favRooms.isEmpty())
+                    emptyRoomCard.setVisibility(View.GONE);
                 adapterFavRooms.notifyDataSetChanged();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV ROOMS");
 
@@ -156,6 +173,8 @@ public class HomeFragment extends Fragment {
                     if (routine.getMeta().isFavorite())
                         favRoutines.add(routine);
                 }
+                if (!favRoutines.isEmpty())
+                    emptyRoutineCard.setVisibility(View.GONE);
                 adapterFavRoutines.notifyDataSetChanged();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV ROUTINES");
 

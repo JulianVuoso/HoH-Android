@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -46,6 +47,8 @@ public class DevicesFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private static DevicesAdapter adapter;
 
+    private static CardView emptyCard;
+
 //    public static List<Category> categories = new ArrayList<>();
 //    private static String requestTag;
 
@@ -69,12 +72,22 @@ public class DevicesFragment extends Fragment {
         });
         rvCategories.setAdapter(adapter);
 
+        emptyCard = root.findViewById(R.id.empty_categories_card);
+        if (MainActivity.categories.isEmpty()) {
+            TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
+            tvEmptyRoom.setText(R.string.empty_category_list);
+        } else {
+            emptyCard.setVisibility(View.GONE);
+        }
+
 //        if (categories.size() == 0) getCategoryList(this.getContext());
 
         return root;
     }
 
     public static void notifyAdapter() {
+        if (emptyCard != null)
+            emptyCard.setVisibility(View.GONE);
         if (adapter != null)
             adapter.notifyDataSetChanged();
     }

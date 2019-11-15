@@ -22,4 +22,12 @@
     <string name="title_favorite_devices">Favorite Devices</string>
     <string name="title_favorite_rooms">Favorite Rooms</string>
     <string name="title_favorite_routines">Favorite Routines</string>
+
+    <string name="empty_device_list">No devices</string>
+    <string name="empty_category_list">No categories found</string>
+    <string name="empty_room_list">No rooms</string>
+    <string name="empty_routine_list">No routines</string>
+    <string name="empty_fav_device_list">No favorite devices</string>
+    <string name="empty_fav_room_list">No favorite rooms</string>
+    <string name="empty_fav_routine_list">No favorite routines</string>
 </resources>

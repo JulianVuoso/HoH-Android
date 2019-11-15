@@ -8,8 +8,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -44,6 +46,8 @@ public class RoomFragment extends Fragment {
 
     private List<String> requestTag = new ArrayList<>();
 
+    private CardView emptyCard;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +78,10 @@ public class RoomFragment extends Fragment {
         });
         rvDevices.setAdapter(adapter);
 
+        emptyCard = root.findViewById(R.id.empty_device_room_card);
+        TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
+        tvEmptyRoom.setText(R.string.empty_device_list);
+
         if (room != null) {
             // TODO: SACAR CONTEXT
             requestTag.add(Api.getInstance(this.getContext()).getDevicesFromRoom(room.getId(), new Response.Listener<ArrayList<Device>>() {
@@ -81,7 +89,8 @@ public class RoomFragment extends Fragment {
                 public void onResponse(ArrayList<Device> response) {
                     for (Device device : response)
                         device.setRoom(room);
-
+                    if (!data.isEmpty())
+                        emptyCard.setVisibility(View.GONE);
                     data.addAll(response);
                     adapter.updatedDataSet();
                     Log.v(MainActivity.LOG_TAG, "ACTUALICE DISPOSITIVOS");

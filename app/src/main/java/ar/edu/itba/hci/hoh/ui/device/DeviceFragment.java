@@ -9,8 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -46,6 +48,8 @@ public class DeviceFragment extends Fragment {
 
     private List<String> requestTag = new ArrayList<>();
 
+    private CardView emptyCard;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         devicesViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
@@ -74,6 +78,10 @@ public class DeviceFragment extends Fragment {
         // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
 //        fillData();
 
+        emptyCard = root.findViewById(R.id.empty_device_card);
+        TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
+        tvEmptyRoom.setText(R.string.empty_device_list);
+
         if (category != null) {
             for (final DeviceType type : category.getTypes()) {
                 // TODO: SACAR CONTEXT
@@ -82,8 +90,9 @@ public class DeviceFragment extends Fragment {
                     public void onResponse(ArrayList<Device> response) {
                         for (Device device : response)
                             device.setType(type);
-
                         data.addAll(response);
+                        if (!data.isEmpty())
+                            emptyCard.setVisibility(View.GONE);
                         adapter.updatedDataSet();
                         Log.v(MainActivity.LOG_TAG, "ACTUALICE DISPOSITIVOS");
                     }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -42,6 +43,8 @@ public class RoomsFragment extends Fragment {
 
     private String requestTag;
 
+    private CardView emptyCard;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         roomsViewModel = ViewModelProviders.of(this).get(RoomsViewModel.class);
@@ -62,6 +65,9 @@ public class RoomsFragment extends Fragment {
         rvRooms.setAdapter(adapter);
 
         getRoomList();
+        emptyCard = root.findViewById(R.id.empty_rooms_card);
+        TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
+        tvEmptyRoom.setText(R.string.empty_room_list);
 
         return root;
     }
@@ -73,6 +79,8 @@ public class RoomsFragment extends Fragment {
             @Override
             public void onResponse(ArrayList<Room> response) {
                 rooms.addAll(response);
+                if (!rooms.isEmpty())
+                    emptyCard.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE ROOMS");
             }

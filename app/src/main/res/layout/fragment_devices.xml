@@ -24,4 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/categories_title">
     </androidx.recyclerview.widget.RecyclerView>
+
+    <include android:id="@+id/empty_categories_card"
+        layout="@layout/item_no_elements"/>
 </RelativeLayout>
