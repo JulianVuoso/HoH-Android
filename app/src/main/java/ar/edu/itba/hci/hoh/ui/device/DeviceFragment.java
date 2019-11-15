@@ -1,15 +1,20 @@
 package ar.edu.itba.hci.hoh.ui.device;
 
 import android.app.AlertDialog;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,8 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +53,9 @@ public class DeviceFragment extends Fragment {
 
     private List<String> requestTag = new ArrayList<>();
 
-    //Dialog dialog;
-    AlertDialog.Builder dialog;
-    Button close_dialog, close;
+    private int orange = Color.rgb(255, 152, 0);
 
+    //Dialog dialog;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         devicesViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
@@ -69,30 +71,18 @@ public class DeviceFragment extends Fragment {
 //        gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
 //        rvDevices.setLayoutManager(gridLayoutManager);
 
-        close = root.findViewById(R.id.close_dialog);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
         adapter = new DeviceListAdapter(data, new OnItemClickListener<Device>() {
             @Override
             public void onItemClick(Device element) {
-                // TODO: OPEN DIALOG
                 createDialog(element);
-                dialog.show();
-                /*close.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });*/
             }
         });
         rvDevices.setAdapter(adapter);
 
-
         // METODO DE PRUEBA PARA PONER DISPOSITIVOS EN LA LISTA
-//        fillData();
-
-        //close_dialog = root.findViewById(R.id.close_dialog);
+        // fillData();
 
         if (category != null) {
             for (final DeviceType type : category.getTypes()) {
@@ -122,30 +112,332 @@ public class DeviceFragment extends Fragment {
     private void createDialog(Device element){
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View mView = inflater.inflate(R.layout.settings_door, null);
+        View root = inflater.inflate(R.layout.settings_dialog, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity())
+                .setView(root);
+        final AlertDialog dialog = dialogBuilder.create();
 
-        dialog = new AlertDialog.Builder(getActivity())
-                .setView(mView);
-
-        TextView name = mView.findViewById(R.id.dev_name);
-        TextView room = mView.findViewById(R.id.dev_room);
-        ImageView img = mView.findViewById(R.id.dev_img);
-        LinearLayout panel = mView.findViewById(R.id.panel);
-        LinearLayout panel2 = mView.findViewById(R.id.panel2);
+        TextView name = root.findViewById(R.id.dev_name);
+        TextView room = root.findViewById(R.id.dev_room);
+        ImageView img = root.findViewById(R.id.dev_img);
 
         name.setText(element.getName());
         room.setText(element.getRoom().getName());
         img.setImageResource(DeviceType.getDeviceTypeDrawable(element.getType()));
-        panel.setVisibility(View.GONE);
-        panel2.setVisibility(View.VISIBLE);
+        root.findViewById(R.id.close_dialog).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dialog.dismiss();
+            }
+        });
 
-        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
-        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.40);
+        setPanel(root, element);
 
-        //dialog.getWindow().setLayout(width, height);
-        //close = dialog.findViewById(R.id.close_dialog);
+        dialog.show();
+//        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+//        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.40);
+//        dialog.getWindow().setLayout(width, height);
     }
 
+    private void setPanel(View root, Device element){
+        switch (element.getType().getName()){
+            case "lamp":
+                root.findViewById(R.id.light_panel).setVisibility(View.VISIBLE);
+                final SeekBar brightness = root.findViewById(R.id.brightness);
+                final TextView brightnessText = root.findViewById(R.id.brightness_text);
+                brightness.setProgress(element.getState().getBrightness());
+                brightness.setMax(100);
+                brightnessText.setText(element.getState().getBrightness()+"%");
+                brightness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        brightness.setProgress(seekBar.getProgress());
+                        brightnessText.setText(seekBar.getProgress()+"%");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+
+                Switch sw = root.findViewById(R.id.light_switch);
+                sw.setChecked( element.getState().getStatus().compareTo("on") == 0 ? true : false );
+            break;
+            case "door":
+                root.findViewById(R.id.door_panel).setVisibility(View.VISIBLE);
+                Button btnO = root.findViewById(R.id.door_open);
+                Button btnC = root.findViewById(R.id.door_closed);
+                Button btnL = root.findViewById(R.id.door_locked);
+                if(element.getState().getStatus().compareTo("closed") == 0)
+                    turnOn(btnC);
+                else
+                    turnOn(btnO);
+                if(element.getState().getLock().compareTo("locked")==0)
+                    turnOn(btnL);
+                break;
+            case "blinds":
+                root.findViewById(R.id.window_panel).setVisibility(View.VISIBLE);
+                Button openBtn = root.findViewById(R.id.window_open);
+                Button closeBtn = root.findViewById(R.id.window_close);
+                if(element.getState().getStatus().compareTo("opened")==0)
+                    turnOn(openBtn);
+                else
+                    turnOn(closeBtn);
+                final ProgressBar pB = root.findViewById(R.id.window_bar);
+                final Device device = element;
+                pB.setMax(100);
+                pB.setProgressTintList(ColorStateList.valueOf(orange));
+                pB.setProgress(device.getState().getLevel());
+                openBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    while(device.getState().getStatus().compareTo("opened")==0){
+                        pB.setProgress(device.getState().getLevel());
+                        pB.setSecondaryProgress(device.getState().getLevel()+10);
+                    }
+                    }
+                });
+                closeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    while(device.getState().getStatus().compareTo("closed")==0){
+                        pB.setProgress(device.getState().getLevel());
+                        pB.setSecondaryProgress(device.getState().getLevel()-10);
+                    }
+                    }
+                });
+            break;
+            case "oven":
+                root.findViewById(R.id.oven_panel).setVisibility(View.VISIBLE);
+                Switch swOven = root.findViewById(R.id.oven_switch);
+                swOven.setChecked(element.getState().getStatus().compareTo("on") == 0 ? true : false);
+                final SeekBar ovenBar = root.findViewById(R.id.oven_temp_bar);
+                final TextView ovenTemp = root.findViewById(R.id.oven_temp_text);
+                ovenTemp.setText(element.getState().getTemperature()+"°C");
+                ovenBar.setMax(220);
+                ovenBar.setProgress(element.getState().getTemperature());
+                ovenBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        ovenBar.setProgress(seekBar.getProgress());
+                        ovenTemp.setText(seekBar.getProgress()+"°C");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                switch (element.getState().getHeat()){
+                    case "up":  Button heatUp = root.findViewById(R.id.heat_up);
+                                turnOn(heatUp); break;
+                    case "down":Button heatDown = root.findViewById(R.id.heat_down);
+                                turnOn(heatDown); break;
+                    default:    Button heatFull = root.findViewById(R.id.heat_full);
+                                turnOn(heatFull); break;
+                }
+                switch (element.getState().getConvection()){
+                    case "off": Button convOff = root.findViewById(R.id.conv_off);
+                                turnOn(convOff); break;
+                    case "full":Button convFull = root.findViewById(R.id.conv_full);
+                                turnOn(convFull); break;
+                    default:    Button convEcho = root.findViewById(R.id.conv_echo);
+                                turnOn(convEcho); break;
+                }
+                switch (element.getState().getGrill()){
+                    case "off": Button grillOff = root.findViewById(R.id.grill_off);
+                                turnOn(grillOff); break;
+                    case "full":Button grillFull = root.findViewById(R.id.grill_full);
+                                turnOn(grillFull); break;
+                    default:    Button grillEcho = root.findViewById(R.id.grill_echo);
+                                turnOn(grillEcho); break;
+                }
+                break;
+            case "refrigerator":
+                root.findViewById(R.id.fridge_panel).setVisibility(View.VISIBLE);
+                switch (element.getState().getMode()){
+                    case "vacation":
+                        Button vacation = root.findViewById(R.id.mode_vac);
+                        turnOn(vacation); break;
+                    case "party":
+                        Button party = root.findViewById(R.id.mode_party);
+                        turnOn(party); break;
+                    default:
+                        Button normal = root.findViewById(R.id.mode_normal);
+                        turnOn(normal); break;
+                }
+                final SeekBar fridgeBar = root.findViewById(R.id.fridge_bar);
+                final TextView fridgeText = root.findViewById(R.id.fridge_text);
+                final SeekBar freezerBar = root.findViewById(R.id.freezer_bar);
+                final TextView freezerText = root.findViewById(R.id.freezer_text);
+                fridgeBar.setMax(12);
+                fridgeBar.setKeyProgressIncrement(1);
+                fridgeBar.setProgress(element.getState().getTemperature());
+                fridgeText.setText(element.getState().getTemperature()+"°C");
+                fridgeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        fridgeBar.setProgress(seekBar.getProgress());
+                        fridgeText.setText(seekBar.getProgress()+"°C");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                freezerBar.setMax(12);
+                freezerBar.setKeyProgressIncrement(1);
+                freezerBar.setProgress(element.getState().getFreezerTemperature());
+                freezerText.setText(element.getState().getFreezerTemperature()+"°C");
+                freezerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        freezerBar.setProgress(seekBar.getProgress());
+                        freezerText.setText(seekBar.getProgress()+"°C");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                break;
+            case "ac":
+                root.findViewById(R.id.aa_panel).setVisibility(View.VISIBLE);
+                Switch swAA = root.findViewById(R.id.aa_switch);
+                swAA.setChecked(element.getState().getStatus().compareTo("on") == 0 ? true : false);
+                switch (element.getState().getMode()){
+                    case "cold":
+                        Button cold = root.findViewById(R.id.mode_cold);
+                        turnOn(cold); break;
+                    case "vent":
+                        Button vent = root.findViewById(R.id.mode_vent);
+                        turnOn(vent); break;
+                    default:
+                        Button heat = root.findViewById(R.id.mode_heat);
+                        turnOn(heat); break;
+                }
+                final SeekBar tempAA = root.findViewById(R.id.aa_temp);
+                final TextView AAtext = root.findViewById(R.id.aa_temp_text);
+                tempAA.setMax(12);
+                tempAA.setKeyProgressIncrement(1);
+                tempAA.setProgress(element.getState().getTemperature());
+                AAtext.setText(element.getState().getTemperature()+"°C");
+                tempAA.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        tempAA.setProgress(seekBar.getProgress());
+                        AAtext.setText(seekBar.getProgress()+"°C");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                final SeekBar fanSpeed = root.findViewById(R.id.fan_speed);
+                final TextView fanSpeedText = root.findViewById(R.id.fan_speed_text);
+                fanSpeed.setMax(12);
+                fanSpeed.setKeyProgressIncrement(1);
+//                fanSpeed.setProgress(Integer.parseInt(element.getState().getFanSpeed()));
+                fanSpeedText.setText(element.getState().getFanSpeed()+"°C");
+                fanSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        fanSpeed.setProgress(seekBar.getProgress());
+                        fanSpeedText.setText(seekBar.getProgress()+"°C");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+
+                final SeekBar vertWings = root.findViewById(R.id.aa_temp);
+                vertWings.setMax(100);
+                vertWings.setKeyProgressIncrement(1);
+//                vertWings.setProgress(Integer.parseInt(element.getState().getVerticalSwing()));
+                vertWings.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        vertWings.setProgress(seekBar.getProgress());
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                final SeekBar horizWings = root.findViewById(R.id.aa_temp);
+                horizWings.setMax(100);
+                horizWings.setKeyProgressIncrement(1);
+//                horizWings.setProgress(Integer.parseInt(element.getState().getHorizontalSwing()));
+                horizWings.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        horizWings.setProgress(seekBar.getProgress());
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+            break;
+            case "speaker":
+                root.findViewById(R.id.speaker_panel).setVisibility(View.VISIBLE);
+                TextView time = root.findViewById(R.id.time);
+                TextView song = root.findViewById(R.id.song);
+                TextView artist = root.findViewById(R.id.artist);
+                //TODO alternar imagen de play o pause segun state
+                //TODO ver el spinner del genero
+                Spinner genre = root.findViewById(R.id.genre_selector);
+                time.setText(element.getState().getSong().getProgress());
+                song.setText(element.getState().getSong().getTitle());
+                artist.setText(element.getState().getSong().getArtist());
+//                String[] genres = {"Rock", "Pop", "Regueaton", "Cumbia"};
+//                genre.setAdapter(genres);
+                final SeekBar volume = root.findViewById(R.id.volume_bar);
+                final TextView volumeTxt = root.findViewById(R.id.volume_text);
+                volumeTxt.setText(element.getState().getVolume()+"%");
+                volume.setMax(100);
+                volume.setProgress(element.getState().getVolume());
+                volume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        volume.setProgress(seekBar.getProgress());
+                        volumeTxt.setText(seekBar.getProgress()+"%");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });            break;
+            default: break;
+        }
+    }
+
+    private void turnOn(Button btn){
+        btn.setBackgroundTintList(ColorStateList.valueOf(orange));
+        return;
+    }
 
     private void fillData() {
         List<Device> auxList = new ArrayList<>();

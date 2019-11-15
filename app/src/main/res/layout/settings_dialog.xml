@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    android:layout_marginLeft="@dimen/card_spacing"
+    android:layout_marginTop="@dimen/card_spacing"
+    android:layout_marginRight="@dimen/card_spacing"
+    app:cardBackgroundColor="@color/colorDevCardBackgroundLight"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:id="@+id/dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/fav_dev"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="left"
+                    android:background="@null"
+                    android:src="@drawable/ic_star_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/dev_img"
+                    android:layout_width="1dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_nodev_black_40dp" />
+
+                <LinearLayout
+                    android:layout_width="135dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/dev_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/dev_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_italic"
+                        android:textColor="@color/colorDevCardContentFaded"
+                        android:textSize="15sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/close_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@null"
+                    android:src="@drawable/ic_nodev_black_40dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/door_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:visibility="gone">
+                <Button
+                    android:id="@+id/door_open"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Open" />
+                <Button
+                    android:id="@+id/door_closed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Closed" />
+                <Button
+                    android:id="@+id/door_locked"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Locked" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/light_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <Switch
+                    android:id="@+id/light_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:textOff="OFF"
+                    android:textOn="ON" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp">
+                    <TextView
+                        android:id="@+id/brightness_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Brightness"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+                    <SeekBar
+                        android:id="@+id/brightness"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E"
+                        android:max="100"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/oven_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <Switch
+                    android:id="@+id/oven_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textOff="OFF"
+                    android:textOn="ON" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Temperature"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <SeekBar
+                        android:id="@+id/oven_temp_bar"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <TextView
+                        android:id="@+id/oven_temp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="220°C"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Heat Source"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/heat_up"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Up" />
+                    <Button
+                        android:id="@+id/heat_down"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Down" />
+                    <Button
+                        android:id="@+id/heat_full"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Full" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Convention Mode"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/conv_off"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Off" />
+                    <Button
+                        android:id="@+id/conv_echo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Echo" />
+                    <Button
+                        android:id="@+id/conv_full"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Full" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Grill Mode"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/grill_off"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Off" />
+                    <Button
+                        android:id="@+id/grill_echo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Echo" />
+                    <Button
+                        android:id="@+id/grill_full"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Full" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/speaker_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <Switch
+                    android:id="@+id/speaker_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textOff="OFF"
+                    android:textOn="ON" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/playing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_italic"
+                            android:text="Playing"
+                            android:textColor="@color/colorDevCardContent"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_italic"
+                            android:text="2.03"
+                            android:textColor="@color/colorDevCardContentFaded"
+                            android:textSize="20sp"
+                            android:textStyle="italic" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/song"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:fontFamily="@font/open_sans_semibold"
+                            android:text="Date la vuelta"
+                            android:textColor="@color/colorDevCardContent"
+                            android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/artist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_italic"
+                            android:text="Luis Fonsi, Sebastian Yatra, ..."
+                            android:textColor="@color/colorDevCardContentFaded"
+                            android:textSize="12sp"
+                            android:textStyle="italic" />
+                    </LinearLayout>
+                    <ImageButton
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@drawable/ic_playlist_add_black_24dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <ImageButton
+                        android:id="@+id/prev"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:src="@drawable/ic_skip_previous_black_24dp" />
+                    <ImageButton
+                        android:id="@+id/pause_play"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:src="@drawable/ic_pause_circle_filled_black_24dp" />
+                    <ImageButton
+                        android:id="@+id/next"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:src="@drawable/ic_skip_next_black_24dp" />
+                    <ImageButton
+                        android:id="@+id/stop"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:src="@drawable/ic_stop_black_24dp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Volume"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <SeekBar
+                            android:id="@+id/volume_bar"
+                            android:layout_width="260dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:progressBackgroundTint="#F48D1E"
+                            android:progressTint="#F48D1E"
+                            android:thumbTint="#F48D1E" />
+                        <TextView
+                            android:id="@+id/volume_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/open_sans_semibold"
+                            android:text="38%"
+                            android:textColor="@color/colorDevCardContent"
+                            android:textSize="20sp"
+                            android:textStyle="italic" />
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Genre"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                    <Spinner
+                        android:id="@+id/genre_selector"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fridge_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="20dp">
+                <Switch
+                    android:id="@+id/fridge_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textOff="OFF"
+                    android:textOn="ON" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Temperature"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <SeekBar
+                        android:id="@+id/fridge_bar"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+
+                    <TextView
+                        android:id="@+id/fridge_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="5°C"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Freezer Temperature"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    android:layout_marginTop="20dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <SeekBar
+                        android:id="@+id/freezer_bar"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <TextView
+                        android:id="@+id/freezer_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="-3°C"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Mode"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    android:layout_marginTop="20dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <Button
+                        android:id="@+id/mode_normal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Normal" />
+                    <Button
+                        android:id="@+id/mode_vac"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Vacation" />
+                    <Button
+                        android:id="@+id/mode_party"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Party" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/window_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:visibility="visible">
+                    <Button
+                        android:id="@+id/window_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Open" />
+                    <Button
+                        android:id="@+id/window_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Closed"/>
+                </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/window_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    style="?android:progressBarStyleHorizontal"
+                    android:progressTint="#FF9800"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aa_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="20dp">
+                <Switch
+                    android:id="@+id/aa_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textOff="OFF"
+                    android:textOn="ON" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Temperature"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/aa_temp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="220°C"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+                    <SeekBar
+                        android:id="@+id/aa_temp"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Mode"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/mode_cold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="cold" />
+                    <Button
+                        android:id="@+id/mode_vent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="vent" />
+                    <Button
+                        android:id="@+id/mode_heat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="heat" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Fan Speed"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/fan_speed_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="25"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                    <SeekBar
+                        android:id="@+id/fan_speed"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Auto"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Vertical Wings"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <SeekBar
+                        android:id="@+id/vert_wings"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Auto"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Horizontal Wings"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <SeekBar
+                        android:id="@+id/horiz_wings"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Auto"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>
