@@ -1,6 +1,5 @@
 package ar.edu.itba.hci.hoh.ui.device;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
+import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
@@ -64,12 +63,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
             tvDeviceRoom.setText(device.getRoom().getName());
             tvDeviceState.setText(device.getState().getStatus());
             ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClick(device);
-                }
-            });
+            itemView.setOnClickListener(view -> listener.onItemClick(device));
         }
     }
 }

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Room;
+import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
@@ -22,8 +22,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
     private List<Room> data;
     private OnItemClickListener<Room> listener;
 
-    public RoomsAdapter(List<Room> data, OnItemClickListener<Room> onClickListener) {
-        this.data = data;
+    public RoomsAdapter(OnItemClickListener<Room> onClickListener) {
         this.listener = onClickListener;
     }
 
@@ -36,12 +35,23 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RoomsViewHolder holder, int position) {
-        holder.bind(data.get(position), listener);
+        if (data != null) {
+            holder.bind(data.get(position), listener);
+        } else {
+            holder.tvRoomName.setText(R.string.empty_room_list);
+        }
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.data = rooms;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        if (this.data != null)
+            return data.size();
+        return 0;
     }
 
     class RoomsViewHolder extends RecyclerView.ViewHolder {
@@ -60,11 +70,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
             tvRoomName.setText(room.getName());
             ivRoomImage.setImageResource(MainActivity.getDrawableFromString(context, room.getMeta().getImage()));
             ivRoomImage.setContentDescription(room.getMeta().getImage());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    listener.onItemClick(room);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(room));
         }
     }
 }

@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Category;
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
+import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
@@ -57,11 +55,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
         public void bind(final Category category, final OnItemClickListener<Category> listener) {
             tvCategoryName.setText(category.getName());
             ivCategoryImage.setImageResource(category.getDrawableId());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    listener.onItemClick(category);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(category));
         }
     }
 }

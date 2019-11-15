@@ -1,9 +1,8 @@
-package ar.edu.itba.hci.hoh.Elements;
+package ar.edu.itba.hci.hoh.elements;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Category implements Serializable {
     private String name;

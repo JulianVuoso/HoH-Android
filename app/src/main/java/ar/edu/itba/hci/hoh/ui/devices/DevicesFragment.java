@@ -1,42 +1,23 @@
 package ar.edu.itba.hci.hoh.ui.devices;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import ar.edu.itba.hci.hoh.Elements.Category;
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
-import ar.edu.itba.hci.hoh.Elements.Room;
+import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
-import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
-import ar.edu.itba.hci.hoh.ui.device.DeviceFragment;
 
 
 public class DevicesFragment extends Fragment {

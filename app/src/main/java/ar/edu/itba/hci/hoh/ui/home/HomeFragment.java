@@ -21,9 +21,9 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.Room;
-import ar.edu.itba.hci.hoh.Elements.Routine;
+import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.Room;
+import ar.edu.itba.hci.hoh.elements.Routine;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
@@ -32,7 +32,6 @@ import ar.edu.itba.hci.hoh.ui.MarginItemDecorator;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 import ar.edu.itba.hci.hoh.ui.device.DeviceAdapter;
 import ar.edu.itba.hci.hoh.ui.rooms.RoomsAdapter;
-import ar.edu.itba.hci.hoh.ui.rooms.RoomsFragmentDirections;
 import ar.edu.itba.hci.hoh.ui.routines.RoutinesAdapter;
 import ar.edu.itba.hci.hoh.ui.routines.RoutinesFragment;
 
@@ -80,13 +79,13 @@ public class HomeFragment extends Fragment {
         managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
         rvFavRooms.setLayoutManager(managerFavRooms);
         rvFavRooms.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.card_spacing)));
-        adapterFavRooms = new RoomsAdapter(favRooms, new OnItemClickListener<Room>() {
-            @Override
-            public void onItemClick(Room room) {
-                HomeFragmentDirections.ActionSelectRoom action = HomeFragmentDirections.actionSelectRoom(room, room.getName());
-                Navigation.findNavController(root).navigate(action);
-            }
-        });
+//        adapterFavRooms = new RoomsAdapter(favRooms, new OnItemClickListener<Room>() {
+//            @Override
+//            public void onItemClick(Room room) {
+//                HomeFragmentDirections.ActionSelectRoom action = HomeFragmentDirections.actionSelectRoom(room, room.getName());
+//                Navigation.findNavController(root).navigate(action);
+//            }
+//        });
         rvFavRooms.setAdapter(adapterFavRooms);
         getFavRoomList();
         emptyRoomCard = root.findViewById(R.id.empty_fav_rooms_card);
@@ -97,13 +96,13 @@ public class HomeFragment extends Fragment {
         managerFavRoutines = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
         rvFavRoutines.setLayoutManager(managerFavRoutines);
         rvFavRoutines.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.card_spacing)));
-        adapterFavRoutines = new RoutinesAdapter(favRoutines, new OnItemClickListener<Routine>() {
-            @Override
-            public void onItemClick(Routine routine) {
-                // TODO: OPEN CONFIRMATION DIALOG TO EXECUTE ROUTINE
-                RoutinesFragment.executeRoutine(routine, getContext());
-            }
-        });
+//        adapterFavRoutines = new RoutinesAdapter(favRoutines, new OnItemClickListener<Routine>() {
+//            @Override
+//            public void onItemClick(Routine routine) {
+//                // TODO: OPEN CONFIRMATION DIALOG TO EXECUTE ROUTINE
+//                RoutinesFragment.executeRoutine(routine, getContext());
+//            }
+//        });
         rvFavRoutines.setAdapter(adapterFavRoutines);
         getFavRoutineList();
         emptyRoutineCard = root.findViewById(R.id.empty_fav_routines_card);
@@ -150,7 +149,7 @@ public class HomeFragment extends Fragment {
                 }
                 if (!favRooms.isEmpty())
                     emptyRoomCard.setVisibility(View.GONE);
-                adapterFavRooms.notifyDataSetChanged();
+//                adapterFavRooms.notifyDataSetChanged();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV ROOMS");
 
             }
@@ -175,7 +174,7 @@ public class HomeFragment extends Fragment {
                 }
                 if (!favRoutines.isEmpty())
                     emptyRoutineCard.setVisibility(View.GONE);
-                adapterFavRoutines.notifyDataSetChanged();
+//                adapterFavRoutines.notifyDataSetChanged();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV ROUTINES");
 
             }

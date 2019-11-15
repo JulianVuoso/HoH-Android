@@ -16,13 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ar.edu.itba.hci.hoh.Elements.Category;
-import ar.edu.itba.hci.hoh.Elements.Device;
+import ar.edu.itba.hci.hoh.elements.Category;
+import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 import ar.edu.itba.hci.hoh.ui.device.DeviceAdapter;
-import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 
 public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomListViewHolder> {
     private Map<Category, List<Device>> map = new HashMap<>();

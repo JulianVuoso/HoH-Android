@@ -1,23 +1,34 @@
 package ar.edu.itba.hci.hoh.api;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
-import ar.edu.itba.hci.hoh.Elements.Room;
-import ar.edu.itba.hci.hoh.Elements.Routine;
+import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.DeviceType;
+import ar.edu.itba.hci.hoh.elements.Room;
+import ar.edu.itba.hci.hoh.elements.Routine;
 
 public class Api {
+    private final static String LOG_TAG = "ar.edu.itba.hci.hoh.api.Api";
     private static Api instance;
     private static RequestQueue requestQueue;
     // Use IP 10.0.2.2 instead of 127.0.0.1 when running Android emulator in the
@@ -293,6 +304,37 @@ public class Api {
         if ((uuid != null) && (requestQueue != null)) {
             requestQueue.cancelAll(uuid);
         }
+    }
+
+    public Error handleError(VolleyError error) {
+        Error response = null;
+        boolean handled = false;
+
+        NetworkResponse networkResponse = error.networkResponse;
+        if ((networkResponse != null) && (error.networkResponse.data != null)) {
+            try {
+                String json = new String(
+                        error.networkResponse.data,
+                        HttpHeaderParser.parseCharset(networkResponse.headers));
+
+                JSONObject jsonObject = new JSONObject(json);
+                json = jsonObject.getJSONObject("error").toString();
+
+                Gson gson = new Gson();
+                response = gson.fromJson(json, Error.class);
+                handled = true;
+            } catch (JSONException | UnsupportedEncodingException e) {
+            }
+        }
+
+        if (!handled) {
+            Log.e(LOG_TAG, error.toString());
+
+            ArrayList<String> description = new ArrayList<>(Arrays.asList(error.getMessage()));
+            response = new Error(6, description);
+        }
+
+        return response;
     }
 }
 

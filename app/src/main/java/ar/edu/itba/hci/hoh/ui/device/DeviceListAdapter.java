@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,11 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
-import ar.edu.itba.hci.hoh.Elements.Room;
+import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 

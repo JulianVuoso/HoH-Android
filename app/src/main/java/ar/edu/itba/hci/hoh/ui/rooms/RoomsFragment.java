@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -23,13 +22,11 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Room;
+import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
-import ar.edu.itba.hci.hoh.ui.devices.DevicesAdapter;
-import ar.edu.itba.hci.hoh.ui.devices.DevicesFragmentDirections;
 
 public class RoomsFragment extends Fragment {
 
@@ -55,15 +52,11 @@ public class RoomsFragment extends Fragment {
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
         gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
         rvRooms.setLayoutManager(gridLayoutManager);
-        adapter = new RoomsAdapter(rooms, new OnItemClickListener<Room>() {
-            @Override
-            public void onItemClick(Room room) {
-                RoomsFragmentDirections.ActionSelectRoom action = RoomsFragmentDirections.actionSelectRoom(room, room.getName());
-                Navigation.findNavController(root).navigate(action);
-            }
+        adapter = new RoomsAdapter(room -> {
+            RoomsFragmentDirections.ActionSelectRoom action = RoomsFragmentDirections.actionSelectRoom(room, room.getName());
+            Navigation.findNavController(root).navigate(action);
         });
         rvRooms.setAdapter(adapter);
-
         getRoomList();
         emptyCard = root.findViewById(R.id.empty_rooms_card);
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
@@ -73,30 +66,27 @@ public class RoomsFragment extends Fragment {
     }
 
     private void getRoomList() {
-        rooms.clear();
-        // TODO: SACAR CONTEXT
-        requestTag = Api.getInstance(this.getContext()).getRooms(new Response.Listener<ArrayList<Room>>() {
-            @Override
-            public void onResponse(ArrayList<Room> response) {
-                rooms.addAll(response);
-                if (!rooms.isEmpty())
-                    emptyCard.setVisibility(View.GONE);
-                adapter.notifyDataSetChanged();
-                Log.v(MainActivity.LOG_TAG, "ACTUALICE ROOMS");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // TODO: VER QUE HACER CON ERROR
-                Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR ROOMS. El error es %s", error.toString()));
-            }
+        roomsViewModel.getRooms().observe(this, rooms -> {
+            if (rooms != null && !rooms.isEmpty())
+                emptyCard.setVisibility(View.GONE);
+            adapter.setRooms(rooms);
+            Log.v(MainActivity.LOG_TAG, "ACTUALICE ROOMS");
         });
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        // TODO: VER ADONDE MANDARLE EL CANCEL REQUEST, NO TENGO EL TAG.
         // TODO: SACAR CONTEXT
         Api.getInstance(this.getContext()).cancelRequest(requestTag);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        emptyCard.setVisibility(View.VISIBLE);
+        roomsViewModel.reloadRooms();
+        getRoomList();
     }
 }

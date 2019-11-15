@@ -34,7 +34,7 @@
         tools:layout="@layout/fragment_room" >
         <argument
             android:name="room"
-            app:argType="ar.edu.itba.hci.hoh.Elements.Room"
+            app:argType="ar.edu.itba.hci.hoh.elements.Room"
             app:nullable="true" />
         <argument
             android:name="appbar_title"
@@ -59,7 +59,7 @@
         tools:layout="@layout/fragment_device" >
         <argument
             android:name="category"
-            app:argType="ar.edu.itba.hci.hoh.Elements.Category"
+            app:argType="ar.edu.itba.hci.hoh.elements.Category"
             app:nullable="true" />
         <argument
             android:name="appbar_title"

@@ -24,9 +24,8 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
-import ar.edu.itba.hci.hoh.Elements.Room;
+import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;

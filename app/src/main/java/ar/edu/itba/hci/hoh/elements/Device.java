@@ -1,8 +1,6 @@
-package ar.edu.itba.hci.hoh.Elements;
+package ar.edu.itba.hci.hoh.elements;
 
 import java.io.Serializable;
-
-import ar.edu.itba.hci.hoh.R;
 
 public class Device implements Serializable {
     private String id;
