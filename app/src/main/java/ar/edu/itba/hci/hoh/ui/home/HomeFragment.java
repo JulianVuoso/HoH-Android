@@ -21,9 +21,9 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.Room;
-import ar.edu.itba.hci.hoh.Elements.Routine;
+import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.Room;
+import ar.edu.itba.hci.hoh.elements.Routine;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
@@ -32,7 +32,6 @@ import ar.edu.itba.hci.hoh.ui.MarginItemDecorator;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 import ar.edu.itba.hci.hoh.ui.device.DeviceAdapter;
 import ar.edu.itba.hci.hoh.ui.rooms.RoomsAdapter;
-import ar.edu.itba.hci.hoh.ui.rooms.RoomsFragmentDirections;
 import ar.edu.itba.hci.hoh.ui.routines.RoutinesAdapter;
 import ar.edu.itba.hci.hoh.ui.routines.RoutinesFragment;
 

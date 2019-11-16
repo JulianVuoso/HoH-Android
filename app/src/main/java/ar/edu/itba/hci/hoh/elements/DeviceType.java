@@ -1,7 +1,6 @@
-package ar.edu.itba.hci.hoh.Elements;
+package ar.edu.itba.hci.hoh.elements;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import ar.edu.itba.hci.hoh.R;
 

@@ -17,14 +17,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.fragment.app.FragmentManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,13 +31,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.itba.hci.hoh.Elements.Category;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
+import ar.edu.itba.hci.hoh.elements.Category;
+import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.api.Error;
 import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
-import ar.edu.itba.hci.hoh.ui.rooms.RoomsFragmentDirections;
 
 
 public class MainActivity extends AppCompatActivity {

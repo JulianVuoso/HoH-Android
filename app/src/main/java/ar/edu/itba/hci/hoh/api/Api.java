@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import ar.edu.itba.hci.hoh.Elements.Device;
-import ar.edu.itba.hci.hoh.Elements.DeviceType;
-import ar.edu.itba.hci.hoh.Elements.Room;
-import ar.edu.itba.hci.hoh.Elements.Routine;
+import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.DeviceType;
+import ar.edu.itba.hci.hoh.elements.Room;
+import ar.edu.itba.hci.hoh.elements.Routine;
 
 public class Api {
     private static Api instance;
