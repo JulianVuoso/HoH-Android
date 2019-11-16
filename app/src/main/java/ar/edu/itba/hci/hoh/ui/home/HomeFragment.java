@@ -120,9 +120,11 @@ public class HomeFragment extends Fragment {
 
     private void getFavDeviceList() {
         homeViewModel.getDevices().observe(this, devices -> {
-            for (Device device : devices)
-                if (device.getMeta().isFavorite())
-                    favDevices.add(device);
+            if (devices != null) {
+                for (Device device : devices)
+                    if (device.getMeta().isFavorite())
+                        favDevices.add(device);
+            }
             if (!favDevices.isEmpty())
                 emptyDeviceCard.setVisibility(View.GONE);
             adapterFavDevices.notifyDataSetChanged();
@@ -132,9 +134,11 @@ public class HomeFragment extends Fragment {
 
     private void getFavRoomList() {
         homeViewModel.getRooms().observe(this, rooms -> {
-            for (Room room : rooms)
-                if (room.getMeta().isFavorite())
-                    favRooms.add(room);
+            if (rooms != null) {
+                for (Room room : rooms)
+                    if (room.getMeta().isFavorite())
+                        favRooms.add(room);
+            }
             if (!favRooms.isEmpty())
                 emptyRoomCard.setVisibility(View.GONE);
             adapterFavRooms.notifyDataSetChanged();
@@ -144,9 +148,11 @@ public class HomeFragment extends Fragment {
 
     private void getFavRoutineList() {
         homeViewModel.getRoutines().observe(this, routines -> {
-            for (Routine routine : routines)
-                if (routine.getMeta().isFavorite())
-                    favRoutines.add(routine);
+            if (routines != null) {
+                for (Routine routine : routines)
+                    if (routine.getMeta().isFavorite())
+                        favRoutines.add(routine);
+            }
             if (!favRoutines.isEmpty())
                 emptyRoutineCard.setVisibility(View.GONE);
             adapterFavRoutines.notifyDataSetChanged();
