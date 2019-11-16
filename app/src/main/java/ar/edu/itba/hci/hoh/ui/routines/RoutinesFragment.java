@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.elements.Routine;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
@@ -53,16 +54,11 @@ public class RoutinesFragment extends Fragment {
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
         gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
         rvRoutines.setLayoutManager(gridLayoutManager);
-        adapter = new RoutinesAdapter(routines, new OnItemClickListener<Routine>() {
-            @Override
-            public void onItemClick(Routine routine) {
-                // TODO: OPEN CONFIRMATION DIALOG TO EXECUTE ROUTINE
-                executeRoutine(routine, getContext());
-            }
+        adapter = new RoutinesAdapter(routine -> {
+            // TODO: OPEN CONFIRMATION DIALOG TO EXECUTE ROUTINE
+            executeRoutine(routine);
         });
         rvRoutines.setAdapter(adapter);
-
-        routines.clear();
         getRoutineList();
         emptyCard = root.findViewById(R.id.empty_routines_card);
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
@@ -72,37 +68,20 @@ public class RoutinesFragment extends Fragment {
     }
 
     private void getRoutineList() {
-        // TODO: SACAR CONTEXT
-        requestTag.add(Api.getInstance(this.getContext()).getRoutines(new Response.Listener<ArrayList<Routine>>() {
-            @Override
-            public void onResponse(ArrayList<Routine> response) {
-                routines.addAll(response);
-                if (!routines.isEmpty())
-                    emptyCard.setVisibility(View.GONE);
-                adapter.notifyDataSetChanged();
-                Log.v(MainActivity.LOG_TAG, "ACTUALICE ROUTINES");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // TODO: VER QUE HACER CON ERROR
-                Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR ROUTINES. El error es %s", error.toString()));
-            }
-        }));
+        routinesViewModel.getRoutines().observe(this, routines -> {
+            if (routines != null && ! routines.isEmpty())
+                emptyCard.setVisibility(View.GONE);
+            adapter.setRoutines(routines);
+            Log.v(MainActivity.LOG_TAG, "ACTUALICE ROUTINES");
+        });
     }
 
-    public static void executeRoutine(final Routine routine, final Context context) {
-        requestTag.add(Api.getInstance(context).execRoutine(routine.getId(), new Response.Listener<Boolean>() {
-            @Override
-            public void onResponse(Boolean response) {
-                Toast.makeText(context, String.format("Routine %s executed", routine.getName()), Toast.LENGTH_LONG).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Error executing routine", Toast.LENGTH_LONG).show();
-            }
-        }));
+    // TODO: PROBARLO
+    private void executeRoutine(Routine routine) {
+        routinesViewModel.execRoutine(routine.getId()).observe(this, result -> {
+            if (result != null)
+                MyApplication.makeToast(String.format("Routine %s executed", routine.getName()));
+        });
     }
 
     @Override
@@ -111,5 +90,13 @@ public class RoutinesFragment extends Fragment {
         // TODO: SACAR CONTEXT
         for (String request : requestTag)
             Api.getInstance(this.getContext()).cancelRequest(request);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        emptyCard.setVisibility(View.VISIBLE);
+        routinesViewModel.reloadRoutines();
+        getRoutineList();
     }
 }

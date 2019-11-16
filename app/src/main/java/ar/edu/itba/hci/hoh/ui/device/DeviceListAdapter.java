@@ -88,7 +88,8 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
         public void bind(final Room room, final OnItemClickListener<Device> listener) {
             tvRoomName.setText(room.getName());
             rvRoomDevices.setLayoutManager(new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false));
-            DeviceAdapter adapter = new DeviceAdapter(map.get(room), listener);
+            DeviceAdapter adapter = new DeviceAdapter(listener);
+            adapter.setDevices(map.get(room));
             adapterList.add(adapter);
             rvRoomDevices.setAdapter(adapter);
         }

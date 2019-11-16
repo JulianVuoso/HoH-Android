@@ -20,8 +20,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     private List<Device> data;
     private OnItemClickListener<Device> listener;
 
-    public DeviceAdapter(List<Device> data, OnItemClickListener<Device> listener) {
-        this.data = data;
+    public DeviceAdapter(OnItemClickListener<Device> listener) {
         this.listener = listener;
     }
 
@@ -34,12 +33,22 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
 
     @Override
     public void onBindViewHolder(@NonNull DeviceViewHolder holder, int position) {
-        holder.bind(data.get(position), listener);
+        if (data != null)
+            holder.bind(data.get(position), listener);
+        else
+            holder.tvDeviceName.setText(R.string.empty_device_list);
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.data = devices;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        if (this.data != null)
+            return data.size();
+        return 0;
     }
 
 
@@ -63,12 +72,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
             tvDeviceRoom.setText(device.getRoom().getName());
             tvDeviceState.setText(device.getState().getStatus());
             ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClick(device);
-                }
-            });
+            itemView.setOnClickListener(view -> listener.onItemClick(device));
         }
     }
 }

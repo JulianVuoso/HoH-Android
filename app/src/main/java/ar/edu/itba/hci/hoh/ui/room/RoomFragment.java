@@ -69,7 +69,7 @@ public class RoomFragment extends Fragment {
 //        rvDevices.setLayoutManager(gridLayoutManager);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
-        adapter = new RoomListAdapter(data, new OnItemClickListener<Device>() {
+        adapter = new RoomListAdapter(new OnItemClickListener<Device>() {
             @Override
             public void onItemClick(Device element) {
                 // TODO: OPEN DIALOGue
@@ -82,28 +82,24 @@ public class RoomFragment extends Fragment {
         tvEmptyRoom.setText(R.string.empty_device_list);
 
         if (room != null) {
-            // TODO: SACAR CONTEXT
-            requestTag.add(Api.getInstance(this.getContext()).getDevicesFromRoom(room.getId(), new Response.Listener<ArrayList<Device>>() {
-                @Override
-                public void onResponse(ArrayList<Device> response) {
-                    for (Device device : response)
-                        device.setRoom(room);
-                    if (!data.isEmpty())
-                        emptyCard.setVisibility(View.GONE);
-                    data.addAll(response);
-                    adapter.updatedDataSet();
-                    Log.v(MainActivity.LOG_TAG, "ACTUALICE DISPOSITIVOS");
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // TODO: VER QUE HACER CON ERROR
-                    Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR DISPOSITIVOS. El error es %s", error.toString()));
-                }
-            }));
+            getDevicesList(room);
         }
 
         return root;
+    }
+
+    private void getDevicesList(Room room) {
+        roomViewModel.setRoom(room);
+        roomViewModel.getDevicesFromRoom().observe(this, devices -> {
+            if (devices != null) {
+                for (Device device : devices)
+                    device.setRoom(room);
+                if (!devices.isEmpty())
+                    emptyCard.setVisibility(View.GONE);
+            }
+            adapter.setDevices(devices);
+            Log.v(MainActivity.LOG_TAG, "ACTUALICE DISPOSITIVOS");
+        });
     }
 
     public static void notifyAdapter() {
@@ -134,28 +130,24 @@ public class RoomFragment extends Fragment {
 
         room.getMeta().setFavorite(!room.getMeta().isFavorite());
 
-        // TODO: SACAR CONTEXT
-        requestTag.add(Api.getInstance(this.getContext()).modifyRoom(room, new Response.Listener<Boolean>() {
-            @Override
-            public void onResponse(Boolean response) {
-                if (response) {
-                    if (room != null && room.getMeta().isFavorite())
-                        item.setIcon(R.drawable.ic_star_white_24dp);
-                    else
-                        item.setIcon(R.drawable.ic_star_border_white_24dp);
-                } else {
-                    // TODO: VER QUE HACER CON ERROR
-                    Log.e(MainActivity.LOG_TAG, "NO SE PUDO ACTUALIZAR FAV");
-                }
+        roomViewModel.modifyRoom(room).observe(this, result -> {
+            // Si result es null, ya maneje el error
+            if (result != null) {
+                if (room != null && room.getMeta().isFavorite())
+                    item.setIcon(R.drawable.ic_star_white_24dp);
+                else
+                    item.setIcon(R.drawable.ic_star_border_white_24dp);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // TODO: VER QUE HACER CON ERROR
-                Log.e(MainActivity.LOG_TAG, String.format("ERROR AL MODIFICAR HABITACION. El error es %s", error.toString()));
-            }
-        }));
+        });
 
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        emptyCard.setVisibility(View.VISIBLE);
+        roomViewModel.setRoom(room);
+        getDevicesList(room);
     }
 }
