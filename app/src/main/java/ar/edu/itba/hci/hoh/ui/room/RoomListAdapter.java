@@ -31,10 +31,9 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
     private List<Device> data;
     private List<DeviceAdapter> adapterList = new ArrayList<>();
 
-    public RoomListAdapter(List<Device> data, OnItemClickListener<Device> listener) {
-        this.data = data;
+    public RoomListAdapter(OnItemClickListener<Device> listener) {
         this.listener = listener;
-        updateMap();
+//        updateMap();
     }
 
     @NonNull
@@ -46,8 +45,12 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
 
     @Override
     public void onBindViewHolder(@NonNull RoomListViewHolder holder, int position) {
-        Log.v("TAG", String.format("OnBindViewHolder with %d, %s", position, categories.get(position).getName()));
         holder.bind(categories.get(position), listener);
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.data = devices;
+        updatedDataSet();
     }
 
     @Override
@@ -93,7 +96,8 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
         public void bind(final Category category, final OnItemClickListener<Device> listener) {
             tvCategoryName.setText(category.getName());
             rvCategoryDevices.setLayoutManager(new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false));
-            DeviceAdapter adapter = new DeviceAdapter(map.get(category), listener);
+            DeviceAdapter adapter = new DeviceAdapter(listener);
+            adapter.setDevices(map.get(category));
             adapterList.add(adapter);
             rvCategoryDevices.setAdapter(adapter);
         }

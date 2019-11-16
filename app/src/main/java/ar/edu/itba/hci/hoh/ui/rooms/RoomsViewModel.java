@@ -20,7 +20,7 @@ public class RoomsViewModel extends ViewModel {
         reloadRooms();
     }
 
-    public LiveData<ArrayList<Room>> getRooms() {
+    LiveData<ArrayList<Room>> getRooms() {
         return Transformations.map(this.rooms, (result) -> {
             Error error = result.getError();
             if (error != null)

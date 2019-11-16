@@ -21,7 +21,7 @@ public class RoutinesViewModel extends ViewModel {
         reloadRoutines();
     }
 
-    public LiveData<ArrayList<Routine>> getRoutines() {
+    LiveData<ArrayList<Routine>> getRoutines() {
         return Transformations.map(this.routines, new Function<Result<ArrayList<Routine>>, ArrayList<Routine>>() {
             @Override
             public ArrayList<Routine> apply(Result<ArrayList<Routine>> result) {
@@ -33,7 +33,7 @@ public class RoutinesViewModel extends ViewModel {
         });
     }
 
-    public LiveData<Boolean> execRoutine(String id) {
+    LiveData<Boolean> execRoutine(String id) {
         LiveData<Result<Boolean>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
         return Transformations.map(execResult, new Function<Result<Boolean>, Boolean>() {
             @Override
