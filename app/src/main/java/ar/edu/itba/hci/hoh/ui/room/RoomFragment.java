@@ -58,6 +58,8 @@ public class RoomFragment extends Fragment {
         roomViewModel = ViewModelProviders.of(this).get(RoomViewModel.class);
         View root = inflater.inflate(R.layout.fragment_room, container, false);
 
+        MainActivity.reloadCategories();
+
         if (getArguments() != null)
             room = RoomFragmentArgs.fromBundle(getArguments()).getRoom();
 

@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "ar.edu.itba.hci.hoh";
 
+    private static MainActivityData mainActivityData;
+    private static MainActivity instance;
+
     public static List<Category> categories = new ArrayList<>();
     private static String requestTag;
 
@@ -96,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        instance = this;
+        mainActivityData = new MainActivityData();
+
         if (categories.size() == 0) getCategoryList();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -118,16 +124,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static void getCategoryList() {
-        requestTag = Api.getInstance(null).getDeviceTypes(new Response.Listener<ArrayList<DeviceType>>() {
-            @Override
-            public void onResponse(ArrayList<DeviceType> response) {
+        mainActivityData.getDeviceTypes().observe(instance, deviceTypes -> {
+            if (deviceTypes != null) {
                 Category lights = new Category("Lights", R.drawable.ic_light_black_60dp);
                 Category openings = new Category("Doors & Blinds", R.drawable.ic_door_black_60dp);
                 Category ac = new Category("Air Conditioning", R.drawable.ic_door_black_60dp); // TODO: CHANGE CATEGORY PIC
                 Category appliances = new Category("Appliances", R.drawable.ic_fridge_black_60dp);
                 Category entertainment = new Category("Entertainment", R.drawable.ic_entertainment_black_60dp);
 
-                for (DeviceType type : response) {
+                for (DeviceType type : deviceTypes) {
                     switch (type.getName()) {
                         case "lamp":    lights.addType(type);
                             break;
@@ -153,13 +158,6 @@ public class MainActivity extends AppCompatActivity {
                 RoomFragment.notifyAdapter();
                 Log.v(MainActivity.LOG_TAG, "ACTUALICE CATEGORIAS");
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                MainActivity.handleError(error);
-                // TODO: VER QUE HACER CON ERROR
-                Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR CATEGORIAS. El error es %s", error.toString()));
-            }
         });
     }
 
@@ -167,5 +165,21 @@ public class MainActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         Api.getInstance(null).cancelRequest(requestTag);
+    }
+
+    public static void reloadCategories() {
+        if (categories.size() == 0) {
+            mainActivityData.reloadTypes();
+            getCategoryList();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (categories.size() == 0) {
+            mainActivityData.reloadTypes();
+            getCategoryList();
+        }
     }
 }

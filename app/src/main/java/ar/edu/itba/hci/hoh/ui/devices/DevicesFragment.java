@@ -38,6 +38,8 @@ public class DevicesFragment extends Fragment {
         devicesViewModel = ViewModelProviders.of(this).get(DevicesViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_devices, container, false);
 
+        MainActivity.reloadCategories();
+
         rvCategories = root.findViewById(R.id.rv_categories);
         // Para numero automatico, ver:
         // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count

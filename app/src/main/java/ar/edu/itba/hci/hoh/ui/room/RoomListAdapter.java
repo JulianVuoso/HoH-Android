@@ -33,7 +33,6 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
 
     public RoomListAdapter(OnItemClickListener<Device> listener) {
         this.listener = listener;
-//        updateMap();
     }
 
     @NonNull
@@ -45,7 +44,8 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
 
     @Override
     public void onBindViewHolder(@NonNull RoomListViewHolder holder, int position) {
-        holder.bind(categories.get(position), listener);
+        if (categories.size() != 0)
+            holder.bind(categories.get(position), listener);
     }
 
     public void setDevices(List<Device> devices) {
@@ -68,15 +68,19 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
     // TODO: COMO EVITO USAR LAS CATEGORIAS DE DEVICES FRAGMENT? NO SE SI MOVERLAS A MAIN ACTIVITY PORQUE EN EL CREADOR HAGO UN ADAPTER.NOTIFYCHANGES
     // todo: ASI COMO ESTA, SI O SI DEBO PRIMERO ABRIR CATEGORIES ANTES DE ENTRAR EN UN ROOM
     private void updateMap() {
+        if (data == null) return;
+
         for (Device dev : data) {
             Category category = Category.getCategoryFromType(dev.getType(), MainActivity.categories);
-            if (map.containsKey(category) && !map.get(category).contains(dev))
-                map.get(category).add(dev);
-            else {
-                List<Device> list = new ArrayList<>();
-                list.add(dev);
-                map.put(category, list);
-                this.categories.add(category);
+            if (category != null) {
+                if (map.containsKey(category) && !map.get(category).contains(dev))
+                    map.get(category).add(dev);
+                else {
+                    List<Device> list = new ArrayList<>();
+                    list.add(dev);
+                    map.put(category, list);
+                    this.categories.add(category);
+                }
             }
         }
     }
