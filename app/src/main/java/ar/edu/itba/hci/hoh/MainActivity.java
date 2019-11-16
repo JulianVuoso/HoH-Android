@@ -168,8 +168,4 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         Api.getInstance(null).cancelRequest(requestTag);
     }
-
-    public static int getDrawableFromString(Context context, String imgName) {
-        return context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
-    }
 }
