@@ -30,9 +30,6 @@ public class DevicesFragment extends Fragment {
 
     private static CardView emptyCard;
 
-//    public static List<Category> categories = new ArrayList<>();
-//    private static String requestTag;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         devicesViewModel = ViewModelProviders.of(this).get(DevicesViewModel.class);
@@ -46,12 +43,9 @@ public class DevicesFragment extends Fragment {
         // TODO: VER SI NO HACEMOS CARDS COMO EN ROOM
         gridLayoutManager = new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false);
         rvCategories.setLayoutManager(gridLayoutManager);
-        adapter = new DevicesAdapter(MainActivity.categories, new OnItemClickListener<Category>() {
-            @Override
-            public void onItemClick(Category category) {
-                DevicesFragmentDirections.ActionSelectCategory action = DevicesFragmentDirections.actionSelectCategory(category, category.getName());
-                Navigation.findNavController(root).navigate(action);
-            }
+        adapter = new DevicesAdapter(MainActivity.categories, category -> {
+            DevicesFragmentDirections.ActionSelectCategory action = DevicesFragmentDirections.actionSelectCategory(category, category.getName());
+            Navigation.findNavController(root).navigate(action);
         });
         rvCategories.setAdapter(adapter);
 
@@ -63,8 +57,6 @@ public class DevicesFragment extends Fragment {
             emptyCard.setVisibility(View.GONE);
         }
 
-//        if (categories.size() == 0) getCategoryList(this.getContext());
-
         return root;
     }
 
@@ -74,54 +66,4 @@ public class DevicesFragment extends Fragment {
         if (adapter != null)
             adapter.notifyDataSetChanged();
     }
-
-    /*private static void getCategoryList(Context context) {
-        requestTag = Api.getInstance(context).getDeviceTypes(new Response.Listener<ArrayList<DeviceType>>() {
-            @Override
-            public void onResponse(ArrayList<DeviceType> response) {
-                Category lights = new Category("Lights", R.drawable.ic_light_black_60dp);
-                Category openings = new Category("Doors & Blinds", R.drawable.ic_door_black_60dp);
-                Category ac = new Category("Air Conditioning", R.drawable.ic_door_black_60dp); // TODO: CHANGE CATEGORY PIC
-                Category appliances = new Category("Appliances", R.drawable.ic_fridge_black_60dp);
-                Category entertainment = new Category("Entertainment", R.drawable.ic_entertainment_black_60dp);
-
-                for (DeviceType type : response) {
-                    switch (type.getName()) {
-                        case "lamp":    lights.addType(type);
-                                        break;
-                        case "door":
-                        case "blinds":  openings.addType(type);
-                                        break;
-                        case "ac":      ac.addType(type);
-                                        break;
-                        case "refrigerator":
-                        case "oven":    appliances.addType(type);
-                                        break;
-                        case "speaker": entertainment.addType(type);
-                                        break;
-                    }
-                }
-                categories.add(lights);
-                categories.add(openings);
-                categories.add(ac);
-                categories.add(appliances);
-                categories.add(entertainment);
-                adapter.notifyDataSetChanged();
-                Log.v(MainActivity.LOG_TAG, "ACTUALICE CATEGORIAS");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                MainActivity.handleError(error);
-                // TODO: VER QUE HACER CON ERROR
-                Log.e(MainActivity.LOG_TAG, String.format("ERROR AL ACTUALIZAR CATEGORIAS. El error es %s", error.toString()));
-            }
-        });
-    }*/
-
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        Api.getInstance(this.getContext()).cancelRequest(requestTag);
-//    }
 }
