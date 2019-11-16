@@ -30,6 +30,7 @@ import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
+// TODO: COMO APLICO VIEWMODEL ACA? NECESITO APPENDEAR COSAS A LA LISTA, SON VARIOS FETCH JUNTOS
 public class DeviceFragment extends Fragment {
 
     private DeviceViewModel devicesViewModel;
