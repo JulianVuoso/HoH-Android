@@ -41,7 +41,7 @@ public class Routine implements Serializable {
         }
 
         public String getImg() {
-            return img;
+            return img.substring(0, img.length() - ".jpg".length());
         }
 
         public boolean isFavorite() {

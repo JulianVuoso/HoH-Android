@@ -49,7 +49,7 @@ public class LinearLayoutPagerManager extends LinearLayoutManager {
     private int getItemSize() {
         int pageSize;
         if (getOrientation() == HORIZONTAL)
-            pageSize = getWidth();
+            pageSize = getWidth() - 120;
         else
             pageSize = getHeight();
         Log.v(MainActivity.LOG_TAG, String.format("WIDTH TOTAL: %d, PAGESIZE: %d", getWidth(), pageSize));

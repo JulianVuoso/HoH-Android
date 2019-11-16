@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         rvFavDevices = root.findViewById(R.id.rv_favorite_devices);
         managerFavDevices = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
         rvFavDevices.setLayoutManager(managerFavDevices);
-        rvFavDevices.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.card_spacing)));
+        rvFavDevices.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
         adapterFavDevices = new DeviceAdapter(new OnItemClickListener<Device>() {
             @Override
             public void onItemClick(Device element) {
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
         rvFavRooms = root.findViewById(R.id.rv_favorite_rooms);
         managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
         rvFavRooms.setLayoutManager(managerFavRooms);
-        rvFavRooms.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.card_spacing)));
+        rvFavRooms.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
         adapterFavRooms = new RoomsAdapter(new OnItemClickListener<Room>() {
             @Override
             public void onItemClick(Room room) {
@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
         rvFavRoutines = root.findViewById(R.id.rv_favorite_routines);
         managerFavRoutines = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
         rvFavRoutines.setLayoutManager(managerFavRoutines);
-        rvFavRoutines.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.card_spacing)));
+        rvFavRoutines.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
         adapterFavRoutines = new RoutinesAdapter(new OnItemClickListener<Routine>() {
             @Override
             public void onItemClick(Routine routine) {
