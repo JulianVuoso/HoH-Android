@@ -45,7 +45,7 @@ public class LinearLayoutPagerManager extends LinearLayoutManager {
         return lp;
     }
 
-    // TODO: COMO HAGO PARA QUE DEJE UN MARGEN A IZQ Y DER?
+    // TODO: REVISAR CONSTANTE PARA CUANDO CAMBIA EL FACTOR DE FORMA O ROTO
     private int getItemSize() {
         int pageSize;
         if (getOrientation() == HORIZONTAL)

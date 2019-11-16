@@ -43,7 +43,6 @@ public class RoutinesFragment extends Fragment {
 
     private static List<String> requestTag = new ArrayList<>();
 
-    // TODO: GUARDAR LAS PNG DE LAS RUTINAS
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         routinesViewModel = ViewModelProviders.of(this).get(RoutinesViewModel.class);

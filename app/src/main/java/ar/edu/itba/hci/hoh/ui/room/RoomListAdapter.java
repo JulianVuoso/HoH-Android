@@ -65,8 +65,6 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
         this.notifyDataSetChanged();
     }
 
-    // TODO: COMO EVITO USAR LAS CATEGORIAS DE DEVICES FRAGMENT? NO SE SI MOVERLAS A MAIN ACTIVITY PORQUE EN EL CREADOR HAGO UN ADAPTER.NOTIFYCHANGES
-    // todo: ASI COMO ESTA, SI O SI DEBO PRIMERO ABRIR CATEGORIES ANTES DE ENTRAR EN UN ROOM
     private void updateMap() {
         if (data == null) return;
 

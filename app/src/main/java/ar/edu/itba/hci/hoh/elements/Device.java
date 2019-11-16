@@ -6,7 +6,7 @@ public class Device implements Serializable {
     private String id;
     private String name;
     private DeviceType type;
-    private DeviceState state;   // TODO: QUE ONDA ESTE STATE? VER SI HACE FALTA UNO POR TIPO DE DISP
+    private DeviceState state;
     private Room room;
     private DeviceMeta meta;
 

@@ -24,5 +24,3 @@
         android:textAlignment="center"/>
 
 </androidx.cardview.widget.CardView>
-
-<!-- TODO: VER COMO METER ESTO EN CADA RECYCLER VIEW -->
