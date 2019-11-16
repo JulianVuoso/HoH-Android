@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                 }
+                categories.clear();
                 categories.add(lights);
                 categories.add(openings);
                 categories.add(ac);

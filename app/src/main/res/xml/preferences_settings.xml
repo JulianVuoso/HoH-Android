@@ -12,7 +12,7 @@
 
     <PreferenceCategory
         app:key="api_category"
-        app:title="Notifications">
+        app:title="API">
         <EditTextPreference
             app:key="api_url"
             app:title="Api URL"
