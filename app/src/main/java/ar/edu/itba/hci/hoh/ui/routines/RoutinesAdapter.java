@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.elements.Routine;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
@@ -55,18 +56,16 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
     class RoutinesViewHolder extends RecyclerView.ViewHolder {
         TextView tvRoutineName;
         ImageView ivRoutineImage;
-        Context context; // TODO: VER SI PUEDO EVITARLO
 
         public RoutinesViewHolder(@NonNull View itemView) {
             super(itemView);
             tvRoutineName = itemView.findViewById(R.id.card_item_name);
             ivRoutineImage = itemView.findViewById(R.id.card_item_img);
-            context = itemView.getContext();
         }
 
         public void bind(final Routine routine, final OnItemClickListener<Routine> listener) {
             tvRoutineName.setText(routine.getName());
-            ivRoutineImage.setImageResource(MainActivity.getDrawableFromString(context, routine.getMeta().getImg()));
+            ivRoutineImage.setImageResource(MyApplication.getDrawableFromString(routine.getMeta().getImg()));
             ivRoutineImage.setContentDescription(routine.getMeta().getImg());
             itemView.setOnClickListener(v -> listener.onItemClick(routine));
         }

@@ -3,6 +3,7 @@ package ar.edu.itba.hci.hoh;
 import android.app.Application;
 import android.widget.Toast;
 
+import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.repositories.DeviceRepository;
 import ar.edu.itba.hci.hoh.repositories.DeviceTypeRepository;
 import ar.edu.itba.hci.hoh.repositories.RoomRepository;
@@ -18,6 +19,9 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // Create API instance, no more context needed
+        Api.getInstance(this);
 
         roomRepository = RoomRepository.getInstance(this);
         deviceRepository = DeviceRepository.getInstance(this);
@@ -50,5 +54,9 @@ public class MyApplication extends Application {
     // TODO: VER COMO HACER PARA PARSEAR EL ERROR (Y TRADUCIRLO SI HACE FALTA)
     public static void makeToast(String message) {
         Toast.makeText(instance, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static int getDrawableFromString(String drawableName) {
+        return instance.getResources().getIdentifier(drawableName, "drawable", instance.getPackageName());
     }
 }

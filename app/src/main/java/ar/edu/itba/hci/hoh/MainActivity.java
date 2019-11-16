@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    // TODO: VER QUE ONDA LA OPCION DE LAS LISTAS DE VISTA A MOSTRAR EN CASO DE LISTA VACIA
-    // TODO: SI VUELVO DE SETTINGS, DEBERIA RECARGAR LA VISTA? O NO DEBERIA?
     // TODO: REVISAR MENSAJE I/Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
 
     @Override
@@ -98,9 +96,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: CHECK QUE ESTE GARANTIZADO QUE SE EJECUTA ESTA PRIMERO
-        // CREATE AN API INSTANCE WITH A CONTEXT, NO MORE CONTEXT NEEDED. FILL CATEGORY LIST
-        Api.getInstance(this.getApplicationContext());
         if (categories.size() == 0) getCategoryList();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -120,41 +115,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp() || super.onSupportNavigateUp();
-    }
-
-
-
-    public void handleError(VolleyError error) {
-        Error response = null;
-        boolean handled = false;
-
-        NetworkResponse networkResponse = error.networkResponse;
-        if ((networkResponse != null) && (error.networkResponse.data != null)) {
-            try {
-                String json = new String(
-                        error.networkResponse.data,
-                        HttpHeaderParser.parseCharset(networkResponse.headers));
-
-                JSONObject jsonObject = new JSONObject(json);
-                json = jsonObject.getJSONObject("error").toString();
-
-                Gson gson = new Gson();
-                response = gson.fromJson(json, Error.class);
-                handled = true;
-            } catch (JSONException e) {
-            } catch (UnsupportedEncodingException e) {
-            }
-        }
-
-        if (handled) {
-            String text = getResources().getString(R.string.error_message);
-            if (response != null)
-                text += " " + response.getDescription().get(0);
-
-            Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
-        }
-        else
-            Log.e(LOG_TAG, error.toString());
     }
 
     private static void getCategoryList() {
