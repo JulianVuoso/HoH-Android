@@ -120,6 +120,7 @@ public class HomeFragment extends Fragment {
 
     private void getFavDeviceList() {
         homeViewModel.getDevices().observe(this, devices -> {
+            favDevices.clear();
             if (devices != null) {
                 for (Device device : devices)
                     if (device.getMeta().isFavorite())
@@ -134,6 +135,7 @@ public class HomeFragment extends Fragment {
 
     private void getFavRoomList() {
         homeViewModel.getRooms().observe(this, rooms -> {
+            favRooms.clear();
             if (rooms != null) {
                 for (Room room : rooms)
                     if (room.getMeta().isFavorite())
@@ -148,6 +150,7 @@ public class HomeFragment extends Fragment {
 
     private void getFavRoutineList() {
         homeViewModel.getRoutines().observe(this, routines -> {
+            favRoutines.clear();
             if (routines != null) {
                 for (Routine routine : routines)
                     if (routine.getMeta().isFavorite())
