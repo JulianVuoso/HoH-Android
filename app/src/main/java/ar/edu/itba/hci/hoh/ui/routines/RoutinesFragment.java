@@ -74,7 +74,7 @@ public class RoutinesFragment extends Fragment {
         });
     }
 
-    // TODO: PROBARLO
+    // TODO: CAMBIAR FETCHEO DE RESULTADOS
     private void executeRoutine(Routine routine) {
         routinesViewModel.execRoutine(routine.getId()).observe(this, result -> {
             if (result != null)
@@ -90,11 +90,12 @@ public class RoutinesFragment extends Fragment {
             Api.getInstance(this.getContext()).cancelRequest(request);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        emptyCard.setVisibility(View.VISIBLE);
-        routinesViewModel.reloadRoutines();
-        getRoutineList();
-    }
+    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        emptyCard.setVisibility(View.VISIBLE);
+//        routinesViewModel.reloadRoutines();
+//        getRoutineList();
+//    }
 }

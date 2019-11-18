@@ -30,7 +30,6 @@ import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
-// TODO: COMO APLICO VIEWMODEL ACA? NECESITO APPENDEAR COSAS A LA LISTA, SON VARIOS FETCH JUNTOS
 public class DeviceFragment extends Fragment {
 
     private DeviceViewModel deviceViewModel;
@@ -56,11 +55,6 @@ public class DeviceFragment extends Fragment {
             category = DeviceFragmentArgs.fromBundle(getArguments()).getCategory();
 
         rvDevices = root.findViewById(R.id.rv_list_category_devices);
-        // Para numero automatico, ver:
-        // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
-        // SI PONGO ESTO DE ABAJO, QUEDA PIOLA PARA CUANDO ROTO. PODRIAMOS VER DE ADAPTAR EL SPAN COUNT
-//        gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
-//        rvDevices.setLayoutManager(gridLayoutManager);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
         adapter = new DeviceListAdapter(data, new OnItemClickListener<Device>() {

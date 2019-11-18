@@ -24,8 +24,6 @@
             android:contentDescription="@string/img_default_description"
             />
 
-<!--  TODO: VER COMO HACER PARA QUE LAS IMAGENES QUEDEN BIEN, NO CADA UNA COMO QUIERE      -->
-
         <TextView
             android:id="@+id/card_item_name"
             android:layout_width="match_parent"

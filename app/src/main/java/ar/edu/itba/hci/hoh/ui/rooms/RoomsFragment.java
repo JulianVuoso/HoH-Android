@@ -80,11 +80,12 @@ public class RoomsFragment extends Fragment {
         Api.getInstance(this.getContext()).cancelRequest(requestTag);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        emptyCard.setVisibility(View.VISIBLE);
-        roomsViewModel.reloadRooms();
-        getRoomList();
-    }
+    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        emptyCard.setVisibility(View.VISIBLE);
+//        roomsViewModel.reloadRooms();
+//        getRoomList();
+//    }
 }

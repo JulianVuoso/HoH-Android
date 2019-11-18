@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment {
 
     private CardView emptyDeviceCard, emptyRoomCard, emptyRoutineCard;
 
-    // TODO: VER SI HACE FALTA PONERLE LAS FLECHAS PARA SCROLLEAR ENTRE ELEMENTOS O SE ENTIENDE SIN ESO
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -171,17 +170,18 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        emptyDeviceCard.setVisibility(View.VISIBLE);
-        emptyRoomCard.setVisibility(View.VISIBLE);
-        emptyRoutineCard.setVisibility(View.VISIBLE);
-        homeViewModel.reloadDevices();
-        getFavDeviceList();
-        homeViewModel.reloadRooms();
-        getFavRoomList();
-        homeViewModel.reloadRoutines();
-        getFavRoutineList();
-    }
+    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        emptyDeviceCard.setVisibility(View.VISIBLE);
+//        emptyRoomCard.setVisibility(View.VISIBLE);
+//        emptyRoutineCard.setVisibility(View.VISIBLE);
+//        homeViewModel.reloadDevices();
+//        getFavDeviceList();
+//        homeViewModel.reloadRooms();
+//        getFavRoomList();
+//        homeViewModel.reloadRoutines();
+//        getFavRoutineList();
+//    }
 }
