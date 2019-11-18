@@ -68,6 +68,7 @@ public class MyApplication extends Application {
     }
 
     // TODO: REVISAR COLORES
+    // TODO: VER SI OFF ES MEDIUM O DARK
     public static int getCardBackgroundColor(DeviceState state) {
         if (state == null || state.getStatus() == null) return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundLight);
 
