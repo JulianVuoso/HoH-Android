@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment {
 
     private CardView emptyDeviceCard, emptyRoomCard, emptyRoutineCard;
 
-    // TODO: VER SI HACE FALTA PONERLE LAS FLECHAS PARA SCROLLEAR ENTRE ELEMENTOS O SE ENTIENDE SIN ESO
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -62,7 +61,7 @@ public class HomeFragment extends Fragment {
 
         /* FAV DEVICES */
         rvFavDevices = root.findViewById(R.id.rv_favorite_devices);
-        managerFavDevices = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
+        managerFavDevices = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, getResources().getDimension(R.dimen.device_card_width));
         rvFavDevices.setLayoutManager(managerFavDevices);
         rvFavDevices.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
         adapterFavDevices = new DeviceAdapter(new OnItemClickListener<Device>() {
@@ -80,7 +79,8 @@ public class HomeFragment extends Fragment {
 
         /* FAV ROOMS */
         rvFavRooms = root.findViewById(R.id.rv_favorite_rooms);
-        managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
+//        managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
+        managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, getResources().getDimension(R.dimen.img_card_width));
         rvFavRooms.setLayoutManager(managerFavRooms);
         rvFavRooms.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
         adapterFavRooms = new RoomsAdapter(new OnItemClickListener<Room>() {
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment {
 
         /* FAV ROUTINES */
         rvFavRoutines = root.findViewById(R.id.rv_favorite_routines);
-        managerFavRoutines = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
+        managerFavRoutines = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, getResources().getDimension(R.dimen.img_card_width));
         rvFavRoutines.setLayoutManager(managerFavRoutines);
         rvFavRoutines.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
         adapterFavRoutines = new RoutinesAdapter(new OnItemClickListener<Routine>() {
@@ -170,17 +170,18 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        emptyDeviceCard.setVisibility(View.VISIBLE);
-        emptyRoomCard.setVisibility(View.VISIBLE);
-        emptyRoutineCard.setVisibility(View.VISIBLE);
-        homeViewModel.reloadDevices();
-        getFavDeviceList();
-        homeViewModel.reloadRooms();
-        getFavRoomList();
-        homeViewModel.reloadRoutines();
-        getFavRoutineList();
-    }
+    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        emptyDeviceCard.setVisibility(View.VISIBLE);
+//        emptyRoomCard.setVisibility(View.VISIBLE);
+//        emptyRoutineCard.setVisibility(View.VISIBLE);
+//        homeViewModel.reloadDevices();
+//        getFavDeviceList();
+//        homeViewModel.reloadRooms();
+//        getFavRoomList();
+//        homeViewModel.reloadRoutines();
+//        getFavRoutineList();
+//    }
 }

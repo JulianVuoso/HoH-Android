@@ -11,14 +11,16 @@ import ar.edu.itba.hci.hoh.MainActivity;
 
 public class LinearLayoutPagerManager extends LinearLayoutManager {
     private int itemsPerPage;
+    private int itemWidth;
 
     public LinearLayoutPagerManager(Context context, int orientation, boolean reverseLayout, int itemsPerPage) {
         super(context, orientation, reverseLayout);
         this.itemsPerPage = itemsPerPage;
     }
 
-    public int getitemsPerPage() {
-        return itemsPerPage;
+    public LinearLayoutPagerManager(Context context, int orientation, boolean reverseLayout, float width) {
+        super(context, orientation, reverseLayout);
+        this.itemWidth = (int) width;
     }
 
     @Override
@@ -45,14 +47,15 @@ public class LinearLayoutPagerManager extends LinearLayoutManager {
         return lp;
     }
 
-    // TODO: REVISAR CONSTANTE PARA CUANDO CAMBIA EL FACTOR DE FORMA O ROTO
     private int getItemSize() {
         int pageSize;
         if (getOrientation() == HORIZONTAL)
-            pageSize = getWidth() - 120;
+            pageSize = getWidth() - getPaddingLeft() -getPaddingLeft();
         else
-            pageSize = getHeight();
-        Log.v(MainActivity.LOG_TAG, String.format("WIDTH TOTAL: %d, PAGESIZE: %d", getWidth(), pageSize));
-        return Math.round((float) pageSize / itemsPerPage);
+            pageSize = getHeight() - getPaddingBottom() - getPaddingTop();
+        if (itemsPerPage != 0)
+            return Math.round((float) pageSize / itemsPerPage);
+        else
+            return itemWidth;
     }
 }

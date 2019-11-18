@@ -25,6 +25,7 @@ import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
+import ar.edu.itba.hci.hoh.ui.GridLayoutAutofitManager;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class RoomsFragment extends Fragment {
@@ -47,9 +48,7 @@ public class RoomsFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_rooms, container, false);
 
         rvRooms = root.findViewById(R.id.rv_rooms);
-        // Para numero automatico, ver:
-        // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
-        gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
+        gridLayoutManager = new GridLayoutAutofitManager(this.getContext(), (int) getResources().getDimension(R.dimen.img_card_width), GridLayoutManager.VERTICAL, false);
         rvRooms.setLayoutManager(gridLayoutManager);
         adapter = new RoomsAdapter(room -> {
             RoomsFragmentDirections.ActionSelectRoom action = RoomsFragmentDirections.actionSelectRoom(room, room.getName());
@@ -81,11 +80,12 @@ public class RoomsFragment extends Fragment {
         Api.getInstance(this.getContext()).cancelRequest(requestTag);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        emptyCard.setVisibility(View.VISIBLE);
-        roomsViewModel.reloadRooms();
-        getRoomList();
-    }
+    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        emptyCard.setVisibility(View.VISIBLE);
+//        roomsViewModel.reloadRooms();
+//        getRoomList();
+//    }
 }

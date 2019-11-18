@@ -16,10 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.ui.GridLayoutAutofitManager;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 import ar.edu.itba.hci.hoh.ui.device.DeviceAdapter;
 
@@ -97,7 +99,8 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
 
         public void bind(final Category category, final OnItemClickListener<Device> listener) {
             tvCategoryName.setText(category.getName());
-            rvCategoryDevices.setLayoutManager(new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false));
+//            rvCategoryDevices.setLayoutManager(new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false));
+            rvCategoryDevices.setLayoutManager(new GridLayoutAutofitManager(context, (int) MyApplication.getDeviceCardWidth(), GridLayoutManager.VERTICAL, false));
             DeviceAdapter adapter = new DeviceAdapter(listener);
             adapter.setDevices(map.get(category));
             adapterList.add(adapter);
