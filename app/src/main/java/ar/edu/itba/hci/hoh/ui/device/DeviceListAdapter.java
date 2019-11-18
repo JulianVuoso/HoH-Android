@@ -16,9 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.ui.GridLayoutAutofitManager;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder> {
@@ -44,7 +46,6 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
 
     @Override
     public void onBindViewHolder(@NonNull DeviceListViewHolder holder, int position) {
-        Log.v("TAG", String.format("OnBindViewHolder with %d, %s", position, rooms.get(position).getName()));
         holder.bind(rooms.get(position), listener);
     }
 
@@ -87,7 +88,8 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
 
         public void bind(final Room room, final OnItemClickListener<Device> listener) {
             tvRoomName.setText(room.getName());
-            rvRoomDevices.setLayoutManager(new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false));
+            GridLayoutManager manager = new GridLayoutAutofitManager(context, (int) MyApplication.getDeviceCardWidth(), GridLayoutManager.VERTICAL, false);
+            rvRoomDevices.setLayoutManager(manager);
             DeviceAdapter adapter = new DeviceAdapter(listener);
             adapter.setDevices(map.get(room));
             adapterList.add(adapter);

@@ -27,6 +27,7 @@ import ar.edu.itba.hci.hoh.elements.Routine;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
+import ar.edu.itba.hci.hoh.ui.GridLayoutAutofitManager;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class RoutinesFragment extends Fragment {
@@ -49,9 +50,7 @@ public class RoutinesFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_routines, container, false);
 
         rvRoutines = root.findViewById(R.id.rv_routines);
-        // Para numero automatico, ver:
-        // https://stackoverflow.com/questions/26666143/recyclerview-gridlayoutmanager-how-to-auto-detect-span-count
-        gridLayoutManager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
+        gridLayoutManager = new GridLayoutAutofitManager(this.getContext(), (int) getResources().getDimension(R.dimen.img_card_width), GridLayoutManager.VERTICAL, false);
         rvRoutines.setLayoutManager(gridLayoutManager);
         adapter = new RoutinesAdapter(routine -> {
             // TODO: OPEN CONFIRMATION DIALOG TO EXECUTE ROUTINE

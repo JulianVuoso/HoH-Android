@@ -52,7 +52,6 @@ public class LinearLayoutPagerManager extends LinearLayoutManager {
             pageSize = getWidth() - 120;
         else
             pageSize = getHeight();
-        Log.v(MainActivity.LOG_TAG, String.format("WIDTH TOTAL: %d, PAGESIZE: %d", getWidth(), pageSize));
         return Math.round((float) pageSize / itemsPerPage);
     }
 }

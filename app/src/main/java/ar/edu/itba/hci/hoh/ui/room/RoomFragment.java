@@ -145,11 +145,11 @@ public class RoomFragment extends Fragment {
         return true;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        emptyCard.setVisibility(View.VISIBLE);
-        roomViewModel.setRoom(room);
-        getDevicesList(room);
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        emptyCard.setVisibility(View.VISIBLE);
+//        roomViewModel.setRoom(room);
+//        getDevicesList(room);
+//    }
 }

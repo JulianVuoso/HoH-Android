@@ -59,4 +59,8 @@ public class MyApplication extends Application {
     public static int getDrawableFromString(String drawableName) {
         return instance.getResources().getIdentifier(drawableName, "drawable", instance.getPackageName());
     }
+
+    public static float getDeviceCardWidth() {
+        return instance.getResources().getDimension(R.dimen.device_card_width);
+    }
 }
