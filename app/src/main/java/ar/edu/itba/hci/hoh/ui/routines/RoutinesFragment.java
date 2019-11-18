@@ -74,7 +74,7 @@ public class RoutinesFragment extends Fragment {
         });
     }
 
-    // TODO: CAMBIAR FETCHEO DE RESULTADOS
+    // TODO: CAMBIAR MANEJO DE RESULTADOS
     private void executeRoutine(Routine routine) {
         routinesViewModel.execRoutine(routine.getId()).observe(this, result -> {
             if (result != null)
