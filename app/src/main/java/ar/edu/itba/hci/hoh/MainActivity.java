@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivityData.getDeviceTypes().observe(instance, deviceTypes -> {
             if (deviceTypes != null) {
                 Category lights = new Category("Lights", R.drawable.ic_light_black_60dp);
+                // TODO: EN EL INFORME, PONER QUE DOORS & WINDOWS ERA MUY LARGO Y QUE DEBERIAMOS CAMBIARLO TAMBIEN EN LA WEB
                 Category openings = new Category("Doors & Blinds", R.drawable.ic_door_black_60dp);
                 Category ac = new Category("Air Conditioning", R.drawable.ic_door_black_60dp); // TODO: CHANGE CATEGORY PIC
                 Category appliances = new Category("Appliances", R.drawable.ic_fridge_black_60dp);

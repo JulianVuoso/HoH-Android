@@ -3,7 +3,10 @@ package ar.edu.itba.hci.hoh;
 import android.app.Application;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
 import ar.edu.itba.hci.hoh.api.Api;
+import ar.edu.itba.hci.hoh.elements.DeviceState;
 import ar.edu.itba.hci.hoh.repositories.DeviceRepository;
 import ar.edu.itba.hci.hoh.repositories.DeviceTypeRepository;
 import ar.edu.itba.hci.hoh.repositories.RoomRepository;
@@ -62,5 +65,27 @@ public class MyApplication extends Application {
 
     public static float getDeviceCardWidth() {
         return instance.getResources().getDimension(R.dimen.device_card_width);
+    }
+
+    // TODO: REVISAR COLORES
+    public static int getCardBackgroundColor(DeviceState state) {
+        if (state == null || state.getStatus() == null) return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundLight);
+
+        switch (state.getStatus()) {
+            case "opened":
+            case "on":
+            case "playing":
+                return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundLight);
+            case "off":
+            case "paused":
+            case "closing":
+            case "opening":
+                return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundMedium);
+            case "closed":
+                if (state.getLock() != null && state.getLock().equals("unlocked"))
+                    return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundMedium);
+        }
+        // For closed && !unlocked AND for stopped
+        return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundDark);
     }
 }

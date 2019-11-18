@@ -7,10 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.R;
@@ -57,7 +59,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         TextView tvDeviceName;
         TextView tvDeviceRoom;
         ImageView ivDeviceImage;
-
+        CardView cardView;
 
         public DeviceViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,13 +67,16 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
             tvDeviceRoom = itemView.findViewById(R.id.dev_room);
             tvDeviceState = itemView.findViewById(R.id.dev_state);
             ivDeviceImage = itemView.findViewById(R.id.dev_img);
+            cardView = itemView.findViewById(R.id.dev_card);
         }
 
         public void bind(final Device device, final OnItemClickListener<Device> listener) {
             tvDeviceName.setText(device.getName());
             tvDeviceRoom.setText(device.getRoom().getName());
+            // TODO: PARSEAR STATUS Y MOSTRARLO EN IDIOMA
             tvDeviceState.setText(device.getState().getStatus());
             ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
+            cardView.setCardBackgroundColor(MyApplication.getCardBackgroundColor(device.getState()));
             itemView.setOnClickListener(view -> listener.onItemClick(device));
         }
     }
