@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO: REVISAR MENSAJE I/Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
+    // TODO: CREATE AN IMAGE RESOURCE FOR EVERY PNG IN EACH RESOLUTION
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
