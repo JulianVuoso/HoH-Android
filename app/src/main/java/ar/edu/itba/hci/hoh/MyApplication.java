@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.hoh;
 
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
@@ -13,6 +14,9 @@ import ar.edu.itba.hci.hoh.repositories.RoomRepository;
 import ar.edu.itba.hci.hoh.repositories.RoutineRepository;
 
 public class MyApplication extends Application {
+    private static final float toastHorizontalMargin = 0;
+    private static final float toastVerticalMargin = (float) 0.08;
+
     private static MyApplication instance;
     private RoomRepository roomRepository;
     private DeviceRepository deviceRepository;
@@ -56,7 +60,9 @@ public class MyApplication extends Application {
     // TODO: VER COMO HACER PARA QUE EL TOAST NO SE PISE CON EL BOTTOM NAV
     // TODO: VER COMO HACER PARA PARSEAR EL ERROR (Y TRADUCIRLO SI HACE FALTA)
     public static void makeToast(String message) {
-        Toast.makeText(instance, message, Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(instance, message, Toast.LENGTH_SHORT);
+        toast.setMargin(toastHorizontalMargin, toastVerticalMargin);
+        toast.show();
     }
 
     public static int getDrawableFromString(String drawableName) {
