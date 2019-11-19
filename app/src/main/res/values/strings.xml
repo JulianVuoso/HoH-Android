@@ -14,7 +14,6 @@
     <string name="option_search">Search</string>
     <string name="option_favorite">Favorite</string>
 
-    <string name="error_message">Error with API</string>
     <string name="categories_subtitle">Categories</string>
     <string name="img_default_description">Image</string>
     <string name="search_hint">Search…</string>
@@ -30,4 +29,19 @@
     <string name="empty_fav_device_list">No favorite devices</string>
     <string name="empty_fav_room_list">No favorite rooms</string>
     <string name="empty_fav_routine_list">No favorite routines</string>
+
+    <string name="device_status_on">On</string>
+    <string name="device_status_off">Off</string>
+    <string name="device_status_opened">Opened</string>
+    <string name="device_status_opening">Opening</string>
+    <string name="device_status_closing">Closing</string>
+    <string name="device_status_closed">Closed</string>
+    <string name="device_status_locked">Locked</string>
+    <string name="device_status_playing">Playing</string>
+    <string name="device_status_paused">Paused</string>
+    <string name="device_status_stopped">Stopped</string>
+
+    <string name="routine_exec_message">successfully executed!</string>
+
+    <string name="error_no_connection">Could not connect to Ajax!</string>
 </resources>

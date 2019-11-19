@@ -22,28 +22,12 @@ public class RoutinesViewModel extends ViewModel {
     }
 
     LiveData<ArrayList<Routine>> getRoutines() {
-        return Transformations.map(this.routines, new Function<Result<ArrayList<Routine>>, ArrayList<Routine>>() {
-            @Override
-            public ArrayList<Routine> apply(Result<ArrayList<Routine>> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(this.routines, MyApplication.getTransformFunction());
     }
 
-    LiveData<Boolean> execRoutine(String id) {
-        LiveData<Result<Boolean>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
-        return Transformations.map(execResult, new Function<Result<Boolean>, Boolean>() {
-            @Override
-            public Boolean apply(Result<Boolean> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+    LiveData<ArrayList<Object>> execRoutine(String id) {
+        LiveData<Result<ArrayList<Object>>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
+        return Transformations.map(execResult, MyApplication.getTransformFunction());
     }
 
     void reloadRoutines() {

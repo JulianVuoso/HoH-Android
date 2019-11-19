@@ -286,13 +286,13 @@ public class Api {
 
     // TODO: ME DEVUELVE UN VECTOR DE STRINGS Y BOOLEANS. COMO UNIFICO?
     /* Execute a specific routine */
-    public String execRoutine(String id, Response.Listener<Boolean> listener, Response.ErrorListener errorListener) {
+    public String execRoutine(String id, Response.Listener<ArrayList<Object>> listener, Response.ErrorListener errorListener) {
         String url = URL + "routines/" + id + "/execute";
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         // TODO: CHECK SI ES {} o []
-        GsonRequest<String, Boolean> request =
-                new GsonRequest<>(Request.Method.PUT, url, "[]", "result", new TypeToken<Boolean>(){}, headers, listener, errorListener);
+        GsonRequest<String, ArrayList<Object>> request =
+                new GsonRequest<>(Request.Method.PUT, url, "[]", "result", new TypeToken<ArrayList<Object>>(){}, headers, listener, errorListener);
         String uuid = UUID.randomUUID().toString();
         request.setTag(uuid);
         requestQueue.add(request);

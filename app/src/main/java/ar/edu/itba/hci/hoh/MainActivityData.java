@@ -19,15 +19,7 @@ public class MainActivityData {
     }
 
     LiveData<ArrayList<DeviceType>> getDeviceTypes() {
-        return Transformations.map(this.types, new Function<Result<ArrayList<DeviceType>>, ArrayList<DeviceType>>() {
-            @Override
-            public ArrayList<DeviceType> apply(Result<ArrayList<DeviceType>> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(this.types, MyApplication.getTransformFunction());
     }
 
     void reloadTypes() {

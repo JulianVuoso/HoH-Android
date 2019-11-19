@@ -1,18 +1,27 @@
 package ar.edu.itba.hci.hoh;
 
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.arch.core.util.Function;
 import androidx.core.content.ContextCompat;
 
 import ar.edu.itba.hci.hoh.api.Api;
+import ar.edu.itba.hci.hoh.api.Error;
 import ar.edu.itba.hci.hoh.elements.DeviceState;
+import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.repositories.DeviceRepository;
 import ar.edu.itba.hci.hoh.repositories.DeviceTypeRepository;
 import ar.edu.itba.hci.hoh.repositories.RoomRepository;
 import ar.edu.itba.hci.hoh.repositories.RoutineRepository;
 
 public class MyApplication extends Application {
+    private static final float toastHorizontalMargin = 0;
+    private static final float toastVerticalMargin = (float) 0.08;
+
+    private static final String connectionError = "java.net.ConnectException:";
+
     private static MyApplication instance;
     private RoomRepository roomRepository;
     private DeviceRepository deviceRepository;
@@ -53,10 +62,26 @@ public class MyApplication extends Application {
         return routineRepository;
     }
 
-    // TODO: VER COMO HACER PARA QUE EL TOAST NO SE PISE CON EL BOTTOM NAV
     // TODO: VER COMO HACER PARA PARSEAR EL ERROR (Y TRADUCIRLO SI HACE FALTA)
     public static void makeToast(String message) {
-        Toast.makeText(instance, message, Toast.LENGTH_SHORT).show();
+        // 6 --> Could not connect to Ajax!
+
+        Toast toast = Toast.makeText(instance, message, Toast.LENGTH_SHORT);
+        toast.setMargin(toastHorizontalMargin, toastVerticalMargin);
+        toast.show();
+    }
+
+    public static void makeToast(Error error) {
+        if (error == null) return;
+
+        Toast toast;
+        // API NOT CONNECTED
+        if (error.getDescription().get(0).startsWith(connectionError))
+            toast = Toast.makeText(instance, instance.getResources().getString(R.string.error_no_connection), Toast.LENGTH_SHORT);
+        else // UNRECOGNIZED ERROR
+            toast = Toast.makeText(instance, error.getDescription().get(0), Toast.LENGTH_SHORT);
+        toast.setMargin(toastHorizontalMargin, toastVerticalMargin);
+        toast.show();
     }
 
     public static int getDrawableFromString(String drawableName) {
@@ -88,5 +113,36 @@ public class MyApplication extends Application {
         }
         // For closed && !unlocked AND for stopped
         return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundDark);
+    }
+
+    // TODO: El refrigerator no muestra ningun estado?
+    public static String getDeviceStatusString(DeviceState state) {
+        if (state == null || state.getStatus() == null) return null;
+
+        switch (state.getStatus()) {
+            case "on":      return instance.getResources().getString(R.string.device_status_on);
+            case "off":     return instance.getResources().getString(R.string.device_status_off);
+            case "opened":  return instance.getResources().getString(R.string.device_status_opened);
+            case "opening": return instance.getResources().getString(R.string.device_status_opening);
+            case "closing": return instance.getResources().getString(R.string.device_status_closing);
+            case "closed":
+                        if (state.getLock() != null && state.getLock().equals("locked"))
+                            return instance.getResources().getString(R.string.device_status_locked);
+                        else
+                            return instance.getResources().getString(R.string.device_status_closed);
+            case "playing": return instance.getResources().getString(R.string.device_status_playing);
+            case "paused":  return instance.getResources().getString(R.string.device_status_paused);
+            case "stopped": return instance.getResources().getString(R.string.device_status_stopped);
+        }
+        return null;
+    }
+
+    public static <T> Function<Result<T>, T> getTransformFunction() {
+        return result -> {
+            Error error = result.getError();
+            if (error != null)
+                MyApplication.makeToast(error);
+            return result.getResult();
+        };
     }
 }

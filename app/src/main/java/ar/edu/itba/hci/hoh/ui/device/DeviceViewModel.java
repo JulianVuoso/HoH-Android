@@ -50,7 +50,7 @@ public class DeviceViewModel extends ViewModel {
                 }
                 Error error = result.first.getError();
                 if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
+                    MyApplication.makeToast(error);
                 return result.first.getResult();
             }
         });
