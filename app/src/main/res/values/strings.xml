@@ -14,7 +14,6 @@
     <string name="option_search">Search</string>
     <string name="option_favorite">Favorite</string>
 
-    <string name="error_message">Error with API</string>
     <string name="categories_subtitle">Categories</string>
     <string name="img_default_description">Image</string>
     <string name="search_hint">Search…</string>
@@ -41,4 +40,8 @@
     <string name="device_status_playing">Playing</string>
     <string name="device_status_paused">Paused</string>
     <string name="device_status_stopped">Stopped</string>
+
+    <string name="routine_exec_message">successfully executed!</string>
+
+    <string name="error_no_connection">Could not connect to Ajax!</string>
 </resources>

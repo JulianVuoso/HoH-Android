@@ -29,52 +29,20 @@ public class HomeViewModel extends ViewModel {
     }
 
     LiveData<ArrayList<Device>> getDevices() {
-        return Transformations.map(this.devices, new Function<Result<ArrayList<Device>>, ArrayList<Device>>() {
-            @Override
-            public ArrayList<Device> apply(Result<ArrayList<Device>> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(this.devices, MyApplication.getTransformFunction());
     }
 
     LiveData<ArrayList<Room>> getRooms() {
-        return Transformations.map(this.rooms, new Function<Result<ArrayList<Room>>, ArrayList<Room>>() {
-            @Override
-            public ArrayList<Room> apply(Result<ArrayList<Room>> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(this.rooms, MyApplication.getTransformFunction());
     }
 
     LiveData<ArrayList<Routine>> getRoutines() {
-        return Transformations.map(this.routines, new Function<Result<ArrayList<Routine>>, ArrayList<Routine>>() {
-            @Override
-            public ArrayList<Routine> apply(Result<ArrayList<Routine>> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(this.routines, MyApplication.getTransformFunction());
     }
 
     LiveData<Boolean> execRoutine(String id) {
         LiveData<Result<Boolean>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
-        return Transformations.map(execResult, new Function<Result<Boolean>, Boolean>() {
-            @Override
-            public Boolean apply(Result<Boolean> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(execResult, MyApplication.getTransformFunction());
     }
 
     void reloadDevices() {

@@ -21,12 +21,7 @@ public class RoomsViewModel extends ViewModel {
     }
 
     LiveData<ArrayList<Room>> getRooms() {
-        return Transformations.map(this.rooms, (result) -> {
-            Error error = result.getError();
-            if (error != null)
-                MyApplication.makeToast(error.getDescription().get(0));
-            return result.getResult();
-        });
+        return Transformations.map(this.rooms, MyApplication.getTransformFunction());
     }
 
     void reloadRooms() {

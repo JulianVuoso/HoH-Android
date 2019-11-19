@@ -29,27 +29,11 @@ public class RoomViewModel extends ViewModel {
     }
 
     LiveData<ArrayList<Device>> getDevicesFromRoom() {
-        return Transformations.map(this.devices, new Function<Result<ArrayList<Device>>, ArrayList<Device>>() {
-            @Override
-            public ArrayList<Device> apply(Result<ArrayList<Device>> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(this.devices, MyApplication.getTransformFunction());
     }
 
     LiveData<Boolean> modifyRoom(Room room) {
         LiveData<Result<Boolean>> modifyResult = MyApplication.getInstance().getRoomRepository().modifyRoom(room);
-        return Transformations.map(modifyResult, new Function<Result<Boolean>, Boolean>() {
-            @Override
-            public Boolean apply(Result<Boolean> result) {
-                Error error = result.getError();
-                if (error != null)
-                    MyApplication.makeToast(error.getDescription().get(0));
-                return result.getResult();
-            }
-        });
+        return Transformations.map(modifyResult, MyApplication.getTransformFunction());
     }
 }

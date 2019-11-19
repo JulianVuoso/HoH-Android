@@ -78,7 +78,7 @@ public class RoutinesFragment extends Fragment {
     private void executeRoutine(Routine routine) {
         routinesViewModel.execRoutine(routine.getId()).observe(this, result -> {
             if (result != null)
-                MyApplication.makeToast(String.format("Routine %s executed", routine.getName()));
+                MyApplication.makeToast(String.format("%s %s", routine.getName(), getResources().getString(R.string.routine_exec_message)));
         });
     }
 
