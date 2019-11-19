@@ -40,8 +40,8 @@ public class HomeViewModel extends ViewModel {
         return Transformations.map(this.routines, MyApplication.getTransformFunction());
     }
 
-    LiveData<Boolean> execRoutine(String id) {
-        LiveData<Result<Boolean>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
+    LiveData<ArrayList<Object>> execRoutine(String id) {
+        LiveData<Result<ArrayList<Object>>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
         return Transformations.map(execResult, MyApplication.getTransformFunction());
     }
 

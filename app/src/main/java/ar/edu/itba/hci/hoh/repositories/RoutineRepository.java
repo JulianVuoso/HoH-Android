@@ -38,8 +38,8 @@ public class RoutineRepository extends Repository {
     }
 
     // TODO: CAMBIAR A ARRAY LIST DE OBJECT, DEVUELVE LISTA DE BOOLEAN Y STRINGS
-    public LiveData<Result<Boolean>> execRoutine(String id) {
-        final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
+    public LiveData<Result<ArrayList<Object>>> execRoutine(String id) {
+        final MutableLiveData<Result<ArrayList<Object>>> result = new MutableLiveData<>();
         this.api.execRoutine(id, getListener(result), getErrorListener(this.api, result));
         return result;
     }
