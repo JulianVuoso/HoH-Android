@@ -89,4 +89,26 @@ public class MyApplication extends Application {
         // For closed && !unlocked AND for stopped
         return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundDark);
     }
+
+    // TODO: El refrigerator no muestra ningun estado?
+    public static String getDeviceStatusString(DeviceState state) {
+        if (state == null || state.getStatus() == null) return null;
+
+        switch (state.getStatus()) {
+            case "on":      return instance.getResources().getString(R.string.device_status_on);
+            case "off":     return instance.getResources().getString(R.string.device_status_off);
+            case "opened":  return instance.getResources().getString(R.string.device_status_opened);
+            case "opening": return instance.getResources().getString(R.string.device_status_opening);
+            case "closing": return instance.getResources().getString(R.string.device_status_closing);
+            case "closed":
+                        if (state.getLock() != null && state.getLock().equals("locked"))
+                            return instance.getResources().getString(R.string.device_status_locked);
+                        else
+                            return instance.getResources().getString(R.string.device_status_closed);
+            case "playing": return instance.getResources().getString(R.string.device_status_playing);
+            case "paused":  return instance.getResources().getString(R.string.device_status_paused);
+            case "stopped": return instance.getResources().getString(R.string.device_status_stopped);
+        }
+        return null;
+    }
 }
