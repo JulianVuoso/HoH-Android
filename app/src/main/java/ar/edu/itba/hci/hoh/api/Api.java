@@ -327,8 +327,14 @@ public class Api {
 
         if (!handled) {
             Log.e(LOG_TAG, error.toString());
+            Log.e(LOG_TAG, String.format("%s", error.getMessage()));
 
-            ArrayList<String> description = new ArrayList<>(Arrays.asList(error.getMessage()));
+            ArrayList<String> description;
+            if (error.getMessage() != null)
+                description = new ArrayList<>(Arrays.asList(error.getMessage()));
+            else
+                description = new ArrayList<>(Arrays.asList(error.toString()));
+
             response = new Error(6, description);
         }
 

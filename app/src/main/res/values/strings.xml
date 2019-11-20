@@ -43,5 +43,6 @@
 
     <string name="routine_exec_message">successfully executed!</string>
 
-    <string name="error_no_connection">Could not connect to Ajax!</string>
+    <string name="error_no_connection">Failed to connect to</string>
+    <string name="error_timeout">Timeout error! Could not connect to Ajax!</string>
 </resources>

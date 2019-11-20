@@ -21,6 +21,7 @@ public class MyApplication extends Application {
     private static final float toastVerticalMargin = (float) 0.08;
 
     private static final String connectionError = "java.net.ConnectException:";
+    private static final String timeoutError = "com.android.volley.TimeoutError";
 
     private static MyApplication instance;
     private RoomRepository roomRepository;
@@ -72,14 +73,16 @@ public class MyApplication extends Application {
     }
 
     public static void makeToast(Error error) {
-        if (error == null) return;
+        if (error == null || error.getDescription() == null || error.getDescription().get(0) == null) return;
 
         Toast toast;
-        // API NOT CONNECTED
-        if (error.getDescription().get(0).startsWith(connectionError))
-            toast = Toast.makeText(instance, instance.getResources().getString(R.string.error_no_connection), Toast.LENGTH_SHORT);
+        String errorMessage = error.getDescription().get(0);
+        if (errorMessage.startsWith(connectionError)) // FAILED TO CONNECT TO URL
+            toast = Toast.makeText(instance, String.format("%s %s", instance.getResources().getString(R.string.error_no_connection), Api.getURL()), Toast.LENGTH_SHORT);
+        else if (errorMessage.startsWith(timeoutError)) // TIMEOUT ERROR
+            toast = Toast.makeText(instance, instance.getResources().getString(R.string.error_timeout), Toast.LENGTH_SHORT);
         else // UNRECOGNIZED ERROR
-            toast = Toast.makeText(instance, error.getDescription().get(0), Toast.LENGTH_SHORT);
+            toast = Toast.makeText(instance, errorMessage, Toast.LENGTH_SHORT);
         toast.setMargin(toastHorizontalMargin, toastVerticalMargin);
         toast.show();
     }
