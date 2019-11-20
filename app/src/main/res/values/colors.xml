@@ -22,7 +22,7 @@
     <color name="colorImgCardTitle">#000000</color>
 
 
-    <color name="colorBottomNavTrue">#0F3ED9</color>
-    <color name="colorBottomNavFalse">#000000</color>
-    <color name="colorBottomNavBackground">#87919D</color>
+    <color name="colorBottomNavTrue">#FF9800</color>
+    <color name="colorBottomNavFalse">#747F8B</color>
+    <color name="colorBottomNavBackground">#1E1E1E</color>
 </resources>
