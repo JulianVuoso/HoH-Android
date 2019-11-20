@@ -52,6 +52,8 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomLi
 
     public void setDevices(List<Device> devices) {
         this.data = devices;
+        map.clear();
+        categories.clear();
         updatedDataSet();
     }
 

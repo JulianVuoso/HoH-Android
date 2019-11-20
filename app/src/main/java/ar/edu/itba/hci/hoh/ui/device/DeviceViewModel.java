@@ -28,7 +28,7 @@ import ar.edu.itba.hci.hoh.ui.RequestViewModel;
 public class DeviceViewModel extends RequestViewModel {
 
     private MediatorLiveData<Pair<Result<ArrayList<Device>>, DeviceType>> devices;
-    private Map<String, LiveData<Result<ArrayList<Device>>>> typesData = new HashMap<>();
+    private Map<DeviceType, LiveData<Result<ArrayList<Device>>>> typesData = new HashMap<>();
 
     public DeviceViewModel() {
         super();
@@ -36,9 +36,13 @@ public class DeviceViewModel extends RequestViewModel {
     }
 
     void addDeviceType(DeviceType type) {
-        if (typesData.containsKey(type.getId())) return;
+        if (typesData.containsKey(type)) return;
+        createTypeLiveData(type);
+    }
+
+    private void createTypeLiveData(DeviceType type) {
         LiveData<Result<ArrayList<Device>>> auxDevices = getDevicesFromType(type.getId());
-        typesData.put(type.getId(), auxDevices);
+        typesData.put(type, auxDevices);
         this.devices.addSource(auxDevices, value -> this.devices.setValue(new Pair<>(value, type)));
     }
 
@@ -65,8 +69,8 @@ public class DeviceViewModel extends RequestViewModel {
     }
 
     void reloadDevices() {
-        for (Map.Entry<String, LiveData<Result<ArrayList<Device>>>> entry : typesData.entrySet()) {
-            entry.setValue(getDevicesFromType(entry.getKey()));
-        }
+        this.devices = new MediatorLiveData<>();
+        for (DeviceType type : typesData.keySet())
+            createTypeLiveData(type);
     }
 }

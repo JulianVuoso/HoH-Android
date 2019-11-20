@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.RestartListener;
 import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
@@ -45,6 +46,8 @@ public class DeviceFragment extends Fragment {
     private List<String> requestTag = new ArrayList<>();
 
     private CardView emptyCard;
+
+    private RestartListener restartListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,15 +79,25 @@ public class DeviceFragment extends Fragment {
             getDevicesList();
         }
 
+        restartListener = () -> {
+            deviceViewModel.reloadDevices();
+            getDevicesList();
+        };
+        MainActivity.setRestartListener(restartListener);
+
         return root;
     }
 
     private void getDevicesList() {
+        data.clear();
+        adapter.clearDataSet();
         deviceViewModel.getDevicesFromCategory().observe(this, devices -> {
             if (devices != null)
                 data.addAll(devices);
             if (!data.isEmpty())
                 emptyCard.setVisibility(View.GONE);
+            else
+                emptyCard.setVisibility(View.VISIBLE);
             adapter.updatedDataSet();
             Log.v(MainActivity.LOG_TAG, "ACTUALICE DISPOSITIVOS");
         });
@@ -94,5 +107,11 @@ public class DeviceFragment extends Fragment {
     public void onStop() {
         super.onStop();
         deviceViewModel.cancelRequests();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.removeRestartListener(restartListener);
     }
 }

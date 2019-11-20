@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.RestartListener;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
@@ -46,6 +47,8 @@ public class RoomFragment extends Fragment {
     private List<String> requestTag = new ArrayList<>();
 
     private CardView emptyCard;
+
+    private RestartListener restartListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,9 @@ public class RoomFragment extends Fragment {
             getDevicesList(room);
         }
 
+        restartListener = () -> getDevicesList(room);
+        MainActivity.setRestartListener(restartListener);
+
         return root;
     }
 
@@ -91,9 +97,11 @@ public class RoomFragment extends Fragment {
             if (devices != null) {
                 for (Device device : devices)
                     device.setRoom(room);
-                if (!devices.isEmpty())
-                    emptyCard.setVisibility(View.GONE);
             }
+            if (devices != null && !devices.isEmpty())
+                emptyCard.setVisibility(View.GONE);
+            else
+                emptyCard.setVisibility(View.VISIBLE);
             adapter.setDevices(devices);
             Log.v(MainActivity.LOG_TAG, "ACTUALICE DISPOSITIVOS");
         });
@@ -146,12 +154,9 @@ public class RoomFragment extends Fragment {
         roomViewModel.cancelRequests();
     }
 
-    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        emptyCard.setVisibility(View.VISIBLE);
-//        roomViewModel.setRoom(room);
-//        getDevicesList(room);
-//    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.removeRestartListener(restartListener);
+    }
 }

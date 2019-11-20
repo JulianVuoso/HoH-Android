@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.hci.hoh.MyApplication;
+import ar.edu.itba.hci.hoh.RestartListener;
 import ar.edu.itba.hci.hoh.elements.Routine;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
@@ -39,6 +40,8 @@ public class RoutinesFragment extends Fragment {
     private RoutinesAdapter adapter;
 
     private CardView emptyCard;
+
+    private RestartListener restartListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,13 +61,21 @@ public class RoutinesFragment extends Fragment {
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_routine_list);
 
+        restartListener = () -> {
+            routinesViewModel.reloadRoutines();
+            getRoutineList();
+        };
+        MainActivity.setRestartListener(restartListener);
+
         return root;
     }
 
     private void getRoutineList() {
         routinesViewModel.getRoutines().observe(this, routines -> {
-            if (routines != null && ! routines.isEmpty())
+            if (routines != null && !routines.isEmpty())
                 emptyCard.setVisibility(View.GONE);
+            else
+                emptyCard.setVisibility(View.VISIBLE);
             adapter.setRoutines(routines);
             Log.v(MainActivity.LOG_TAG, "ACTUALICE ROUTINES");
         });
@@ -83,12 +94,9 @@ public class RoutinesFragment extends Fragment {
         routinesViewModel.cancelRequests();
     }
 
-    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        emptyCard.setVisibility(View.VISIBLE);
-//        routinesViewModel.reloadRoutines();
-//        getRoutineList();
-//    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.removeRestartListener(restartListener);
+    }
 }

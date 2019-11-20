@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.itba.hci.hoh.RestartListener;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
@@ -36,11 +37,9 @@ public class RoomsFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private RoomsAdapter adapter;
 
-    private List<Room> rooms = new ArrayList<>();
-
-    private String requestTag;
-
     private CardView emptyCard;
+
+    private RestartListener restartListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +59,13 @@ public class RoomsFragment extends Fragment {
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_room_list);
 
+        restartListener = () -> {
+            roomsViewModel.reloadRooms();
+            getRoomList();
+        };
+
+        MainActivity.setRestartListener(restartListener);
+
         return root;
     }
 
@@ -67,6 +73,8 @@ public class RoomsFragment extends Fragment {
         roomsViewModel.getRooms().observe(this, rooms -> {
             if (rooms != null && !rooms.isEmpty())
                 emptyCard.setVisibility(View.GONE);
+            else
+                emptyCard.setVisibility(View.VISIBLE);
             adapter.setRooms(rooms);
             Log.v(MainActivity.LOG_TAG, "ACTUALICE ROOMS");
         });
@@ -76,14 +84,12 @@ public class RoomsFragment extends Fragment {
     public void onStop() {
         super.onStop();
         roomsViewModel.cancelRequests();
+        Log.e(MainActivity.LOG_TAG, "onstop de room");
     }
 
-    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        emptyCard.setVisibility(View.VISIBLE);
-//        roomsViewModel.reloadRooms();
-//        getRoomList();
-//    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.removeRestartListener(restartListener);
+    }
 }

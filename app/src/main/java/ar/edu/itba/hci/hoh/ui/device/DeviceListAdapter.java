@@ -61,6 +61,11 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
         this.notifyDataSetChanged();
     }
 
+    public void clearDataSet() {
+        map.clear();
+        rooms.clear();
+    }
+
     private void updateMap() {
         for (Device dev : data) {
             if (map.containsKey(dev.getRoom()) && !map.get(dev.getRoom()).contains(dev))

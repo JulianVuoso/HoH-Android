@@ -29,7 +29,6 @@ public abstract class Repository {
     }
 
     public void cancelRequest(String uuid) {
-        Log.e(MainActivity.LOG_TAG, uuid);
         api.cancelRequest(uuid);
     }
 }

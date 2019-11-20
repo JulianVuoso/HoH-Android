@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.hci.hoh.MyApplication;
+import ar.edu.itba.hci.hoh.RestartListener;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.elements.Routine;
@@ -53,6 +54,8 @@ public class HomeFragment extends Fragment {
     private List<String> requestTag = new ArrayList<>();
 
     private CardView emptyDeviceCard, emptyRoomCard, emptyRoutineCard;
+
+    private RestartListener restartListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -115,6 +118,17 @@ public class HomeFragment extends Fragment {
         TextView tvEmptyRoutine = emptyRoutineCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoutine.setText(R.string.empty_fav_routine_list);
 
+        restartListener = () -> {
+            homeViewModel.reloadDevices();
+            getFavDeviceList();
+            homeViewModel.reloadRooms();
+            getFavRoomList();
+            homeViewModel.reloadRoutines();
+            getFavRoutineList();
+        };
+
+        MainActivity.setRestartListener(restartListener);
+
         return root;
     }
 
@@ -128,6 +142,8 @@ public class HomeFragment extends Fragment {
             }
             if (!favDevices.isEmpty())
                 emptyDeviceCard.setVisibility(View.GONE);
+            else
+                emptyDeviceCard.setVisibility(View.VISIBLE);
             adapterFavDevices.notifyDataSetChanged();
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV DEVICES");
         });
@@ -143,6 +159,8 @@ public class HomeFragment extends Fragment {
             }
             if (!favRooms.isEmpty())
                 emptyRoomCard.setVisibility(View.GONE);
+            else
+                emptyRoomCard.setVisibility(View.VISIBLE);
             adapterFavRooms.notifyDataSetChanged();
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV Rooms");
         });
@@ -158,6 +176,8 @@ public class HomeFragment extends Fragment {
             }
             if (!favRoutines.isEmpty())
                 emptyRoutineCard.setVisibility(View.GONE);
+            else
+                emptyRoutineCard.setVisibility(View.VISIBLE);
             adapterFavRoutines.notifyDataSetChanged();
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV Routines");
         });
@@ -176,18 +196,9 @@ public class HomeFragment extends Fragment {
         homeViewModel.cancelRequests();
     }
 
-    // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        emptyDeviceCard.setVisibility(View.VISIBLE);
-//        emptyRoomCard.setVisibility(View.VISIBLE);
-//        emptyRoutineCard.setVisibility(View.VISIBLE);
-//        homeViewModel.reloadDevices();
-//        getFavDeviceList();
-//        homeViewModel.reloadRooms();
-//        getFavRoomList();
-//        homeViewModel.reloadRoutines();
-//        getFavRoutineList();
-//    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.removeRestartListener(restartListener);
+    }
 }

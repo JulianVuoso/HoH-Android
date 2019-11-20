@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static List<Category> categories = new ArrayList<>();
 
+    private static List<RestartListener> restartListeners = new ArrayList<>();
+
     private static boolean notifications;
 
     public static boolean isNotifications() {
@@ -182,6 +184,24 @@ public class MainActivity extends AppCompatActivity {
         if (categories.size() == 0) {
             mainActivityData.reloadTypes();
             getCategoryList();
+        }
+    }
+
+    public static void setRestartListener(RestartListener listener) {
+        restartListeners.add(listener);
+    }
+
+    public static void removeRestartListener(RestartListener listener) {
+        restartListeners.remove(listener);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (restartListeners != null) {
+            Log.e(LOG_TAG, "Le mando al listener en MainActivity");
+            for (RestartListener listener : restartListeners)
+                listener.onRestartActivity();
         }
     }
 }
