@@ -140,6 +140,12 @@ public class RoomFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        roomViewModel.cancelRequests();
+    }
+
     // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
 //    @Override
 //    public void onResume() {

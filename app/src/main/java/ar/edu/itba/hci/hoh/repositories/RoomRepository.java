@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.elements.Room;
 
@@ -24,33 +25,33 @@ public class RoomRepository extends Repository {
         return instance;
     }
 
-    public LiveData<Result<Room>> addRoom(Room room) {
+    public ApiRequest<Room> addRoom(Room room) {
         final MutableLiveData<Result<Room>> result = new MutableLiveData<>();
-        this.api.addRoom(room, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.addRoom(room, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<Boolean>> modifyRoom(Room room) {
+    public ApiRequest<Boolean> modifyRoom(Room room) {
         final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
-        this.api.modifyRoom(room, getListener(result), getErrorListener(api, result));
-        return result;
+        String uuid = this.api.modifyRoom(room, getListener(result), getErrorListener(api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<Boolean>> deleteRoom(String id) {
+    public ApiRequest<Boolean> deleteRoom(String id) {
         final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
-        this.api.deleteRoom(id, getListener(result), getErrorListener(api, result));
-        return result;
+        String uuid = this.api.deleteRoom(id, getListener(result), getErrorListener(api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<Room>> getRoom(String id) {
+    public ApiRequest<Room> getRoom(String id) {
         final MutableLiveData<Result<Room>> result = new MutableLiveData<>();
-        this.api.getRoom(id, getListener(result), getErrorListener(api, result));
-        return result;
+        String uuid = this.api.getRoom(id, getListener(result), getErrorListener(api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<ArrayList<Room>>> getRooms() {
+    public ApiRequest<ArrayList<Room>> getRooms() {
         final MutableLiveData<Result<ArrayList<Room>>> result = new MutableLiveData<>();
-        this.api.getRooms(getListener(result), getErrorListener(api, result));
-        return result;
+        String uuid = this.api.getRooms(getListener(result), getErrorListener(api, result));
+        return new ApiRequest<>(uuid, result);
     }
 }

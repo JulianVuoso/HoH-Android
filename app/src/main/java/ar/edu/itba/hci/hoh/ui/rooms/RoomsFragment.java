@@ -75,9 +75,7 @@ public class RoomsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        // TODO: VER ADONDE MANDARLE EL CANCEL REQUEST, NO TENGO EL TAG.
-        // TODO: SACAR CONTEXT
-        Api.getInstance(this.getContext()).cancelRequest(requestTag);
+        roomsViewModel.cancelRequests();
     }
 
     // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG

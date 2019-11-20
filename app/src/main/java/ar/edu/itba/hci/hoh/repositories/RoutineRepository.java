@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.elements.Routine;
@@ -25,22 +26,21 @@ public class RoutineRepository extends Repository {
         return instance;
     }
 
-    public LiveData<Result<Routine>> getRoutine(String id) {
+    public ApiRequest<Routine> getRoutine(String id) {
         final MutableLiveData<Result<Routine>> result = new MutableLiveData<>();
-        this.api.getRoutine(id, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getRoutine(id, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<ArrayList<Routine>>> getRoutines() {
+    public ApiRequest<ArrayList<Routine>> getRoutines() {
         final MutableLiveData<Result<ArrayList<Routine>>> result = new MutableLiveData<>();
-        this.api.getRoutines(getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getRoutines(getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    // TODO: CAMBIAR A ARRAY LIST DE OBJECT, DEVUELVE LISTA DE BOOLEAN Y STRINGS
-    public LiveData<Result<ArrayList<Object>>> execRoutine(String id) {
+    public ApiRequest<ArrayList<Object>> execRoutine(String id) {
         final MutableLiveData<Result<ArrayList<Object>>> result = new MutableLiveData<>();
-        this.api.execRoutine(id, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.execRoutine(id, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 }

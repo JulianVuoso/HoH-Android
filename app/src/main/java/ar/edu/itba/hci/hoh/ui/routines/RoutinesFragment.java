@@ -38,11 +38,7 @@ public class RoutinesFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private RoutinesAdapter adapter;
 
-    private List<Routine> routines = new ArrayList<>();
-
     private CardView emptyCard;
-
-    private static List<String> requestTag = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -84,9 +80,7 @@ public class RoutinesFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        // TODO: SACAR CONTEXT
-        for (String request : requestTag)
-            Api.getInstance(this.getContext()).cancelRequest(request);
+        routinesViewModel.cancelRequests();
     }
 
     // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG

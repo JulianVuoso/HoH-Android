@@ -6,13 +6,16 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.api.Error;
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.elements.Routine;
+import ar.edu.itba.hci.hoh.ui.RequestViewModel;
 
-public class RoutinesViewModel extends ViewModel {
+public class RoutinesViewModel extends RequestViewModel {
 
     private LiveData<Result<ArrayList<Routine>>> routines;
 
@@ -26,11 +29,14 @@ public class RoutinesViewModel extends ViewModel {
     }
 
     LiveData<ArrayList<Object>> execRoutine(String id) {
-        LiveData<Result<ArrayList<Object>>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
-        return Transformations.map(execResult, MyApplication.getTransformFunction());
+        ApiRequest<ArrayList<Object>> execRequest = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
+        requestTags.add(execRequest.getUuid());
+        return Transformations.map(execRequest.getLiveData(), MyApplication.getTransformFunction());
     }
 
     void reloadRoutines() {
-        this.routines = MyApplication.getInstance().getRoutineRepository().getRoutines();
+        ApiRequest<ArrayList<Routine>> routineRequest = MyApplication.getInstance().getRoutineRepository().getRoutines();
+        requestTags.add(routineRequest.getUuid());
+        this.routines = routineRequest.getLiveData();
     }
 }

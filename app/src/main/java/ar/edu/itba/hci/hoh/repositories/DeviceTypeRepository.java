@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.elements.Result;
 
@@ -24,15 +25,15 @@ public class DeviceTypeRepository extends Repository {
         return instance;
     }
 
-    public LiveData<Result<DeviceType>> getDeviceType(String id) {
+    public ApiRequest<DeviceType> getDeviceType(String id) {
         final MutableLiveData<Result<DeviceType>> result = new MutableLiveData<>();
-        this.api.getDeviceType(id, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getDeviceType(id, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<ArrayList<DeviceType>>> getDeviceTypes() {
+    public ApiRequest<ArrayList<DeviceType>> getDeviceTypes() {
         final MutableLiveData<Result<ArrayList<DeviceType>>> result = new MutableLiveData<>();
-        this.api.getDeviceTypes(getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getDeviceTypes(getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 }

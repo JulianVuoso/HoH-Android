@@ -18,12 +18,14 @@ import java.util.Map;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.api.Error;
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.elements.Routine;
+import ar.edu.itba.hci.hoh.ui.RequestViewModel;
 
-public class DeviceViewModel extends ViewModel {
+public class DeviceViewModel extends RequestViewModel {
 
     private MediatorLiveData<Pair<Result<ArrayList<Device>>, DeviceType>> devices;
     private Map<String, LiveData<Result<ArrayList<Device>>>> typesData = new HashMap<>();
@@ -57,7 +59,9 @@ public class DeviceViewModel extends ViewModel {
     }
 
     private LiveData<Result<ArrayList<Device>>> getDevicesFromType(String id) {
-        return MyApplication.getInstance().getDeviceRepository().getDevicesFromType(id);
+        ApiRequest<ArrayList<Device>> deviceRequest = MyApplication.getInstance().getDeviceRepository().getDevicesFromType(id);
+        requestTags.add(deviceRequest.getUuid());
+        return deviceRequest.getLiveData();
     }
 
     void reloadDevices() {
