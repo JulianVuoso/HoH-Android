@@ -18,8 +18,8 @@
     <color name="colorCategoryTitle">#FFFFFF</color>
 
     <!-- IMAGE CARD -->
-    <color name="colorImgCardBackground">#EBEBEB</color>
-    <color name="colorImgCardTitle">#000000</color>
+    <color name="colorImgCardBackground">#1E1E1E</color>
+    <color name="colorImgCardTitle">#FFFFFF</color>
 
 
     <color name="colorBottomNavTrue">#FF9800</color>
