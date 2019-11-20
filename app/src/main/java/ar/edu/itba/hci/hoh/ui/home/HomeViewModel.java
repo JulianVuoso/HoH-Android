@@ -7,15 +7,18 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.api.Error;
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.elements.Routine;
+import ar.edu.itba.hci.hoh.ui.RequestViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class HomeViewModel extends RequestViewModel {
 
     private LiveData<Result<ArrayList<Device>>> devices;
     private LiveData<Result<ArrayList<Room>>> rooms;
@@ -41,19 +44,26 @@ public class HomeViewModel extends ViewModel {
     }
 
     LiveData<ArrayList<Object>> execRoutine(String id) {
-        LiveData<Result<ArrayList<Object>>> execResult = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
-        return Transformations.map(execResult, MyApplication.getTransformFunction());
+        ApiRequest<ArrayList<Object>> execRequest = MyApplication.getInstance().getRoutineRepository().execRoutine(id);
+        requestTags.add(execRequest.getUuid());
+        return Transformations.map(execRequest.getLiveData(), MyApplication.getTransformFunction());
     }
 
     void reloadDevices() {
-        this.devices = MyApplication.getInstance().getDeviceRepository().getDevices();
+        ApiRequest<ArrayList<Device>> deviceRequest = MyApplication.getInstance().getDeviceRepository().getDevices();
+        requestTags.add(deviceRequest.getUuid());
+        this.devices = deviceRequest.getLiveData();
     }
 
     void reloadRooms() {
-        this.rooms = MyApplication.getInstance().getRoomRepository().getRooms();
+        ApiRequest<ArrayList<Room>> roomRequest = MyApplication.getInstance().getRoomRepository().getRooms();
+        requestTags.add(roomRequest.getUuid());
+        this.rooms = roomRequest.getLiveData();
     }
 
     void reloadRoutines() {
-        this.routines = MyApplication.getInstance().getRoutineRepository().getRoutines();
+        ApiRequest<ArrayList<Routine>> routineRequest = MyApplication.getInstance().getRoutineRepository().getRoutines();
+        requestTags.add(routineRequest.getUuid());
+        this.routines = routineRequest.getLiveData();
     }
 }

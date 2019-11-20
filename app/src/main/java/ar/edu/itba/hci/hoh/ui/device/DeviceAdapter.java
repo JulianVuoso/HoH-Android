@@ -73,7 +73,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         public void bind(final Device device, final OnItemClickListener<Device> listener) {
             tvDeviceName.setText(device.getName());
             tvDeviceRoom.setText(device.getRoom().getName());
-            // TODO: PARSEAR STATUS Y MOSTRARLO EN IDIOMA
             tvDeviceState.setText(MyApplication.getDeviceStatusString(device.getState()));
             ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
             cardView.setCardBackgroundColor(MyApplication.getCardBackgroundColor(device.getState()));

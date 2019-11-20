@@ -170,6 +170,12 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        homeViewModel.cancelRequests();
+    }
+
     // TODO: VER DONDE PUEDO RECARGAR VISTAS AL VOLVER DE CONFIG
 //    @Override
 //    public void onResume() {

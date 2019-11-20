@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.api.Error;
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.elements.Room;
+import ar.edu.itba.hci.hoh.ui.RequestViewModel;
 
-public class RoomsViewModel extends ViewModel {
+public class RoomsViewModel extends RequestViewModel {
 
     private LiveData<Result<ArrayList<Room>>> rooms;
 
@@ -25,6 +27,8 @@ public class RoomsViewModel extends ViewModel {
     }
 
     void reloadRooms() {
-        this.rooms = MyApplication.getInstance().getRoomRepository().getRooms();
+        ApiRequest<ArrayList<Room>> roomRequest = MyApplication.getInstance().getRoomRepository().getRooms();
+        requestTags.add(roomRequest.getUuid());
+        this.rooms = roomRequest.getLiveData();
     }
 }

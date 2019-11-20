@@ -90,4 +90,9 @@ public class DeviceFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        deviceViewModel.cancelRequests();
+    }
 }

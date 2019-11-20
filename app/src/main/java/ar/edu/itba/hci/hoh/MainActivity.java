@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity instance;
 
     public static List<Category> categories = new ArrayList<>();
-    private static String requestTag;
 
     private static boolean notifications;
 
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        Api.getInstance(null).cancelRequest(requestTag);
+        mainActivityData.cancelRequests();
     }
 
     public static void reloadCategories() {

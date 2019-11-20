@@ -1,11 +1,13 @@
 package ar.edu.itba.hci.hoh.repositories;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.volley.Response;
 
+import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.elements.Result;
 
@@ -24,5 +26,10 @@ public abstract class Repository {
 
     protected static <T> Response.ErrorListener getErrorListener(final Api api, final MutableLiveData<Result<T>> result) {
         return (error) -> result.setValue(new Result<>(null, api.handleError(error)));
+    }
+
+    public void cancelRequest(String uuid) {
+        Log.e(MainActivity.LOG_TAG, uuid);
+        api.cancelRequest(uuid);
     }
 }

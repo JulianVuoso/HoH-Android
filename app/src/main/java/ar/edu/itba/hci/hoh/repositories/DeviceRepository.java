@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 
+import ar.edu.itba.hci.hoh.elements.ApiRequest;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.Result;
 import ar.edu.itba.hci.hoh.elements.Routine;
@@ -25,58 +26,58 @@ public class DeviceRepository extends Repository {
         return instance;
     }
 
-    public LiveData<Result<Device>> addDevice(Device device) {
+    public ApiRequest<Device> addDevice(Device device) {
         final MutableLiveData<Result<Device>> result = new MutableLiveData<>();
-        this.api.addDevice(device, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.addDevice(device, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<Boolean>> modifyDevice(Device device) {
+    public ApiRequest<Boolean> modifyDevice(Device device) {
         final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
-        this.api.modifyDevice(device, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.modifyDevice(device, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<Boolean>> deleteDevice(String id) {
+    public ApiRequest<Boolean> deleteDevice(String id) {
         final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
-        this.api.deleteDevice(id, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.deleteDevice(id, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<Device>> getDevice(String id) {
+    public ApiRequest<Device> getDevice(String id) {
         final MutableLiveData<Result<Device>> result = new MutableLiveData<>();
-        this.api.getDevice(id, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getDevice(id, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<ArrayList<Device>>> getDevices() {
+    public ApiRequest<ArrayList<Device>> getDevices() {
         final MutableLiveData<Result<ArrayList<Device>>> result = new MutableLiveData<>();
-        this.api.getDevices(getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getDevices(getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<ArrayList<Device>>> getDevicesFromType(String id) {
+    public ApiRequest<ArrayList<Device>> getDevicesFromType(String id) {
         final MutableLiveData<Result<ArrayList<Device>>> result = new MutableLiveData<>();
-        this.api.getDevicesFromType(id, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getDevicesFromType(id, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<ArrayList<Device>>> getDevicesFromRoom(String id) {
+    public ApiRequest<ArrayList<Device>> getDevicesFromRoom(String id) {
         final MutableLiveData<Result<ArrayList<Device>>> result = new MutableLiveData<>();
-        this.api.getDevicesFromRoom(id, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.getDevicesFromRoom(id, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
     // TODO: DEVUELVE STRING O BOOLEAN, UNIFICAR con OBJECT
-    public LiveData<Result<Boolean>> execAction(String id, String action, String[] param) {
+    public ApiRequest<Boolean> execAction(String id, String action, String[] param) {
         final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
-        this.api.execAction(id, action, param, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.execAction(id, action, param, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 
-    public LiveData<Result<Boolean>> execAction(String id, String action) {
+    public ApiRequest<Boolean> execAction(String id, String action) {
         final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
-        this.api.execAction(id, action, getListener(result), getErrorListener(this.api, result));
-        return result;
+        String uuid = this.api.execAction(id, action, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
     }
 }
