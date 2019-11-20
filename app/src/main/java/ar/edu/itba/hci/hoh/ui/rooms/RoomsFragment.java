@@ -84,7 +84,6 @@ public class RoomsFragment extends Fragment {
     public void onStop() {
         super.onStop();
         roomsViewModel.cancelRequests();
-        Log.e(MainActivity.LOG_TAG, "onstop de room");
     }
 
     @Override
