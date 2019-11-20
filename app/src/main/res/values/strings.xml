@@ -41,6 +41,9 @@
     <string name="device_status_paused">Paused</string>
     <string name="device_status_stopped">Stopped</string>
 
+    <string name="left_arrow_description">Left Arrow</string>
+    <string name="right_arrow_description">Right Arrow</string>
+
     <string name="routine_exec_message">successfully executed!</string>
 
     <string name="error_no_connection">Failed to connect to</string>

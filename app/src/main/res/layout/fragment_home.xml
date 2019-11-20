@@ -22,12 +22,41 @@
             android:textStyle="bold"
             android:text="@string/title_favorite_devices"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_favorite_devices"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        </androidx.recyclerview.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/left_arrow_favorite_devices"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_left_white_24dp"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:contentDescription="@string/left_arrow_description"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_favorite_devices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toStartOf="@id/right_arrow_favorite_devices"
+                android:layout_toEndOf="@id/left_arrow_favorite_devices">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/right_arrow_favorite_devices"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_right_white_24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:contentDescription="@string/right_arrow_description"/>
+        </RelativeLayout>
 
         <include android:id="@+id/empty_fav_devices_card"
             layout="@layout/item_no_elements" />
@@ -43,12 +72,41 @@
             android:textStyle="bold"
             android:text="@string/title_favorite_rooms"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_favorite_rooms"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        </androidx.recyclerview.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/left_arrow_favorite_rooms"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_left_white_24dp"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:contentDescription="@string/left_arrow_description"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_favorite_rooms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toStartOf="@id/right_arrow_favorite_rooms"
+                android:layout_toEndOf="@id/left_arrow_favorite_rooms">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/right_arrow_favorite_rooms"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_right_white_24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:contentDescription="@string/right_arrow_description"/>
+        </RelativeLayout>
 
         <include android:id="@+id/empty_fav_rooms_card"
             layout="@layout/item_no_elements" />
@@ -64,13 +122,41 @@
             android:textStyle="bold"
             android:text="@string/title_favorite_routines"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_favorite_routines"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/card_spacing"
             android:orientation="horizontal">
-        </androidx.recyclerview.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/left_arrow_favorite_routines"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_left_white_24dp"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:contentDescription="@string/left_arrow_description"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_favorite_routines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toStartOf="@id/right_arrow_favorite_routines"
+                android:layout_toEndOf="@id/left_arrow_favorite_routines">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/right_arrow_favorite_routines"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_right_white_24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:contentDescription="@string/right_arrow_description"/>
+        </RelativeLayout>
 
         <include android:id="@+id/empty_fav_routines_card"
             layout="@layout/item_no_elements"/>

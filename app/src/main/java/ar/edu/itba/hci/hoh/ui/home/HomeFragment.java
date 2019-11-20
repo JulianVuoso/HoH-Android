@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,8 @@ public class HomeFragment extends Fragment {
 
     private RestartListener restartListener;
 
+    private ImageButton leftArrowFavDevices, rightArrowFavDevices, leftArrowFavRooms, rightArrowFavRooms, leftArrowFavRoutines, rightArrowFavRoutines;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -80,6 +83,12 @@ public class HomeFragment extends Fragment {
         TextView tvEmptyDevice = emptyDeviceCard.findViewById(R.id.card_no_element_text);
         tvEmptyDevice.setText(R.string.empty_fav_device_list);
 
+        leftArrowFavDevices = root.findViewById(R.id.left_arrow_favorite_devices);
+        leftArrowFavDevices.setOnClickListener(getLeftArrowListener(managerFavDevices, rvFavDevices));
+        rightArrowFavDevices = root.findViewById(R.id.right_arrow_favorite_devices);
+        rightArrowFavDevices.setOnClickListener(v -> rvFavDevices.smoothScrollToPosition(managerFavDevices.findLastVisibleItemPosition() + 1));
+        rvFavDevices.addOnScrollListener(getOnScrollListener(managerFavDevices, leftArrowFavDevices, rightArrowFavDevices, favDevices));
+
         /* FAV ROOMS */
         rvFavRooms = root.findViewById(R.id.rv_favorite_rooms);
 //        managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, 2);
@@ -100,6 +109,12 @@ public class HomeFragment extends Fragment {
         TextView tvEmptyRoom = emptyRoomCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_fav_room_list);
 
+        leftArrowFavRooms = root.findViewById(R.id.left_arrow_favorite_rooms);
+        leftArrowFavRooms.setOnClickListener(getLeftArrowListener(managerFavRooms, rvFavRooms));
+        rightArrowFavRooms = root.findViewById(R.id.right_arrow_favorite_rooms);
+        rightArrowFavRooms.setOnClickListener(v -> rvFavRooms.smoothScrollToPosition(managerFavRooms.findLastVisibleItemPosition() + 1));
+        rvFavRooms.addOnScrollListener(getOnScrollListener(managerFavRooms, leftArrowFavRooms, rightArrowFavRooms, favRooms));
+
         /* FAV ROUTINES */
         rvFavRoutines = root.findViewById(R.id.rv_favorite_routines);
         managerFavRoutines = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, getResources().getDimension(R.dimen.img_card_width));
@@ -118,6 +133,12 @@ public class HomeFragment extends Fragment {
         TextView tvEmptyRoutine = emptyRoutineCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoutine.setText(R.string.empty_fav_routine_list);
 
+        leftArrowFavRoutines = root.findViewById(R.id.left_arrow_favorite_routines);
+        leftArrowFavRoutines.setOnClickListener(getLeftArrowListener(managerFavRoutines, rvFavRoutines));
+        rightArrowFavRoutines = root.findViewById(R.id.right_arrow_favorite_routines);
+        rightArrowFavRoutines.setOnClickListener(v -> rvFavRoutines.smoothScrollToPosition(managerFavRoutines.findLastVisibleItemPosition() + 1));
+        rvFavRoutines.addOnScrollListener(getOnScrollListener(managerFavRoutines, leftArrowFavRoutines, rightArrowFavRoutines, favRoutines));
+
         restartListener = () -> {
             homeViewModel.reloadDevices();
             getFavDeviceList();
@@ -130,6 +151,49 @@ public class HomeFragment extends Fragment {
         MainActivity.setRestartListener(restartListener);
 
         return root;
+    }
+
+    private <T> RecyclerView.OnScrollListener getOnScrollListener(LinearLayoutManager manager, ImageButton leftArrow, ImageButton rightArrow, List<T> list) {
+        return new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (manager.findFirstCompletelyVisibleItemPosition() == 0)
+                    leftArrow.setVisibility(View.INVISIBLE);
+                else
+                    leftArrow.setVisibility(View.VISIBLE);
+
+                if (manager.findLastCompletelyVisibleItemPosition() == list.size() - 1)
+                    rightArrow.setVisibility(View.INVISIBLE);
+                else
+                    rightArrow.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        };
+    }
+
+    private View.OnClickListener getLeftArrowListener(LinearLayoutManager manager, RecyclerView recyclerView) {
+        return v -> {
+            int pos = managerFavDevices.findFirstVisibleItemPosition();
+            if (pos > 0)
+                rvFavDevices.smoothScrollToPosition(pos - 1);
+            else
+                rvFavDevices.smoothScrollToPosition(0);
+        };
+    }
+
+    private void configureInitialArrows(ImageButton leftArrow, ImageButton rightArrow, int size) {
+        if (size == 0) {
+            leftArrow.setVisibility(View.GONE);
+            rightArrow.setVisibility(View.GONE);
+            return;
+        }
+        leftArrow.setVisibility(View.INVISIBLE);
+        rightArrow.setVisibility(View.VISIBLE);
     }
 
     private void getFavDeviceList() {
@@ -145,6 +209,7 @@ public class HomeFragment extends Fragment {
             else
                 emptyDeviceCard.setVisibility(View.VISIBLE);
             adapterFavDevices.notifyDataSetChanged();
+            configureInitialArrows(leftArrowFavDevices, rightArrowFavDevices, favDevices.size());
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV DEVICES");
         });
     }
@@ -162,6 +227,7 @@ public class HomeFragment extends Fragment {
             else
                 emptyRoomCard.setVisibility(View.VISIBLE);
             adapterFavRooms.notifyDataSetChanged();
+            configureInitialArrows(leftArrowFavRooms, rightArrowFavRooms, favRooms.size());
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV Rooms");
         });
     }
@@ -179,6 +245,7 @@ public class HomeFragment extends Fragment {
             else
                 emptyRoutineCard.setVisibility(View.VISIBLE);
             adapterFavRoutines.notifyDataSetChanged();
+            configureInitialArrows(leftArrowFavRoutines, rightArrowFavRoutines, favRoutines.size());
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV Routines");
         });
     }
