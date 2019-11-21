@@ -55,6 +55,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
         public void bind(final Category category, final OnItemClickListener<Category> listener) {
             tvCategoryName.setText(category.getName());
             ivCategoryImage.setImageResource(category.getDrawableId());
+            ivCategoryImage.setContentDescription(category.getName());
             itemView.setOnClickListener(v -> listener.onItemClick(category));
         }
     }

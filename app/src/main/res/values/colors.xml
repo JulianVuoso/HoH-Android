@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF9800</color>
-    <color name="colorPrimaryDark">#AF6A03</color>
+    <color name="colorPrimaryDark">#E28600</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBackground">#97AEF5</color>
     <color name="colorFragmentSubtitle">#FFFFFF</color>
@@ -26,5 +26,5 @@
     <color name="colorBottomNavFalse">#747F8B</color>
     <color name="colorBottomNavBackground">#1E1E1E</color>
 
-    <color name="dialogTextColor">#000000</color>
+    <color name="dialogTextColor">#3C3C3C</color>
 </resources>

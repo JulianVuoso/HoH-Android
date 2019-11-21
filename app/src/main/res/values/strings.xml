@@ -44,15 +44,13 @@
     <string name="left_arrow_description">Left Arrow</string>
     <string name="right_arrow_description">Right Arrow</string>
 
-    <string name="routine_exec_message">successfully executed!</string>
+    <string name="routine_exec_dialog_message">Are you sure you want to run</string>
+    <string name="routine_exec_dialog_cancel">Cancel</string>
+    <string name="routine_exec_dialog_run">Run</string>
+    <string name="routine_exec_message">Running</string>
 
     <string name="about_us_title">About Us</string>
     <string name="about_us_message">
-        Team members
-        \n\t\tMatías Alejandro Brula\n\t\tMartín Galderisi
-        \n\t\tJulián Tallar\n\t\tJulián Matías Vuoso
-    </string>
-    <string name="about_us_message2">
         House of Hands is an application made by iLuz. We are a student group from ITBA University
         with the purpose of developing web and android applications applying HCI knowledge.
     </string>

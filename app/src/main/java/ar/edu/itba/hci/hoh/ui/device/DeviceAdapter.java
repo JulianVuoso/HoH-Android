@@ -75,6 +75,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
             tvDeviceRoom.setText(device.getRoom().getName());
             tvDeviceState.setText(MyApplication.getDeviceStatusString(device.getState()));
             ivDeviceImage.setImageResource(DeviceType.getDeviceTypeDrawable(device.getType()));
+            ivDeviceImage.setContentDescription(device.getType().getName());
             cardView.setCardBackgroundColor(MyApplication.getCardBackgroundColor(device.getState()));
             itemView.setOnClickListener(view -> listener.onItemClick(device));
         }
