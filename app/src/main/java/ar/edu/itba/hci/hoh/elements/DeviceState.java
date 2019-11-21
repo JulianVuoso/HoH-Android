@@ -187,4 +187,26 @@ public class DeviceState implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        return "DeviceState{" +
+                "status='" + status + '\'' +
+                ", color='" + color + '\'' +
+                ", brightness=" + brightness +
+                ", lock='" + lock + '\'' +
+                ", level=" + level +
+                ", temperature=" + temperature +
+                ", mode='" + mode + '\'' +
+                ", verticalSwing='" + verticalSwing + '\'' +
+                ", horizontalSwing='" + horizontalSwing + '\'' +
+                ", fanSpeed='" + fanSpeed + '\'' +
+                ", volume=" + volume +
+                ", genre='" + genre + '\'' +
+                ", song=" + song +
+                ", freezerTemperature=" + freezerTemperature +
+                ", heat='" + heat + '\'' +
+                ", grill='" + grill + '\'' +
+                ", convection='" + convection + '\'' +
+                '}';
+    }
 }
