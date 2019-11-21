@@ -15,6 +15,7 @@ import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
 
 public class NotificationCreator {
     public static final String CHANNEL_ID = "ar.edu.itba.hci.hoh.NOTIFICATION_CHANNEL";
+    private static final String INTENT_KEY = "ROOOM";
 
     public static void showNotification(Context context, int messageId, Notification notification) {
 
@@ -44,16 +45,18 @@ public class NotificationCreator {
     public static Notification createNotification(Context context, int title, String content) {
         /* Set notification channel id (required by Android 8.0 - Oreo) */
 
+        Intent intent = new Intent(context.getApplicationContext(), RoomFragment.class);
+        intent.putExtra(INTENT_KEY, "hello");
+
         // Create pending intent, mention the Activity which needs to be
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                new Intent(context, RoomFragment.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), CHANNEL_ID)
                 .setContentTitle(context.getResources().getText(title))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(content))
-                .setContentIntent(contentIntent)
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
         return builder.build();
     }

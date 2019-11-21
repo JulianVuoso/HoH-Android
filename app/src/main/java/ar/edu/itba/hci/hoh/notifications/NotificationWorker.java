@@ -40,6 +40,7 @@ public class NotificationWorker extends Worker {
             ArrayList<Device> changedDevices =  new ArrayList<>();
             ArrayList<Tuple> deletedTuples;
             ArrayList<String> currentIds = new ArrayList<>();
+            boolean flag = DatabaseHandler.getTotalCount(db) > 0;
 
             Tuple tuple;
             if (response == null) return;
@@ -64,7 +65,7 @@ public class NotificationWorker extends Worker {
             deletedTuples = (ArrayList<Tuple>) DatabaseHandler.getMissing(db, currentIds.toArray(new String[0]));
 
             /* Creates notifications for new and changed devices only if not beginning */
-            if (DatabaseHandler.getTotalCount(db) > 0) {
+            if (flag) {
                 notifyNewDevices(newDevices);
                 notifyChangedDevices(changedDevices);
                 notifyDeletedDevices(deletedTuples);
