@@ -106,4 +106,23 @@ public class DatabaseHandler {
         return userData;
     }
 
+    public static Integer getTotalCount(LocalDatabase db) {
+
+        BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(1);
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, workQueue);
+
+        Integer userData = null;
+
+        Future<Integer> future = threadPoolExecutor.submit(() -> db.tupleDao().getTotalCount());
+
+        try {
+            userData = future.get(500, TimeUnit.MILLISECONDS);
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
+            e.printStackTrace();
+        }
+
+        future.cancel(true);
+        return userData;
+    }
+
 }

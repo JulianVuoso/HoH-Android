@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -18,11 +19,12 @@ import static ar.edu.itba.hci.hoh.notifications.NotificationCreator.showNotifica
 
 public class NotificationWorker extends Worker {
 
-    public final static String TAG = "ar.edu.itba.workmanager.myworker";
+    public final static String TAG = "ar.edu.itba.hoh.notificationworker";
     public final static String NAME = TAG;
 
     private Context context;
     private LocalDatabase db;
+    private static int notId = 0;
 
     public NotificationWorker(@NonNull Context context, @NonNull WorkerParameters params) {
         super(context, params);
@@ -61,10 +63,12 @@ public class NotificationWorker extends Worker {
             }
             deletedTuples = (ArrayList<Tuple>) DatabaseHandler.getMissing(db, currentIds.toArray(new String[0]));
 
-            /* Creates notifications for new and changed devices */
-            notifyNewDevices(newDevices);
-            notifyChangedDevices(changedDevices);
-            notifyDeletedDevices(deletedTuples);
+            /* Creates notifications for new and changed devices only if not beginning */
+            if (DatabaseHandler.getTotalCount(db) > 0) {
+                notifyNewDevices(newDevices);
+                notifyChangedDevices(changedDevices);
+                notifyDeletedDevices(deletedTuples);
+            }
 
         }, error -> {
 
@@ -76,24 +80,22 @@ public class NotificationWorker extends Worker {
     private void notifyNewDevices(ArrayList<Device> devices) {
         String content;
         Notification notification;
-        int i = 0;
 
         for (Device device: devices) {
             content = device.getName() + " " + context.getResources().getString(R.string.new_notification) + " " + device.getRoom().getName() + "\n";
             notification = createNotification(context, R.string.new_notification_title, content);
-            showNotification(context, i++, notification);
+            showNotification(context, notId++, notification);
         }
     }
 
     private void notifyChangedDevices(ArrayList<Device> devices) {
         String content;
         Notification notification;
-        int i = 500;
 
         for (Device device: devices) {
             content = device.getName() + " " + context.getResources().getString(R.string.changed_notification) + "\n";
             notification = createNotification(context, R.string.changed_notification_title, content);
-            showNotification(context, i++, notification);
+            showNotification(context, notId++, notification);
 
         }
     }
@@ -103,13 +105,12 @@ public class NotificationWorker extends Worker {
 
         String content;
         Notification notification;
-        int i = 1000;
 
         for (Tuple device: devices) {
             DatabaseHandler.delete(db, device);
             content = device.getName() + " " + context.getResources().getString(R.string.deleted_notification) + "\n";
             notification = createNotification(context, R.string.deleted_notification_title, content);
-            showNotification(context, i++, notification);
+            showNotification(context, notId++, notification);
         }
     }
 }

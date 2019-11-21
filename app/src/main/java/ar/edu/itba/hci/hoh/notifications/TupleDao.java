@@ -20,4 +20,7 @@ public interface TupleDao {
 
     @Query("DELETE FROM tuple")
     void deleteAll();
+
+    @Query("SELECT COUNT(*) FROM tuple")
+    Integer getTotalCount();
 }
