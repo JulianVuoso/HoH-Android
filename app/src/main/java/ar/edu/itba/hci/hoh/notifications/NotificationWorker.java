@@ -84,7 +84,7 @@ public class NotificationWorker extends Worker {
 
         for (Device device: devices) {
             content = device.getName() + " " + context.getResources().getString(R.string.new_notification) + " " + device.getRoom().getName() + "\n";
-            notification = createNotification(context, R.string.new_notification_title, content);
+            notification = createNotification(context, R.string.new_notification_title, content, device.getRoom().getId());
             showNotification(context, notId++, notification);
         }
     }
@@ -95,7 +95,7 @@ public class NotificationWorker extends Worker {
 
         for (Device device: devices) {
             content = device.getName() + " " + context.getResources().getString(R.string.changed_notification) + "\n";
-            notification = createNotification(context, R.string.changed_notification_title, content);
+            notification = createNotification(context, R.string.changed_notification_title, content, device.getRoom().getId());
             showNotification(context, notId++, notification);
 
         }
@@ -110,7 +110,7 @@ public class NotificationWorker extends Worker {
         for (Tuple device: devices) {
             DatabaseHandler.delete(db, device);
             content = device.getName() + " " + context.getResources().getString(R.string.deleted_notification) + "\n";
-            notification = createNotification(context, R.string.deleted_notification_title, content);
+            notification = createNotification(context, R.string.deleted_notification_title, content, null);
             showNotification(context, notId++, notification);
         }
     }

@@ -42,20 +42,19 @@ public class NotificationCreator {
         manager.notify(messageId, notification);
     }
 
-    public static Notification createNotification(Context context, int title, String content) {
+    public static Notification createNotification(Context context, int title, String content, String roomid) {
         /* Set notification channel id (required by Android 8.0 - Oreo) */
 
         Intent intent = new Intent(context.getApplicationContext(), RoomFragment.class);
-        intent.putExtra(INTENT_KEY, "hello");
+        intent.putExtra(INTENT_KEY, roomid);
 
         // Create pending intent, mention the Activity which needs to be
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), CHANNEL_ID)
                 .setContentTitle(context.getResources().getText(title))
+                .setContentText(content)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(content))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
         return builder.build();
