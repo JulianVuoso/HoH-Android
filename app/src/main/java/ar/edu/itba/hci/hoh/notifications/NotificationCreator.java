@@ -10,6 +10,7 @@ import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 
+import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
 
@@ -45,7 +46,7 @@ public class NotificationCreator {
     public static Notification createNotification(Context context, int title, String content, String roomid) {
         /* Set notification channel id (required by Android 8.0 - Oreo) */
 
-        Intent intent = new Intent(context.getApplicationContext(), RoomFragment.class);
+        Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
         intent.putExtra(INTENT_KEY, roomid);
 
         // Create pending intent, mention the Activity which needs to be
