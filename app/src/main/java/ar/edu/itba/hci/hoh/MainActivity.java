@@ -51,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
     private static List<RestartListener> restartListeners = new ArrayList<>();
 
     private static boolean notifications;
+    private static int notificationsTime = 15;
+
+    public static int getNotificationsTime() {
+        return notificationsTime;
+    }
+
+    public static void setNotificationsTime(int notificationsTime) {
+        MainActivity.notificationsTime = notificationsTime;
+    }
 
     public static boolean isNotifications() {
         return notifications;

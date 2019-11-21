@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         app:key="notifications_category"
-        app:title="Notifications">
+        app:title="@string/settings_notifications_category">
         <SwitchPreferenceCompat
             app:key="notifications"
-            app:title="Enable notifications"/>
+            app:title="@string/settings_notification_switch"/>
+        <ListPreference
+            app:key="notifications_time"
+            app:title="@string/settings_notification_time"
+            app:useSimpleSummaryProvider="true"
+            android:entries="@array/notification_time_strings"
+            android:entryValues="@array/notification_time_values"
+            android:defaultValue="15"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         app:key="api_category"
-        app:title="API">
+        app:title="@string/settings_api_category">
         <EditTextPreference
             app:key="api_url"
-            app:title="Api URL"
+            app:title="@string/settings_api_url"
             app:useSimpleSummaryProvider="true"/>
     </PreferenceCategory>
 

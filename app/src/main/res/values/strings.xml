@@ -48,4 +48,16 @@
 
     <string name="error_no_connection">Failed to connect to</string>
     <string name="error_timeout">Timeout error! Could not connect to Ajax!</string>
+
+    <string name="settings_notifications_category">Notifications</string>
+    <string name="settings_notification_switch">Enable notifications</string>
+    <string name="settings_notification_time">Repeat time interval</string>
+    <string name="settings_api_category">API</string>
+    <string name="settings_api_url">Api URL</string>
+
+    <!-- If values are meant to be changed, change them also in arrays.xml notif values -->
+    <string name="settings_notification_time_option_15">15 minutes</string>
+    <string name="settings_notification_time_option_30">30 minutes</string>
+    <string name="settings_notification_time_option_45">45 minutes</string>
+    <string name="settings_notification_time_option_60">60 minutes</string>
 </resources>
