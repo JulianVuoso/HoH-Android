@@ -7,7 +7,9 @@
     <dimen name="round_card_size">100dp</dimen>
     <dimen name="cat_card_width">120dp</dimen>
     <dimen name="img_card_width">150dp</dimen>
+    <dimen name="img_card_height">94dp</dimen>
     <dimen name="device_card_width">160dp</dimen>
     <dimen name="cardCornerRadius">15dp</dimen>
     <dimen name="cardElevation">10dp</dimen>
+
 </resources>
