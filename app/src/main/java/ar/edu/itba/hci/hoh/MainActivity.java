@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO: REVISAR MENSAJE I/Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
-    // TODO: CREATE AN IMAGE RESOURCE FOR EVERY PNG IN EACH RESOLUTION
+    // TODO: CORERGIR SVG DE HORNO Y BLINDS PORQUE LES FALTA MARGEN
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 Category lights = new Category("Lights", R.drawable.ic_light_black_60dp);
                 // TODO: EN EL INFORME, PONER QUE DOORS & WINDOWS ERA MUY LARGO Y QUE DEBERIAMOS CAMBIARLO TAMBIEN EN LA WEB
                 Category openings = new Category("Doors & Blinds", R.drawable.ic_door_black_60dp);
-                Category ac = new Category("Air Conditioning", R.drawable.ic_door_black_60dp); // TODO: CHANGE CATEGORY PIC
+                Category ac = new Category("Air Conditioning", R.drawable.ic_ac_black_60dp);
                 Category appliances = new Category("Appliances", R.drawable.ic_fridge_black_60dp);
                 Category entertainment = new Category("Entertainment", R.drawable.ic_entertainment_black_60dp);
 

@@ -26,6 +26,12 @@ public class Device implements Serializable {
         this.meta = meta;
     }
 
+    public Device(String id, String name, DeviceMeta meta) {
+        this.id = id;
+        this.name = name;
+        this.meta = meta;
+    }
+
     public String getId() {
         return id;
     }
@@ -58,7 +64,6 @@ public class Device implements Serializable {
         return meta;
     }
 
-    // TODO: VER SI TIENE QUE SER UNA CLASE PUBLICA AFUERA O FUNCA ASI
     public class DeviceMeta implements Serializable{
         private boolean favorite;
 
@@ -68,6 +73,10 @@ public class Device implements Serializable {
 
         public boolean isFavorite() {
             return favorite;
+        }
+
+        public void setFavorite(boolean favorite) {
+            this.favorite = favorite;
         }
     }
 }

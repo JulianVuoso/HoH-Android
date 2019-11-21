@@ -226,7 +226,6 @@ public class Api {
         String url = URL + "devices/" + id + "/" + action;
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        // TODO: CHECK SI ES {} o []
         GsonRequest<String[], Boolean> request =
                 new GsonRequest<>(Request.Method.PUT, url, new String[0], "result", new TypeToken<Boolean>(){}, headers, listener, errorListener);
         String uuid = UUID.randomUUID().toString();
