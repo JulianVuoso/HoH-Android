@@ -60,4 +60,15 @@
     <string name="settings_notification_time_option_30">30 minutes</string>
     <string name="settings_notification_time_option_45">45 minutes</string>
     <string name="settings_notification_time_option_60">60 minutes</string>
+
+    <!--  For notifications  -->
+    <string name="channel_name">Notification Channel</string>
+    <string name="channel_description">Notification Channel</string>
+
+    <string name="new_notification_title"><b>New Device</b></string>
+    <string name="new_notification">added to</string>
+    <string name="changed_notification_title"><b>Device Changed</b></string>
+    <string name="changed_notification">has changed its configuration</string>
+    <string name="deleted_notification_title"><b>Device Deleted</b></string>
+    <string name="deleted_notification">has been deleted</string>
 </resources>
