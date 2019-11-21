@@ -22,11 +22,7 @@ public class DatabaseHandler {
 
         try {
             userData = future.get(500, TimeUnit.MILLISECONDS);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
             e.printStackTrace();
         }
 
@@ -46,10 +42,9 @@ public class DatabaseHandler {
 
         try {
             future.get(500,TimeUnit.MILLISECONDS);
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
+            e.printStackTrace();
         }
-        catch (ExecutionException e) {e.printStackTrace();}
-        catch (InterruptedException e) {e.printStackTrace();}
-        catch (TimeoutException e) {e.printStackTrace();}
 
         future.cancel(true);
     }
@@ -66,11 +61,7 @@ public class DatabaseHandler {
 
         try {
             future.get(500, TimeUnit.MILLISECONDS);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
             e.printStackTrace();
         }
 
@@ -89,11 +80,7 @@ public class DatabaseHandler {
 
         try {
             future.get(5000, TimeUnit.MILLISECONDS);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
             e.printStackTrace();
         }
 
@@ -111,11 +98,7 @@ public class DatabaseHandler {
 
         try {
             userData = future.get(500, TimeUnit.MILLISECONDS);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
             e.printStackTrace();
         }
 

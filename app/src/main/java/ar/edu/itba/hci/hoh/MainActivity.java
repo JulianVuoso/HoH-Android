@@ -23,6 +23,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -39,6 +40,8 @@ import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.api.Error;
+import ar.edu.itba.hci.hoh.notifications.DatabaseHandler;
+import ar.edu.itba.hci.hoh.notifications.LocalDatabase;
 import ar.edu.itba.hci.hoh.notifications.NotificationWorker;
 import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
@@ -72,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setNotifications(boolean notifications) {
         MainActivity.notifications = notifications;
+        LocalDatabase db = LocalDatabase.getInstance(instance.getApplicationContext());
+
         if (notifications) {
             PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(NotificationWorker.class, notificationsTime, TimeUnit.MINUTES)
                     .addTag(NotificationWorker.TAG)
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 //            WorkManager.getInstance().enqueueUniqueWork(NotificationWorker.NAME, ExistingWorkPolicy.KEEP, request);
         } else {
             WorkManager.getInstance().cancelUniqueWork(NotificationWorker.NAME);
+            DatabaseHandler.deleteAll(db);
         }
 
     }

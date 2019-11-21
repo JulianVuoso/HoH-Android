@@ -32,10 +32,12 @@ public class NotificationCreator {
             channel.setDescription(description);
 
             /* Create channel */
+            assert manager != null;
             manager.createNotificationChannel(channel);
         }
 
         /* Send notification */
+        assert manager != null;
         manager.notify(messageId, notification);
     }
 

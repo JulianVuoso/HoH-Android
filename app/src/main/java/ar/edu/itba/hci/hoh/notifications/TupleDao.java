@@ -6,9 +6,6 @@ import java.util.List;
 
 @Dao
 public interface TupleDao {
-    @Query("SELECT * FROM tuple")
-    List<Tuple> getAll();
-
     @Query("SELECT * FROM tuple WHERE id IS :id")
     Tuple getById(String id);
 

@@ -20,7 +20,7 @@ public class Tuple {
     @ColumnInfo(name = "name")
     private String name;
 
-    public Tuple(String id, String state, String name) {
+    public Tuple(@NonNull String id, String state, String name) {
         this.id = id;
         this.state = state;
         this.name = name;
