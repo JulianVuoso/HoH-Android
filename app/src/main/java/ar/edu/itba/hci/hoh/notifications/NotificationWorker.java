@@ -23,7 +23,7 @@ public class NotificationWorker extends Worker {
     @Override
     public Result doWork() {
         test++;
-        Log.i("Worker Tester", String.format("Te value of test is %d", test));
+        Log.i("Worker-Tester", String.format("Te value of test is %d", test));
         return Result.success();
     }
 }
