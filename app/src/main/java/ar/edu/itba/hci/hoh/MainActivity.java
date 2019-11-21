@@ -1,12 +1,16 @@
 package ar.edu.itba.hci.hoh;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
@@ -17,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -86,15 +91,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Search Selected", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.kebab_settings:
-//                Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.kebab_help:
-                Toast.makeText(this, "Help Selected", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.kebab_website:
-                Toast.makeText(this, "Website Selected", Toast.LENGTH_SHORT).show();
+            case R.id.kebab_about_us:
+                aboutUsDialog(item.getActionView());
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -212,5 +213,13 @@ public class MainActivity extends AppCompatActivity {
             for (RestartListener listener : restartListeners)
                 listener.onRestartActivity();
         }
+    }
+
+    private void aboutUsDialog(View view) {
+        View dialogView = this.getLayoutInflater().inflate(R.layout.dialog_about_us, (ViewGroup) view);
+        AlertDialog dialog = new AlertDialog.Builder(this).setView(dialogView).create();
+        ImageButton closeDialogButton = dialogView.findViewById(R.id.close_dialog_about_us);
+        if (closeDialogButton != null) closeDialogButton.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 }

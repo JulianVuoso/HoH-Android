@@ -25,4 +25,6 @@
     <color name="colorBottomNavTrue">#FF9800</color>
     <color name="colorBottomNavFalse">#747F8B</color>
     <color name="colorBottomNavBackground">#1E1E1E</color>
+
+    <color name="dialogTextColor">#000000</color>
 </resources>
