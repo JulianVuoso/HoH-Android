@@ -23,6 +23,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,11 +33,13 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.api.Error;
+import ar.edu.itba.hci.hoh.notifications.NotificationWorker;
 import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
 
@@ -68,8 +73,20 @@ public class MainActivity extends AppCompatActivity {
     public static void setNotifications(boolean notifications) {
         MainActivity.notifications = notifications;
         if (notifications) {
-            // TODO: ENABLE WORK MANAGER
+            PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(NotificationWorker.class, notificationsTime, TimeUnit.MINUTES)
+                    .addTag(NotificationWorker.TAG)
+                    .build();
+            WorkManager.getInstance().enqueueUniquePeriodicWork(NotificationWorker.NAME, ExistingPeriodicWorkPolicy.KEEP, request);
+//
+//            OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(NotificationWorker.class)
+//                    .setInitialDelay(60, TimeUnit.SECONDS)
+//                    .addTag(NotificationWorker.TAG)
+//                    .build();
+//            WorkManager.getInstance().enqueueUniqueWork(NotificationWorker.NAME, ExistingWorkPolicy.KEEP, request);
+        } else {
+            WorkManager.getInstance().cancelUniqueWork(NotificationWorker.NAME);
         }
+
     }
 
     @Override
