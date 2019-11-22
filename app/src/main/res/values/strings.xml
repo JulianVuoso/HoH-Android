@@ -16,6 +16,9 @@
 
     <string name="categories_subtitle">Categories</string>
     <string name="img_default_description">Image</string>
+    <string name="dialog_close_description">Close dialog</string>
+    <string name="dialog_favorite_description">Favorite</string>
+    <string name="dialog_not_favorite_description">Not favorite</string>
     <string name="search_hint">Search…</string>
 
     <string name="title_favorite_devices">Favorite Devices</string>
@@ -32,7 +35,7 @@
 
     <string name="device_status_on">On</string>
     <string name="device_status_off">Off</string>
-    <string name="device_status_opened">Opened</string>
+    <string name="device_status_open">Open</string>
     <string name="device_status_opening">Opening</string>
     <string name="device_status_closing">Closing</string>
     <string name="device_status_closed">Closed</string>
@@ -56,6 +59,15 @@
     </string>
 
     <string name="close_dialog_description">Close dialog</string>
+
+    <string name="device_dialog_temperature">Temperature</string>
+    <string name="device_dialog_heat_source">Heat source</string>
+    <string name="device_dialog_convection_mode">Convection mode</string>
+    <string name="device_dialog_grill_mode">Grill mode</string>
+    <string name="device_dialog_up">Up</string>
+    <string name="device_dialog_down">Down</string>
+    <string name="device_dialog_full">Full</string>
+    <string name="device_dialog_eco">Eco</string>
 
     <string name="error_no_connection">Failed to connect to</string>
     <string name="error_timeout">Timeout error! Could not connect to Ajax!</string>

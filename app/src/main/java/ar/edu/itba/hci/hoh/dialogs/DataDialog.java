@@ -6,4 +6,7 @@ abstract class DataDialog {
     static void cancelRequests() {
         dialogData.cancelRequests();
     }
+
+    abstract void openDialog();
+    abstract void closeDialog();
 }

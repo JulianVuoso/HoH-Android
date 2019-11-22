@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
-            android:textColor="@color/dialogTextColor"
+            android:textColor="@color/colorDialogText"
             android:textSize="14sp"
             android:text="@string/about_us_message"
             android:layout_marginTop="5dp"

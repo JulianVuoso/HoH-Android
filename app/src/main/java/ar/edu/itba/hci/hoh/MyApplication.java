@@ -125,7 +125,7 @@ public class MyApplication extends Application {
         switch (state.getStatus()) {
             case "on":      return instance.getResources().getString(R.string.device_status_on);
             case "off":     return instance.getResources().getString(R.string.device_status_off);
-            case "opened":  return instance.getResources().getString(R.string.device_status_opened);
+            case "opened":  return instance.getResources().getString(R.string.device_status_open);
             case "opening": return instance.getResources().getString(R.string.device_status_opening);
             case "closing": return instance.getResources().getString(R.string.device_status_closing);
             case "closed":

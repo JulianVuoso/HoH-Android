@@ -208,12 +208,26 @@ public class Api {
 
     // TODO: ME DEVUELVE STRINGS O BOOLEANS SEGUN LA ACCION. COMO UNIFICO?
     /* Execute an action in a specific device with params {[]} */
-    public String execAction(String id, String action, String[] param, Response.Listener<Boolean> listener, Response.ErrorListener errorListener) {
+    public String execAction(String id, String action, Integer[] param, Response.Listener<Integer> listener, Response.ErrorListener errorListener) {
         String url = URL + "devices/" + id + "/" + action;
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        GsonRequest<String[], Boolean> request =
-                new GsonRequest<>(Request.Method.PUT, url, param, "result", new TypeToken<Boolean>(){}, headers, listener, errorListener);
+        GsonRequest<Integer[], Integer> request =
+                new GsonRequest<>(Request.Method.PUT, url, param, "result", new TypeToken<Integer>(){}, headers, listener, errorListener);
+        String uuid = UUID.randomUUID().toString();
+        request.setTag(uuid);
+        requestQueue.add(request);
+
+        return uuid;
+    }
+
+    /* Execute an action in a specific device with params {[]} */
+    public String execAction(String id, String action, String[] param, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        String url = URL + "devices/" + id + "/" + action;
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        GsonRequest<String[], String> request =
+                new GsonRequest<>(Request.Method.PUT, url, param, "result", new TypeToken<String>(){}, headers, listener, errorListener);
         String uuid = UUID.randomUUID().toString();
         request.setTag(uuid);
         requestQueue.add(request);

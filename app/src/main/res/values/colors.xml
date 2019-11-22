@@ -26,5 +26,6 @@
     <color name="colorBottomNavFalse">#747F8B</color>
     <color name="colorBottomNavBackground">#1E1E1E</color>
 
-    <color name="dialogTextColor">#3C3C3C</color>
+    <color name="colorDialogText">#3C3C3C</color>
+    <color name="colorOffButton">#D6D7D7</color>
 </resources>

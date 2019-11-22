@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.hci.hoh.RestartListener;
+import ar.edu.itba.hci.hoh.dialogs.DialogCreator;
 import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
@@ -60,12 +61,7 @@ public class DeviceFragment extends Fragment {
         rvDevices = root.findViewById(R.id.rv_list_category_devices);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
-        adapter = new DeviceListAdapter(data, new OnItemClickListener<Device>() {
-            @Override
-            public void onItemClick(Device element) {
-                // TODO: OPEN DIALOG
-            }
-        });
+        adapter = new DeviceListAdapter(data, element -> DialogCreator.createDialog(this, element));
         rvDevices.setAdapter(adapter);
 
         emptyCard = root.findViewById(R.id.empty_device_card);
@@ -107,6 +103,7 @@ public class DeviceFragment extends Fragment {
     public void onStop() {
         super.onStop();
         deviceViewModel.cancelRequests();
+        DialogCreator.closeDialog();
     }
 
     @Override

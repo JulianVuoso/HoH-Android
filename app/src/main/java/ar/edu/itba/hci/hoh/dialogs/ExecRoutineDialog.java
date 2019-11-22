@@ -16,12 +16,19 @@ import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.elements.Routine;
 
 class ExecRoutineDialog extends DataDialog {
-    static AlertDialog openDialog(@NonNull Fragment fragment, Routine routine) {
-        if (fragment.getContext() == null) return null;
+    private Fragment fragment;
+    private Routine routine;
+    private AlertDialog dialog;
 
+    ExecRoutineDialog(Fragment fragment, Routine routine) {
+        this.fragment = fragment;
+        this.routine = routine;
+    }
+
+    void openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_exec_routine, null);
-        AlertDialog dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+        this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
 
         TextView dialogMessage = dialogView.findViewById(R.id.dialog_exec_routine_message);
         dialogMessage.setText(String.format("%s %s?", dialogView.getResources().getString(R.string.routine_exec_dialog_message), routine.getName()));
@@ -29,18 +36,19 @@ class ExecRoutineDialog extends DataDialog {
         if (cancelButton != null) cancelButton.setOnClickListener(v -> dialog.dismiss());
         Button runButton = dialogView.findViewById(R.id.dialog_exec_routine_run);
         if (runButton != null) runButton.setOnClickListener(v -> {
-            executeRoutine(fragment, routine);
+            executeRoutine();
             dialog.dismiss();
         });
 
-        dialog.show();
-
-        return dialog;
+        this.dialog.show();
     }
 
-    private static void executeRoutine(Fragment fragment, Routine routine) {
+    void closeDialog() {
+        dialog.dismiss();
+    }
+
+    private void executeRoutine() {
         dialogData.execRoutine(routine.getId()).observe(fragment, result -> {
-            Log.e(MainActivity.LOG_TAG, "ejecute routine");
             if (result != null)
                 MyApplication.makeToast(String.format("%s %s!", fragment.getResources().getString(R.string.routine_exec_message), routine.getName()));
         });

@@ -69,8 +69,14 @@ public class DeviceRepository extends Repository {
     }
 
     // TODO: DEVUELVE STRING O BOOLEAN, UNIFICAR con OBJECT
-    public ApiRequest<Boolean> execAction(String id, String action, String[] param) {
-        final MutableLiveData<Result<Boolean>> result = new MutableLiveData<>();
+    public ApiRequest<Integer> execAction(String id, String action, Integer[] param) {
+        final MutableLiveData<Result<Integer>> result = new MutableLiveData<>();
+        String uuid = this.api.execAction(id, action, param, getListener(result), getErrorListener(this.api, result));
+        return new ApiRequest<>(uuid, result);
+    }
+
+    public ApiRequest<String> execAction(String id, String action, String[] param) {
+        final MutableLiveData<Result<String>> result = new MutableLiveData<>();
         String uuid = this.api.execAction(id, action, param, getListener(result), getErrorListener(this.api, result));
         return new ApiRequest<>(uuid, result);
     }
