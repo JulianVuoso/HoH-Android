@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- TODO: FIX FANSPEED, HOR SWING, VER SWING AND TEST   -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorDevCardBackgroundLight"
+        app:cardElevation="@dimen/cardElevation">
+
+        <LinearLayout
+            android:id="@+id/dialog_refrigerator_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <include layout="@layout/dialog_device_header"/>
+
+            <LinearLayout
+                android:id="@+id/ac_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
+                <Switch
+                    android:id="@+id/ac_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textOff="@string/device_status_off"
+                    android:textOn="@string/device_status_on" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/device_dialog_temperature"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <SeekBar
+                        android:id="@+id/ac_temp_bar"
+                        android:layout_width="@dimen/temperature_bar_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:progressBackgroundTint="@color/colorPrimary"
+                        android:progressTint="@color/colorPrimary"
+                        android:thumbTint="@color/colorPrimary"
+                        android:layout_alignParentStart="true"/>
+                    <TextView
+                        android:id="@+id/ac_temp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        android:layout_alignParentEnd="true"
+                        android:layout_toStartOf="@id/ac_temp_bar"/>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/device_dialog_mode"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/ac_mode_cold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/device_dialog_cold" />
+                    <Button
+                        android:id="@+id/ac_mode_vent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/device_dialog_vent" />
+                    <Button
+                        android:id="@+id/ac_mode_heat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/device_dialog_heat" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/device_dialog_fan_speed"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <TextView
+                        android:id="@+id/ac_fan_speed_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:layout_marginStart="3dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp"/>
+                    <SeekBar
+                        android:id="@+id/ac_fan_speed_bar"
+                        android:layout_width="@dimen/ac_config_bar_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="3"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <CheckBox
+                        android:id="@+id/ac_cb_speed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:layout_weight="1"
+                        android:text="@string/device_dialog_auto"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/device_dialog_vertical_wings"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <TextView
+                        android:id="@+id/ac_vert_wings_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:layout_marginStart="3dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                    <SeekBar
+                        android:id="@+id/ac_vert_wings_bar"
+                        android:layout_width="@dimen/ac_config_bar_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="3"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <CheckBox
+                        android:id="@+id/ac_cb_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:layout_weight="1"
+                        android:text="@string/device_dialog_auto"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/device_dialog_horizontal_wings"
+                    android:textColor="@color/colorDevCardContent"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <TextView
+                        android:id="@+id/ac_horiz_wings_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:layout_marginStart="3dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                    <SeekBar
+                        android:id="@+id/ac_horiz_wings_bar"
+                        android:layout_width="@dimen/ac_config_bar_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="3"
+                        android:progressBackgroundTint="#F48D1E"
+                        android:progressTint="#F48D1E"
+                        android:thumbTint="#F48D1E" />
+                    <CheckBox
+                        android:id="@+id/ac_cb_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:layout_weight="1"
+                        android:text="@string/device_dialog_auto"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.core.widget.NestedScrollView>

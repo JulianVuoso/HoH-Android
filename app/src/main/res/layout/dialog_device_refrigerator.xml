@@ -13,7 +13,7 @@
         app:cardElevation="@dimen/cardElevation">
 
         <LinearLayout
-            android:id="@+id/dialog_oven_panel"
+            android:id="@+id/dialog_refrigerator_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,19 +27,11 @@
             <include layout="@layout/dialog_device_header"/>
 
             <LinearLayout
-                android:id="@+id/oven_panel"
+                android:id="@+id/fridge_panel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp">
-                <Switch
-                    android:id="@+id/oven_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textOff="@string/device_status_off"
-                    android:textOn="@string/device_status_on" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,13 +39,14 @@
                     android:text="@string/device_dialog_temperature"
                     android:textColor="@color/colorDevCardContent"
                     android:textSize="20sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:layout_marginTop="20dp"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <SeekBar
-                        android:id="@+id/oven_temp_bar"
+                        android:id="@+id/fridge_temp_bar"
                         android:layout_width="@dimen/temperature_bar_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -63,7 +56,7 @@
                         android:thumbTint="@color/colorPrimary"
                         android:layout_alignParentStart="true"/>
                     <TextView
-                        android:id="@+id/oven_temp_text"
+                        android:id="@+id/fridge_temp_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="3dp"
@@ -73,103 +66,81 @@
                         android:textSize="20sp"
                         android:textStyle="italic"
                         android:layout_alignParentEnd="true"
-                        android:layout_toStartOf="@id/oven_temp_bar"/>
+                        android:layout_toStartOf="@id/fridge_temp_bar"/>
                 </RelativeLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:text="@string/device_dialog_heat_source"
+                    android:text="@string/device_dialog_freezer_temperature"
                     android:textColor="@color/colorDevCardContent"
                     android:textSize="20sp"
-                    android:textStyle="italic" />
-                <LinearLayout
+                    android:textStyle="italic"
+                    android:layout_marginTop="20dp"/>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/oven_heat_up"
-                        android:layout_width="0dp"
+                    <SeekBar
+                        android:id="@+id/freezer_temp_bar"
+                        android:layout_width="@dimen/temperature_bar_width"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/device_dialog_up" />
-                    <Button
-                        android:id="@+id/oven_heat_down"
-                        android:layout_width="0dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:progressBackgroundTint="@color/colorPrimary"
+                        android:progressTint="@color/colorPrimary"
+                        android:thumbTint="@color/colorPrimary"
+                        android:layout_alignParentStart="true"/>
+                    <TextView
+                        android:id="@+id/freezer_temp_text"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/device_dialog_down" />
-                    <Button
-                        android:id="@+id/oven_heat_full"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/device_dialog_full" />
-                </LinearLayout>
+                        android:layout_marginEnd="3dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textColor="@color/colorDevCardContent"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        android:layout_alignParentEnd="true"
+                        android:layout_toStartOf="@id/freezer_temp_bar"/>
+                </RelativeLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:text="@string/device_dialog_convection_mode"
+                    android:text="@string/device_dialog_mode"
                     android:textColor="@color/colorDevCardContent"
                     android:textSize="20sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:layout_marginTop="20dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
                     <Button
-                        android:id="@+id/oven_conv_off"
+                        android:id="@+id/fridge_mode_normal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/device_status_off" />
+                        android:text="@string/device_dialog_normal" />
                     <Button
-                        android:id="@+id/oven_conv_eco"
+                        android:id="@+id/fridge_mode_vac"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/device_dialog_eco" />
+                        android:text="@string/device_dialog_vacation" />
                     <Button
-                        android:id="@+id/oven_conv_full"
+                        android:id="@+id/fridge_mode_party"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/device_dialog_full" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:text="@string/device_dialog_grill_mode"
-                    android:textColor="@color/colorDevCardContent"
-                    android:textSize="20sp"
-                    android:textStyle="italic" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/oven_grill_off"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/device_status_off" />
-                    <Button
-                        android:id="@+id/oven_grill_eco"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/device_dialog_eco" />
-                    <Button
-                        android:id="@+id/oven_grill_full"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/device_dialog_full" />
+                        android:text="@string/device_dialog_party" />
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
+
 </androidx.core.widget.NestedScrollView>

@@ -11,5 +11,6 @@
     <dimen name="device_card_width">148dp</dimen>
     <dimen name="cardCornerRadius">15dp</dimen>
     <dimen name="cardElevation">10dp</dimen>
-    <dimen name="seek_bar_width">230dp</dimen>
+    <dimen name="temperature_bar_width">230dp</dimen>
+    <dimen name="ac_config_bar_width">180dp</dimen>
 </resources>
