@@ -20,14 +20,22 @@ public abstract class DialogCreator {
                 break;
             case "oven":
                 dialog = new OvenDialog(fragment, device);
+                break;
             case "refrigerator":
                 dialog = new RefrigeratorDialog(fragment, device);
+                break;
             case "ac":
                 dialog = new AcDialog(fragment, device);
+                break;
             case "blinds":
                 dialog = new BlindsDialog(fragment, device);
+                break;
             case "speaker":
                 dialog = new SpeakerDialog(fragment, device);
+                break;
+            case "lamp":
+                dialog = new LightDialog(fragment, device);
+                break;
         }
         if (dialog != null)
             dialog.openDialog();

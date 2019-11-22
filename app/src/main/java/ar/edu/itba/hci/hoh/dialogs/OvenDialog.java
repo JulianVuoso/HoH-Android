@@ -170,9 +170,9 @@ class OvenDialog extends DeviceDialog {
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
         swOven.setChecked(device.getState().getStatus().equals("on"));
-        String initTemperature = device.getState().getTemperature() + "°C";
-        ovenTemp.setText(initTemperature);
-        ovenBar.setProgress(device.getState().getTemperature() - 90);
+//        String initTemperature = device.getState().getTemperature() + "°C";
+//        ovenTemp.setText(initTemperature);
+//        ovenBar.setProgress(device.getState().getTemperature() - 90);
         setButtons();
     }
 }

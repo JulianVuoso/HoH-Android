@@ -128,12 +128,12 @@ class RefrigeratorDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-        String initFridgeTemperature = device.getState().getTemperature() + "°C";
-        fridgeText.setText(initFridgeTemperature);
-        fridgeBar.setProgress(device.getState().getTemperature() - 2);
-        String initFreezerTemperature = device.getState().getFreezerTemperature() + "°C";
-        freezerText.setText(initFreezerTemperature);
-        freezerBar.setProgress(device.getState().getFreezerTemperature() + 20);
+//        String initFridgeTemperature = device.getState().getTemperature() + "°C";
+//        fridgeText.setText(initFridgeTemperature);
+//        fridgeBar.setProgress(device.getState().getTemperature() - 2);
+//        String initFreezerTemperature = device.getState().getFreezerTemperature() + "°C";
+//        freezerText.setText(initFreezerTemperature);
+//        freezerBar.setProgress(device.getState().getFreezerTemperature() + 20);
         setButtons();
     }
 }

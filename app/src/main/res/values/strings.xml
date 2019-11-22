@@ -75,6 +75,8 @@
     <string name="device_dialog_horizontal_wings">Horizontal wings</string>
     <string name="device_dialog_genre">Genre</string>
     <string name="device_dialog_volume">Volume</string>
+    <string name="device_dialog_brightness">Brightness</string>
+    <string name="device_dialog_color">Color</string>
     <string name="device_dialog_up">Up</string>
     <string name="device_dialog_down">Down</string>
     <string name="device_dialog_full">Full</string>

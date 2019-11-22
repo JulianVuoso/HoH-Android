@@ -140,6 +140,6 @@ class SpeakerDialog extends DeviceDialog {
         Log.e(MainActivity.LOG_TAG, "actualizando");
         setPlayPause();
         setTextViews();
-        setVolume();
+//        setVolume();
     }
 }

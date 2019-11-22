@@ -284,11 +284,11 @@ class AcDialog extends DeviceDialog {
         Log.e(MainActivity.LOG_TAG, "actualizando");
         swAc.setChecked(device.getState().getStatus().equals("on"));
         setButtons();
-        String initAcTemp = device.getState().getTemperature() + "°C";
-        tempAcText.setText(initAcTemp);
-        tempAc.setProgress(device.getState().getTemperature() - 18);
-        setFanSpeed();
-        setVertWings();
-        setHorizWings();
+//        String initAcTemp = device.getState().getTemperature() + "°C";
+//        tempAcText.setText(initAcTemp);
+//        tempAc.setProgress(device.getState().getTemperature() - 18);
+//        setFanSpeed();
+//        setVertWings();
+//        setHorizWings();
     }
 }
