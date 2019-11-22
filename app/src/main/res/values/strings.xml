@@ -77,7 +77,7 @@
     <string name="device_dialog_vacation">Vacation</string>
     <string name="device_dialog_party">Party</string>
     <string name="device_dialog_cold">Cold</string>
-    <string name="device_dialog_vent">Vent</string>
+    <string name="device_dialog_fan">Fan</string>
     <string name="device_dialog_heat">Heat</string>
     <string name="device_dialog_auto">Auto</string>
 

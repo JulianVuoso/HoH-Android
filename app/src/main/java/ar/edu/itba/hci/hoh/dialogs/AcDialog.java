@@ -130,7 +130,7 @@ class AcDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                execAction("setFanSpeed", getParams((seekBar.getProgress() + 1) * 25));
+                execAction("setFanSpeed", getParams(String.valueOf((seekBar.getProgress() + 1) * 25)));
             }
         });
 
@@ -144,7 +144,7 @@ class AcDialog extends DeviceDialog {
                 fanSpeedText.setVisibility(View.INVISIBLE);
                 fanSpeed.setProgress(2);
             } else {
-                execAction("setFanSpeed", getParams(50));
+                execAction("setFanSpeed", getParams(String.valueOf(50)));
                 fanSpeed.setEnabled(true);
                 fanSpeedText.setVisibility(View.VISIBLE);
                 fanSpeed.setProgress(1);
@@ -183,7 +183,7 @@ class AcDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                execAction("setVerticalSwing", getParams(((seekBar.getProgress() + 1) * 225 / 10)));
+                execAction("setVerticalSwing", getParams(String.valueOf((seekBar.getProgress() + 1) * 225 / 10)));
             }
         });
 
@@ -196,7 +196,7 @@ class AcDialog extends DeviceDialog {
                 vertWingsText.setVisibility(View.INVISIBLE);
                 vertWings.setProgress(1);
             } else {
-                execAction("setVerticalSwing", getParams(45));
+                execAction("setVerticalSwing", getParams(String.valueOf(45)));
                 vertWings.setEnabled(true);
                 vertWingsText.setVisibility(View.VISIBLE);
                 vertWings.setProgress(1);
@@ -235,7 +235,7 @@ class AcDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                execAction("setHorizontalSwing", getParams((seekBar.getProgress() * 45 - 90)));
+                execAction("setHorizontalSwing", getParams(String.valueOf(seekBar.getProgress() * 45 - 90)));
             }
         });
 
@@ -246,12 +246,12 @@ class AcDialog extends DeviceDialog {
                 execAction("setVerticalSwing", getParams("auto"));
                 horizWings.setEnabled(false);
                 horizWingsText.setVisibility(View.INVISIBLE);
-                horizWings.setProgress(1);
+                horizWings.setProgress(2);
             } else {
-                execAction("setVerticalSwing", getParams(0));
+                execAction("setVerticalSwing", getParams(String.valueOf(0)));
                 horizWings.setEnabled(true);
                 horizWingsText.setVisibility(View.VISIBLE);
-                horizWings.setProgress(1);
+                horizWings.setProgress(2);
                 String newText = "0°";
                 horizWingsText.setText(newText);
             }
