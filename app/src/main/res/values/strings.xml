@@ -46,6 +46,11 @@
 
     <string name="left_arrow_description">Left Arrow</string>
     <string name="right_arrow_description">Right Arrow</string>
+    <string name="playlist_add_description">Playlist add</string>
+    <string name="previous_song_description">Previous song</string>
+    <string name="next_song_description">Next song</string>
+    <string name="play_pause_description">Play/Pause</string>
+    <string name="stop_description">Stop</string>
 
     <string name="routine_exec_dialog_message">Are you sure you want to run</string>
     <string name="routine_exec_dialog_cancel">Cancel</string>
@@ -68,6 +73,8 @@
     <string name="device_dialog_fan_speed">Fan speed</string>
     <string name="device_dialog_vertical_wings">Vertical wings</string>
     <string name="device_dialog_horizontal_wings">Horizontal wings</string>
+    <string name="device_dialog_genre">Genre</string>
+    <string name="device_dialog_volume">Volume</string>
     <string name="device_dialog_up">Up</string>
     <string name="device_dialog_down">Down</string>
     <string name="device_dialog_full">Full</string>

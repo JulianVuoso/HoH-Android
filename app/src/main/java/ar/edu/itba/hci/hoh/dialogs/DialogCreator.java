@@ -26,6 +26,8 @@ public abstract class DialogCreator {
                 dialog = new AcDialog(fragment, device);
             case "blinds":
                 dialog = new BlindsDialog(fragment, device);
+            case "speaker":
+                dialog = new SpeakerDialog(fragment, device);
         }
         if (dialog != null)
             dialog.openDialog();

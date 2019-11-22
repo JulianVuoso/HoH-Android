@@ -13,4 +13,5 @@
     <dimen name="cardElevation">10dp</dimen>
     <dimen name="temperature_bar_width">230dp</dimen>
     <dimen name="ac_config_bar_width">180dp</dimen>
+    <dimen name="speaker_vol_bar_width">200dp</dimen>
 </resources>
