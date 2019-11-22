@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.hoh.dialogs;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.elements.Device;
@@ -20,6 +22,8 @@ import ar.edu.itba.hci.hoh.elements.Device;
 class RefrigeratorDialog extends DeviceDialog {
     private AlertDialog dialog;
     private Button modeNormal, modeVacation, modeParty;
+    private SeekBar fridgeBar, freezerBar;
+    private TextView fridgeText, freezerText;
 
     RefrigeratorDialog(Fragment fragment, Device device) {
         super(fragment, device);
@@ -31,10 +35,10 @@ class RefrigeratorDialog extends DeviceDialog {
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
         setDialogHeader(dialogView);
 
-        SeekBar fridgeBar = dialogView.findViewById(R.id.fridge_temp_bar);
-        TextView fridgeText = dialogView.findViewById(R.id.fridge_temp_text);
-        SeekBar freezerBar = dialogView.findViewById(R.id.freezer_temp_bar);
-        TextView freezerText = dialogView.findViewById(R.id.freezer_temp_text);
+        fridgeBar = dialogView.findViewById(R.id.fridge_temp_bar);
+        fridgeText = dialogView.findViewById(R.id.fridge_temp_text);
+        freezerBar = dialogView.findViewById(R.id.freezer_temp_bar);
+        freezerText = dialogView.findViewById(R.id.freezer_temp_text);
 
         //         Initial values
         String initFridgeTemperature = device.getState().getTemperature() + "°C";
@@ -97,6 +101,7 @@ class RefrigeratorDialog extends DeviceDialog {
     }
 
     void closeDialog() {
+        super.cancelTimer();
         dialog.dismiss();
     }
 
@@ -104,7 +109,10 @@ class RefrigeratorDialog extends DeviceDialog {
         modeVacation = dialogView.findViewById(R.id.fridge_mode_vac);
         modeParty = dialogView.findViewById(R.id.fridge_mode_party);
         modeNormal = dialogView.findViewById(R.id.fridge_mode_normal);
+        setButtons();
+    }
 
+    private void setButtons() {
         switch (device.getState().getMode()){
             case "vacation":
                 toggleButton(modeVacation, true); toggleButton(modeParty, false); toggleButton(modeNormal, false);
@@ -116,5 +124,16 @@ class RefrigeratorDialog extends DeviceDialog {
                 toggleButton(modeVacation, false); toggleButton(modeParty, false); toggleButton(modeNormal, true);
                 break;
         }
+    }
+
+    void reloadData() {
+        Log.e(MainActivity.LOG_TAG, "actualizando");
+        String initFridgeTemperature = device.getState().getTemperature() + "°C";
+        fridgeText.setText(initFridgeTemperature);
+        fridgeBar.setProgress(device.getState().getTemperature() - 2);
+        String initFreezerTemperature = device.getState().getFreezerTemperature() + "°C";
+        freezerText.setText(initFreezerTemperature);
+        freezerBar.setProgress(device.getState().getFreezerTemperature() + 20);
+        setButtons();
     }
 }

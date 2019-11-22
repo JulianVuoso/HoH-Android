@@ -49,6 +49,12 @@ class DialogData {
         return Transformations.map(execRequest.getLiveData(), MyApplication.getTransformFunction());
     }
 
+    LiveData<Device> getDevice(String id) {
+        ApiRequest<Device> getRequest = MyApplication.getInstance().getDeviceRepository().getDevice(id);
+        requestTags.add(getRequest.getUuid());
+        return Transformations.map(getRequest.getLiveData(), MyApplication.getTransformFunction());
+    }
+
     void cancelRequests() {
         for (String uuid : requestTags)
             MyApplication.getInstance().getDeviceRepository().cancelRequest(uuid);

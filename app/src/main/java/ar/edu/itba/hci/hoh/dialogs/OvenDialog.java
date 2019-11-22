@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.dialogs;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.IntegerParam;
@@ -21,6 +23,9 @@ class OvenDialog extends DeviceDialog {
     private Button heatUp, heatDown, heatFull;
     private Button convOff, convEco, convFull;
     private Button grillOff, grillEco, grillFull;
+    private SeekBar ovenBar;
+    private TextView ovenTemp;
+    private Switch swOven;
 
     OvenDialog(Fragment fragment, Device device) {
         super(fragment, device);
@@ -32,9 +37,9 @@ class OvenDialog extends DeviceDialog {
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
         setDialogHeader(dialogView);
 
-        SeekBar ovenBar = dialogView.findViewById(R.id.oven_temp_bar);
-        TextView ovenTemp = dialogView.findViewById(R.id.oven_temp_text);
-        Switch swOven = dialogView.findViewById(R.id.oven_switch);
+        ovenBar = dialogView.findViewById(R.id.oven_temp_bar);
+        ovenTemp = dialogView.findViewById(R.id.oven_temp_text);
+        swOven = dialogView.findViewById(R.id.oven_switch);
         //        Initial Values
         swOven.setChecked(device.getState().getStatus().equals("on"));
         String initTemperature = device.getState().getTemperature() + "°C";
@@ -103,6 +108,7 @@ class OvenDialog extends DeviceDialog {
     }
 
     void closeDialog() {
+        super.cancelTimer();
         dialog.dismiss();
     }
 
@@ -111,6 +117,19 @@ class OvenDialog extends DeviceDialog {
         heatUp = dialogView.findViewById(R.id.oven_heat_up);
         heatDown = dialogView.findViewById(R.id.oven_heat_down);
         heatFull = dialogView.findViewById(R.id.oven_heat_full);
+
+        convOff = dialogView.findViewById(R.id.oven_conv_off);
+        convFull = dialogView.findViewById(R.id.oven_conv_full);
+        convEco = dialogView.findViewById(R.id.oven_conv_eco);
+
+        grillOff = dialogView.findViewById(R.id.oven_grill_off);
+        grillFull = dialogView.findViewById(R.id.oven_grill_full);
+        grillEco = dialogView.findViewById(R.id.oven_grill_eco);
+
+        setButtons();
+    }
+
+    private void setButtons() {
         switch (device.getState().getHeat()) {
             case "down": toggleButton(heatDown, true);
                 toggleButton(heatUp, false); toggleButton(heatFull, false);
@@ -122,9 +141,7 @@ class OvenDialog extends DeviceDialog {
                 toggleButton(heatUp, false); toggleButton(heatDown, false);
                 break;
         }
-        convOff = dialogView.findViewById(R.id.oven_conv_off);
-        convFull = dialogView.findViewById(R.id.oven_conv_full);
-        convEco = dialogView.findViewById(R.id.oven_conv_eco);
+
         switch (device.getState().getConvection()){
             case "off": toggleButton(convOff, true);
                 toggleButton(convFull, false); toggleButton(convEco, false);
@@ -136,9 +153,7 @@ class OvenDialog extends DeviceDialog {
                 toggleButton(convFull, false); toggleButton(convOff, false);
                 break;
         }
-        grillOff = dialogView.findViewById(R.id.oven_grill_off);
-        grillFull = dialogView.findViewById(R.id.oven_grill_full);
-        grillEco = dialogView.findViewById(R.id.oven_grill_eco);
+
         switch (device.getState().getGrill()){
             case "off": toggleButton(grillOff, true);
                 toggleButton(grillEco, false); toggleButton(grillFull, false);
@@ -150,5 +165,14 @@ class OvenDialog extends DeviceDialog {
                 toggleButton(grillFull, false); toggleButton(grillOff, false);
                 break;
         }
+    }
+
+    void reloadData() {
+        Log.e(MainActivity.LOG_TAG, "actualizando");
+        swOven.setChecked(device.getState().getStatus().equals("on"));
+        String initTemperature = device.getState().getTemperature() + "°C";
+        ovenTemp.setText(initTemperature);
+        ovenBar.setProgress(device.getState().getTemperature() - 90);
+        setButtons();
     }
 }

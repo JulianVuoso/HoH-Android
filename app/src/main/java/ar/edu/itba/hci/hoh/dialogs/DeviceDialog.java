@@ -11,19 +11,41 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
+import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 
 abstract class DeviceDialog extends DataDialog {
     protected Fragment fragment;
     protected Device device;
+    private Timer timer;
 
-    DeviceDialog(Fragment fragment, Device device) {
+    DeviceDialog(Fragment fragment, Device dev) {
         this.fragment = fragment;
-        this.device = device;
+        this.device = dev;
+        this.timer = new Timer();
+        this.timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Cant use observe in background thread
+                Api.getInstance(fragment.getContext()).getDevice(device.getId(), response -> {
+                    device = response;
+                    reloadData();
+                }, error -> {
+                    Log.e(MainActivity.LOG_TAG, "Error reloading");
+                });
+            }
+        }, 0, 1000);
     }
 
     protected void setDialogHeader(View dialogView) {
@@ -56,6 +78,13 @@ abstract class DeviceDialog extends DataDialog {
             });
 
         }
+    }
+
+    abstract void reloadData();
+
+    protected void cancelTimer() {
+        if (timer != null)
+            timer.cancel();
     }
 
     private void setFavoriteIcon(ImageButton button) {

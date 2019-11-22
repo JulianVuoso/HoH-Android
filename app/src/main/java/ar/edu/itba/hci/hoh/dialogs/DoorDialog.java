@@ -33,14 +33,7 @@ class DoorDialog extends DeviceDialog {
         lockButton = dialogView.findViewById(R.id.door_panel_locked);
 
         if (openButton != null && closeButton != null && lockButton != null) {
-            if (device.getState().getLock().equals("locked"))
-                toggleButton(lockButton, true);
-            else {
-                if (device.getState().getStatus().equals("closed"))
-                    toggleButton(closeButton, true);
-                else
-                    toggleButton(openButton, true);
-            }
+            setButtons();
             openButton.setOnClickListener(v -> {
                 toggleButton(openButton, true);
                 toggleButton(closeButton, false);
@@ -68,6 +61,23 @@ class DoorDialog extends DeviceDialog {
     }
 
     void closeDialog() {
+        super.cancelTimer();
         dialog.dismiss();
+    }
+
+    private void setButtons() {
+        if (device.getState().getLock().equals("locked"))
+            toggleButton(lockButton, true);
+        else {
+            if (device.getState().getStatus().equals("closed"))
+                toggleButton(closeButton, true);
+            else
+                toggleButton(openButton, true);
+        }
+    }
+
+    void reloadData() {
+        Log.e(MainActivity.LOG_TAG, "actualizando");
+        setButtons();
     }
 }
