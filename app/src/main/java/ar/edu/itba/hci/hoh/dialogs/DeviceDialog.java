@@ -83,8 +83,11 @@ abstract class DeviceDialog extends DataDialog {
     abstract void reloadData();
 
     protected void cancelTimer() {
-        if (timer != null)
+        Log.e(MainActivity.LOG_TAG, "cancelando timer????");
+        if (timer != null) {
+            Log.e(MainActivity.LOG_TAG, "cancelando timer");
             timer.cancel();
+        }
     }
 
     private void setFavoriteIcon(ImageButton button) {

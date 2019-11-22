@@ -24,6 +24,8 @@ public abstract class DialogCreator {
                 dialog = new RefrigeratorDialog(fragment, device);
             case "ac":
                 dialog = new AcDialog(fragment, device);
+            case "blinds":
+                dialog = new BlindsDialog(fragment, device);
         }
         if (dialog != null)
             dialog.openDialog();
@@ -36,10 +38,10 @@ public abstract class DialogCreator {
     }
 
     public static void closeDialog() {
-        DataDialog.cancelRequests();
         if (dialog != null) {
             dialog.closeDialog();
             dialog = null;
         }
+        DataDialog.cancelRequests();
     }
 }
