@@ -88,12 +88,14 @@
     <string name="device_dialog_vacation">Vacaciones</string>
     <string name="device_dialog_party">Fiesta</string>
     <string name="device_dialog_cold">Frío</string>
-    <string name="device_dialog_fan">Ventilación</string>
+    <string name="device_dialog_fan">Vent</string>
     <string name="device_dialog_heat">Calor</string>
     <string name="device_dialog_auto">Auto</string>
 
     <string name="error_no_connection">Fallo al conectar con</string>
     <string name="error_timeout">¡Error de tiempo de espera! ¡No se pudo conectar a Ajax!</string>
+    <string name="error_http_traffic">¡Error de tráfico de cleartext! Agregue el dominio al network_security_config.xml</string>
+    <string name="error_unexpected">¡Error inesperado!</string>
 
     <string name="settings_notifications_category">Notificaciones</string>
     <string name="settings_notification_switch">Activar Notificaciones</string>

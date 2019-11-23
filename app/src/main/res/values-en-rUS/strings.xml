@@ -94,6 +94,8 @@
 
     <string name="error_no_connection">Failed to connect to</string>
     <string name="error_timeout">Timeout error! Could not connect to Ajax!</string>
+    <string name="error_http_traffic">Cleartext traffic Error! Please add your domain to network_security_config.xml</string>
+    <string name="error_unexpected">Unexpected error!</string>
 
     <string name="settings_notifications_category">Notifications</string>
     <string name="settings_notification_switch">Enable notifications</string>

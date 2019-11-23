@@ -21,7 +21,9 @@ public class MyApplication extends Application {
     private static final float toastVerticalMargin = (float) 0.08;
 
     private static final String connectionError = "java.net.ConnectException:";
+    private static final String socketError = "java.net.SocketException:";
     private static final String timeoutError = "com.android.volley.TimeoutError";
+    private static final String httpTrafficError = "java.io.IOException:";
 
     private static MyApplication instance;
     private RoomRepository roomRepository;
@@ -74,10 +76,12 @@ public class MyApplication extends Application {
 
         Toast toast;
         String errorMessage = error.getDescription().get(0);
-        if (errorMessage.startsWith(connectionError)) // FAILED TO CONNECT TO URL
+        if (errorMessage.startsWith(connectionError) || errorMessage.startsWith(socketError)) // FAILED TO CONNECT TO URL
             toast = Toast.makeText(instance, String.format("%s %s", instance.getResources().getString(R.string.error_no_connection), Api.getURL()), Toast.LENGTH_SHORT);
         else if (errorMessage.startsWith(timeoutError)) // TIMEOUT ERROR
             toast = Toast.makeText(instance, instance.getResources().getString(R.string.error_timeout), Toast.LENGTH_SHORT);
+        else if (errorMessage.startsWith(httpTrafficError)) // HTTP TRAFFIC ERROR
+            toast = Toast.makeText(instance, instance.getResources().getString(R.string.error_http_traffic), Toast.LENGTH_SHORT);
         else // UNRECOGNIZED ERROR
             toast = Toast.makeText(instance, errorMessage, Toast.LENGTH_SHORT);
         toast.setMargin(toastHorizontalMargin, toastVerticalMargin);

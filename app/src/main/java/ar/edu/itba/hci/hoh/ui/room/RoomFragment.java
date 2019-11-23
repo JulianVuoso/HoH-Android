@@ -85,7 +85,7 @@ public class RoomFragment extends Fragment {
             manager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
         else
             manager = new GridLayoutManager(this.getContext(), 1, GridLayoutManager.VERTICAL, false);
-        Log.e(MainActivity.LOG_TAG, String.format("Width %d / %g", displayMetrics.widthPixels, displayMetrics.density));
+        Log.e(MainActivity.LOG_TAG, String.format("Width %d / %g / DPI %d / scaledD %g", displayMetrics.widthPixels, displayMetrics.density, displayMetrics.densityDpi, displayMetrics.scaledDensity));
         rvDevices.setLayoutManager(manager);
         adapter = new RoomListAdapter(element -> {
             AlertDialog dialog = DialogCreator.createDialog(this, element);
