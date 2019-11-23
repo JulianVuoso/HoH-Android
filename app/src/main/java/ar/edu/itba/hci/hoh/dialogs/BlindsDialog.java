@@ -103,6 +103,8 @@ class BlindsDialog extends DeviceDialog {
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
 //        setButtons();
-        pB.setProgress(device.getState().getLevel());
+        int level = device.getState().getLevel();
+        pB.setProgress(level);
+//        if ()
     }
 }
