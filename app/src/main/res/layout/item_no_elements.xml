@@ -21,7 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/open_sans_semibold"
         android:textColor="@color/colorImgCardTitle"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_large"
         android:textAlignment="center"/>
 
 </androidx.cardview.widget.CardView>

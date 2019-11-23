@@ -45,7 +45,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="@string/device_dialog_brightness"
                     android:textColor="@color/colorDevCardContent"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_dialog_titles"
                     android:textStyle="italic" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                         android:fontFamily="@font/open_sans_semibold"
                         android:text="@string/device_dialog_brightness"
                         android:textColor="@color/colorDevCardContent"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/text_size_dialog_titles"
                         android:textStyle="italic" />
                 </LinearLayout>
                 <TextView
@@ -79,7 +79,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="@string/device_dialog_color"
                     android:textColor="@color/colorDevCardContent"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_dialog_titles"
                     android:textStyle="italic" />
                 <com.larswerkman.holocolorpicker.ColorPicker
                     android:id="@+id/picker"

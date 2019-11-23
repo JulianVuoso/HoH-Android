@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">24dp</dimen>
+    <dimen name="activity_vertical_margin">24dp</dimen>
+    <dimen name="card_spacing">24dp</dimen>
+    <dimen name="home_card_spacing">30dp</dimen>
+    <dimen name="round_card_size">160dp</dimen>
+    <!-- Must be half the up dimension -->
+    <dimen name="round_card_radius">80dp</dimen>
+    <dimen name="cat_card_width">220dp</dimen>
+    <dimen name="img_card_width">220dp</dimen>
+    <dimen name="img_card_height">140dp</dimen>
+    <dimen name="device_card_width">220dp</dimen>
+    <dimen name="cardCornerRadius">15dp</dimen>
+    <dimen name="cardElevation">20dp</dimen>
+    <dimen name="temperature_bar_width">300dp</dimen>
+    <dimen name="ac_config_bar_width">230dp</dimen>
+    <dimen name="speaker_vol_bar_width">260dp</dimen>
+
+    <dimen name="text_size_about_us_title">36sp</dimen>
+    <dimen name="text_size_category_name">24sp</dimen>
+    <dimen name="text_size_xsmall">18sp</dimen>
+    <dimen name="text_size_small">21sp</dimen>
+    <dimen name="text_size_medium">22sp</dimen>
+    <dimen name="text_size_large">30sp</dimen>
+    <dimen name="text_size_dialog_titles">30sp</dimen>
+</resources>

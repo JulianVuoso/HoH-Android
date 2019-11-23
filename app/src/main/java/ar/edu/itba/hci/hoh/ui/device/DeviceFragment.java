@@ -1,7 +1,9 @@
 package ar.edu.itba.hci.hoh.ui.device;
 
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +66,13 @@ public class DeviceFragment extends Fragment {
             category = DeviceFragmentArgs.fromBundle(getArguments()).getCategory();
 
         rvDevices = root.findViewById(R.id.rv_list_category_devices);
-        LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+//        LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager manager;
+        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+        if ((displayMetrics.widthPixels / displayMetrics.density) > 800)
+            manager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
+        else
+            manager = new GridLayoutManager(this.getContext(), 1, GridLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
         adapter = new DeviceListAdapter(data, element -> {
             AlertDialog dialog = DialogCreator.createDialog(this, element);

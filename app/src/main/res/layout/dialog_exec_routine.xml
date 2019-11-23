@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
             android:textColor="@color/colorDialogText"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_size_small"
             android:text="@string/routine_exec_dialog_message"
             android:layout_marginTop="5dp"/>
 

@@ -5,6 +5,8 @@
     <dimen name="card_spacing">15dp</dimen>
     <dimen name="home_card_spacing">18dp</dimen>
     <dimen name="round_card_size">100dp</dimen>
+    <!-- Must be half the up dimension -->
+    <dimen name="round_card_radius">50dp</dimen>
     <dimen name="cat_card_width">120dp</dimen>
     <dimen name="img_card_width">148dp</dimen>
     <dimen name="img_card_height">94dp</dimen>
@@ -14,4 +16,12 @@
     <dimen name="temperature_bar_width">230dp</dimen>
     <dimen name="ac_config_bar_width">180dp</dimen>
     <dimen name="speaker_vol_bar_width">200dp</dimen>
+
+    <dimen name="text_size_about_us_title">24sp</dimen>
+    <dimen name="text_size_category_name">16sp</dimen>
+    <dimen name="text_size_xsmall">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">15sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_dialog_titles">20sp</dimen>
 </resources>

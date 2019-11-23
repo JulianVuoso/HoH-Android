@@ -1,7 +1,9 @@
 package ar.edu.itba.hci.hoh.ui.room;
 
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,12 +11,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -35,6 +39,7 @@ import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
+import ar.edu.itba.hci.hoh.ui.LinearLayoutPagerManager;
 import ar.edu.itba.hci.hoh.ui.OnItemClickListener;
 
 public class RoomFragment extends Fragment {
@@ -73,7 +78,14 @@ public class RoomFragment extends Fragment {
             room = RoomFragmentArgs.fromBundle(getArguments()).getRoom();
 
         rvDevices = root.findViewById(R.id.rv_list_room_devices);
-        LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+//        LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager manager;
+        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+        if ((displayMetrics.widthPixels / displayMetrics.density) > 800)
+            manager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
+        else
+            manager = new GridLayoutManager(this.getContext(), 1, GridLayoutManager.VERTICAL, false);
+        Log.e(MainActivity.LOG_TAG, String.format("Width %d / %g", displayMetrics.widthPixels, displayMetrics.density));
         rvDevices.setLayoutManager(manager);
         adapter = new RoomListAdapter(element -> {
             AlertDialog dialog = DialogCreator.createDialog(this, element);

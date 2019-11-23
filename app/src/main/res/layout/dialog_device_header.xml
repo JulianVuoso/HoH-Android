@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"
             android:textColor="@color/colorDevCardContent"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_large" />
 
         <TextView
             android:id="@+id/dialog_dev_room"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
             android:textColor="@color/colorDevCardContentFaded"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_medium"
             android:textStyle="italic" />
     </LinearLayout>
 

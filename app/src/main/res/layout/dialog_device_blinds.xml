@@ -56,7 +56,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/open_sans_semibold"
                     android:textColor="@color/colorDevCardContent"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_size_small"
                     android:textStyle="italic"/>
                 <ProgressBar
                     android:id="@+id/window_bar"

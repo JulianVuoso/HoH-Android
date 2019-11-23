@@ -14,7 +14,7 @@
         android:layout_marginTop="@dimen/card_spacing"
         android:layout_marginRight="@dimen/card_spacing"
         app:cardBackgroundColor="@color/colorCategoryCardBackground"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="@dimen/round_card_radius"
         app:cardElevation="@dimen/cardElevation">
 
         <ImageView
@@ -32,6 +32,6 @@
         android:layout_gravity="center"
         android:fontFamily="@font/roboto_italic"
         android:textColor="@color/colorCategoryTitle"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_category_name"
         android:textStyle="bold"/>
 </LinearLayout>

@@ -38,7 +38,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="@string/device_dialog_temperature"
                     android:textColor="@color/colorDevCardContent"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_dialog_titles"
                     android:textStyle="italic"
                     android:layout_marginTop="20dp"/>
                 <RelativeLayout
@@ -63,7 +63,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/open_sans_semibold"
                         android:textColor="@color/colorDevCardContent"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/text_size_dialog_titles"
                         android:textStyle="italic"
                         android:layout_alignParentEnd="true"
                         android:layout_toStartOf="@id/fridge_temp_bar"/>
@@ -74,7 +74,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="@string/device_dialog_freezer_temperature"
                     android:textColor="@color/colorDevCardContent"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_dialog_titles"
                     android:textStyle="italic"
                     android:layout_marginTop="20dp"/>
                 <RelativeLayout
@@ -99,7 +99,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/open_sans_semibold"
                         android:textColor="@color/colorDevCardContent"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/text_size_dialog_titles"
                         android:textStyle="italic"
                         android:layout_alignParentEnd="true"
                         android:layout_toStartOf="@id/freezer_temp_bar"/>
@@ -110,7 +110,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="@string/device_dialog_mode"
                     android:textColor="@color/colorDevCardContent"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_dialog_titles"
                     android:textStyle="italic"
                     android:layout_marginTop="20dp" />
                 <LinearLayout

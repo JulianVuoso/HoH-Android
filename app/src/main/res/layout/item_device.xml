@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
             android:textColor="@color/colorDevCardContentFaded"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_size_xsmall"
             android:textStyle="italic" />
 
         <ImageView
@@ -47,7 +47,7 @@
 
             android:fontFamily="@font/open_sans_semibold"
             android:textColor="@color/colorDevCardContent"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_xsmall" />
 
         <TextView
             android:id="@+id/dev_room"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_italic"
             android:textColor="@color/colorDevCardContentFaded"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_size_xsmall"
             android:textStyle="italic" />
 
     </LinearLayout>
