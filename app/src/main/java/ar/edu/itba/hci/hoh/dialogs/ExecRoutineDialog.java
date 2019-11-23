@@ -25,7 +25,7 @@ class ExecRoutineDialog extends DataDialog {
         this.routine = routine;
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_exec_routine, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
@@ -41,6 +41,7 @@ class ExecRoutineDialog extends DataDialog {
         });
 
         this.dialog.show();
+        return this.dialog;
     }
 
     void closeDialog() {

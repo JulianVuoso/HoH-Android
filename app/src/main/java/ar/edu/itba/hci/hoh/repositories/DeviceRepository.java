@@ -68,7 +68,6 @@ public class DeviceRepository extends Repository {
         return new ApiRequest<>(uuid, result);
     }
 
-    // TODO: DEVUELVE STRING O BOOLEAN, UNIFICAR con OBJECT
     public ApiRequest<Integer> execAction(String id, String action, Integer[] param) {
         final MutableLiveData<Result<Integer>> result = new MutableLiveData<>();
         String uuid = this.api.execAction(id, action, param, getListener(result), getErrorListener(this.api, result));

@@ -68,6 +68,12 @@ public class DeviceViewModel extends RequestViewModel {
         return deviceRequest.getLiveData();
     }
 
+    LiveData<Device> getDevice(String id) {
+        ApiRequest<Device> getRequest = MyApplication.getInstance().getDeviceRepository().getDevice(id);
+        requestTags.add(getRequest.getUuid());
+        return Transformations.map(getRequest.getLiveData(), MyApplication.getTransformFunction());
+    }
+
     void reloadDevices() {
         this.devices = new MediatorLiveData<>();
         for (DeviceType type : typesData.keySet())

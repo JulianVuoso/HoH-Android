@@ -29,10 +29,11 @@ class AcDialog extends DeviceDialog {
         super(fragment, device);
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_device_ac, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+//        this.dialog.setOnDismissListener(dialog -> DialogCreator.closeDialog());
         setDialogHeader(dialogView);
 
         swAc = dialogView.findViewById(R.id.ac_switch);
@@ -59,6 +60,8 @@ class AcDialog extends DeviceDialog {
         });
 
         this.dialog.show();
+
+        return this.dialog;
     }
 
     void closeDialog() {
@@ -282,8 +285,8 @@ class AcDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-        swAc.setChecked(device.getState().getStatus().equals("on"));
-        setButtons();
+//        swAc.setChecked(device.getState().getStatus().equals("on"));
+//        setButtons();
 //        String initAcTemp = device.getState().getTemperature() + "°C";
 //        tempAcText.setText(initAcTemp);
 //        tempAc.setProgress(device.getState().getTemperature() - 18);

@@ -30,10 +30,11 @@ class LightDialog extends DeviceDialog {
         super(fragment, device);
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_device_light, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+//        this.dialog.setOnDismissListener(dialog -> DialogCreator.closeDialog());
         setDialogHeader(dialogView);
 
         sw = dialogView.findViewById(R.id.light_switch);
@@ -79,6 +80,8 @@ class LightDialog extends DeviceDialog {
 
 
         this.dialog.show();
+
+        return this.dialog;
     }
 
     void closeDialog() {
@@ -89,7 +92,7 @@ class LightDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-        sw.setChecked(device.getState().getStatus().equals("on"));
+//        sw.setChecked(device.getState().getStatus().equals("on"));
 //        String initBrightness = device.getState().getBrightness() + "%";
 //        brightnessText.setText(initBrightness);
 //        brightness.setProgress(device.getState().getBrightness());

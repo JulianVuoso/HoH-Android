@@ -11,8 +11,8 @@ import ar.edu.itba.hci.hoh.elements.Routine;
 public abstract class DialogCreator {
     private static DataDialog dialog;
 
-    public static void createDialog(Fragment fragment, @NonNull Device device) {
-        if (fragment.getContext() == null || device.getType() == null) return;
+    public static AlertDialog createDialog(Fragment fragment, @NonNull Device device) {
+        if (fragment.getContext() == null || device.getType() == null) return null;
 
         switch (device.getType().getName()) {
             case "door":
@@ -38,7 +38,8 @@ public abstract class DialogCreator {
                 break;
         }
         if (dialog != null)
-            dialog.openDialog();
+            return dialog.openDialog();
+        return null;
     }
 
     public static void createDialog(Fragment fragment, Routine routine) {

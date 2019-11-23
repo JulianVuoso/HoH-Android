@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.ui.home;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import ar.edu.itba.hci.hoh.MyApplication;
 import ar.edu.itba.hci.hoh.RestartListener;
+import ar.edu.itba.hci.hoh.dialogs.DialogCreator;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.elements.Routine;
@@ -70,10 +73,14 @@ public class HomeFragment extends Fragment {
         managerFavDevices = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, getResources().getDimension(R.dimen.device_card_width));
         rvFavDevices.setLayoutManager(managerFavDevices);
         rvFavDevices.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
-        adapterFavDevices = new DeviceAdapter(new OnItemClickListener<Device>() {
-            @Override
-            public void onItemClick(Device element) {
-                // TODO: OPEN DIALOG
+        adapterFavDevices = new DeviceAdapter(element -> {
+            Fragment fragment = this;
+            AlertDialog dialog = DialogCreator.createDialog(this, element);
+            if (dialog != null) {
+                dialog.setOnDismissListener(dialog1 -> {
+                    DialogCreator.closeDialog();
+                    updateFragment();
+                });
             }
         });
         adapterFavDevices.setDevices(favDevices);
@@ -95,12 +102,9 @@ public class HomeFragment extends Fragment {
         managerFavRooms = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, getResources().getDimension(R.dimen.img_card_width));
         rvFavRooms.setLayoutManager(managerFavRooms);
         rvFavRooms.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
-        adapterFavRooms = new RoomsAdapter(new OnItemClickListener<Room>() {
-            @Override
-            public void onItemClick(Room room) {
-                HomeFragmentDirections.ActionSelectRoom action = HomeFragmentDirections.actionSelectRoom(room, room.getName());
-                Navigation.findNavController(root).navigate(action);
-            }
+        adapterFavRooms = new RoomsAdapter(room -> {
+            HomeFragmentDirections.ActionSelectRoom action = HomeFragmentDirections.actionSelectRoom(room, room.getName());
+            Navigation.findNavController(root).navigate(action);
         });
         adapterFavRooms.setRooms(favRooms);
         rvFavRooms.setAdapter(adapterFavRooms);
@@ -120,13 +124,7 @@ public class HomeFragment extends Fragment {
         managerFavRoutines = new LinearLayoutPagerManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false, getResources().getDimension(R.dimen.img_card_width));
         rvFavRoutines.setLayoutManager(managerFavRoutines);
         rvFavRoutines.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
-        adapterFavRoutines = new RoutinesAdapter(new OnItemClickListener<Routine>() {
-            @Override
-            public void onItemClick(Routine routine) {
-                // TODO: OPEN CONFIRMATION DIALOG TO EXECUTE ROUTINE
-                executeRoutine(routine);
-            }
-        });
+        adapterFavRoutines = new RoutinesAdapter(routine -> DialogCreator.createDialog(this, routine));
         rvFavRoutines.setAdapter(adapterFavRoutines);
         getFavRoutineList();
         emptyRoutineCard = root.findViewById(R.id.empty_fav_routines_card);
@@ -139,18 +137,20 @@ public class HomeFragment extends Fragment {
         rightArrowFavRoutines.setOnClickListener(v -> rvFavRoutines.smoothScrollToPosition(managerFavRoutines.findLastVisibleItemPosition() + 1));
         rvFavRoutines.addOnScrollListener(getOnScrollListener(managerFavRoutines, leftArrowFavRoutines, rightArrowFavRoutines, favRoutines));
 
-        restartListener = () -> {
-            homeViewModel.reloadDevices();
-            getFavDeviceList();
-            homeViewModel.reloadRooms();
-            getFavRoomList();
-            homeViewModel.reloadRoutines();
-            getFavRoutineList();
-        };
+        restartListener = this::updateFragment;
 
         MainActivity.setRestartListener(restartListener);
 
         return root;
+    }
+
+    private void updateFragment() {
+        homeViewModel.reloadDevices();
+        getFavDeviceList();
+        homeViewModel.reloadRooms();
+        getFavRoomList();
+        homeViewModel.reloadRoutines();
+        getFavRoutineList();
     }
 
     private <T> RecyclerView.OnScrollListener getOnScrollListener(LinearLayoutManager manager, ImageButton leftArrow, ImageButton rightArrow, List<T> list) {

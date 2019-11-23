@@ -25,10 +25,11 @@ class BlindsDialog extends DeviceDialog {
         super(fragment, device);
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_device_blinds, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+//        this.dialog.setOnDismissListener(dialog -> DialogCreator.closeDialog());
         setDialogHeader(dialogView);
 
         openBtn = dialogView.findViewById(R.id.window_open);
@@ -56,6 +57,7 @@ class BlindsDialog extends DeviceDialog {
         });
 
         this.dialog.show();
+        return this.dialog;
     }
 
     void closeDialog() {
@@ -65,37 +67,42 @@ class BlindsDialog extends DeviceDialog {
 
     private void setButtons() {
         String status = device.getState().getStatus();
-        if (status.equals("opened")) {
-            openBtn.setEnabled(true);
-            closeBtn.setEnabled(true);
-            toggleButton(openBtn, true);
-            toggleButton(closeBtn, false);
-            statusText.setVisibility(View.INVISIBLE);
-        } else if (status.equals("closed")) {
-            openBtn.setEnabled(true);
-            closeBtn.setEnabled(true);
-            toggleButton(openBtn, false);
-            toggleButton(closeBtn, true);
-            statusText.setVisibility(View.INVISIBLE);
-        } else if (status.equals("opening")) {
-            toggleButton(closeBtn, false);
-            closeBtn.setEnabled(true);
-            openBtn.setEnabled(false);
-            statusText.setText(fragment.getResources().getString(R.string.device_status_opening));
-            statusText.setVisibility(View.VISIBLE);
-        } else {
-            toggleButton(openBtn, false);
-            openBtn.setEnabled(true);
-            closeBtn.setEnabled(false);
-            statusText.setText(fragment.getResources().getString(R.string.device_status_closing));
-            statusText.setVisibility(View.VISIBLE);
+        switch (status) {
+            case "opened":
+                openBtn.setEnabled(true);
+                closeBtn.setEnabled(true);
+                toggleButton(openBtn, true);
+                toggleButton(closeBtn, false);
+                statusText.setVisibility(View.INVISIBLE);
+                break;
+            case "closed":
+                openBtn.setEnabled(true);
+                closeBtn.setEnabled(true);
+                toggleButton(openBtn, false);
+                toggleButton(closeBtn, true);
+                statusText.setVisibility(View.INVISIBLE);
+                break;
+            case "opening":
+                toggleButton(closeBtn, false);
+                closeBtn.setEnabled(true);
+                openBtn.setEnabled(false);
+                statusText.setText(fragment.getResources().getString(R.string.device_status_opening));
+                statusText.setVisibility(View.VISIBLE);
+                break;
+            default:
+                toggleButton(openBtn, false);
+                openBtn.setEnabled(true);
+                closeBtn.setEnabled(false);
+                statusText.setText(fragment.getResources().getString(R.string.device_status_closing));
+                statusText.setVisibility(View.VISIBLE);
+                break;
         }
 
     }
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-        setButtons();
+//        setButtons();
         pB.setProgress(device.getState().getLevel());
     }
 }

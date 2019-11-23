@@ -33,19 +33,20 @@ abstract class DeviceDialog extends DataDialog {
     DeviceDialog(Fragment fragment, Device dev) {
         this.fragment = fragment;
         this.device = dev;
-        this.timer = new Timer();
-        this.timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // Cant use observe in background thread
-                Api.getInstance(fragment.getContext()).getDevice(device.getId(), response -> {
-                    device = response;
-                    reloadData();
-                }, error -> {
-                    Log.e(MainActivity.LOG_TAG, "Error reloading");
-                });
-            }
-        }, 0, 1000);
+        String type = dev.getType().getName();
+        if (type.equals("speaker") || type.equals("blinds")) {
+            this.timer = new Timer();
+            this.timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    // Cant use observe in background thread
+                    Api.getInstance(fragment.getContext()).getDevice(device.getId(), response -> {
+                        device = response;
+                        reloadData();
+                    }, error -> Log.e(MainActivity.LOG_TAG, "Error reloading"));
+                }
+            }, 0, 1000);
+        }
     }
 
     protected void setDialogHeader(View dialogView) {

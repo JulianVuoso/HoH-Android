@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- TODO: FIX FANSPEED, HOR SWING, VER SWING AND TEST   -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

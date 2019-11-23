@@ -1,5 +1,8 @@
 package ar.edu.itba.hci.hoh.dialogs;
 
+
+import androidx.appcompat.app.AlertDialog;
+
 abstract class DataDialog {
     protected static DialogData dialogData = new DialogData();
 
@@ -7,6 +10,6 @@ abstract class DataDialog {
         dialogData.cancelRequests();
     }
 
-    abstract void openDialog();
+    abstract AlertDialog openDialog();
     abstract void closeDialog();
 }

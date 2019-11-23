@@ -206,7 +206,6 @@ public class Api {
         return uuid;
     }
 
-    // TODO: ME DEVUELVE STRINGS O BOOLEANS SEGUN LA ACCION. COMO UNIFICO?
     /* Execute an action in a specific device with params {[]} */
     public String execAction(String id, String action, Integer[] param, Response.Listener<Integer> listener, Response.ErrorListener errorListener) {
         String url = URL + "devices/" + id + "/" + action;

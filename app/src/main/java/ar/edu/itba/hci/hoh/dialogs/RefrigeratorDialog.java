@@ -29,10 +29,11 @@ class RefrigeratorDialog extends DeviceDialog {
         super(fragment, device);
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_device_refrigerator, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+//        this.dialog.setOnDismissListener(dialog -> DialogCreator.closeDialog());
         setDialogHeader(dialogView);
 
         fridgeBar = dialogView.findViewById(R.id.fridge_temp_bar);
@@ -98,6 +99,8 @@ class RefrigeratorDialog extends DeviceDialog {
         });
 
         this.dialog.show();
+
+        return this.dialog;
     }
 
     void closeDialog() {
@@ -134,6 +137,6 @@ class RefrigeratorDialog extends DeviceDialog {
 //        String initFreezerTemperature = device.getState().getFreezerTemperature() + "°C";
 //        freezerText.setText(initFreezerTemperature);
 //        freezerBar.setProgress(device.getState().getFreezerTemperature() + 20);
-        setButtons();
+//        setButtons();
     }
 }

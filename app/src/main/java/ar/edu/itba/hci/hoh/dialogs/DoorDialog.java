@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.dialogs;
 
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,10 +23,14 @@ class DoorDialog extends DeviceDialog {
         super(fragment, device);
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_device_door, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+//        this.dialog.setOnDismissListener(dialog -> {
+//            Log.e(MainActivity.LOG_TAG, "On dismiss interno");
+//            DialogCreator.closeDialog();
+//        });
         setDialogHeader(dialogView);
 
         openButton = dialogView.findViewById(R.id.door_panel_open);
@@ -40,6 +45,7 @@ class DoorDialog extends DeviceDialog {
                 toggleButton(lockButton, false);
                 execAction("unlock");
                 execAction("open");
+                Log.e(MainActivity.LOG_TAG, "open");
             });
             closeButton.setOnClickListener(v -> {
                 toggleButton(openButton, false);
@@ -47,6 +53,7 @@ class DoorDialog extends DeviceDialog {
                 toggleButton(lockButton, false);
                 execAction("unlock");
                 execAction("close");
+                Log.e(MainActivity.LOG_TAG, "close");
             });
             lockButton.setOnClickListener(v -> {
                 toggleButton(openButton, false);
@@ -54,10 +61,13 @@ class DoorDialog extends DeviceDialog {
                 toggleButton(lockButton, true);
                 execAction("close");
                 execAction("lock");
+                Log.e(MainActivity.LOG_TAG, "lock");
             });
         }
 
         this.dialog.show();
+
+        return this.dialog;
     }
 
     void closeDialog() {
@@ -78,6 +88,6 @@ class DoorDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-        setButtons();
+//        setButtons();
     }
 }

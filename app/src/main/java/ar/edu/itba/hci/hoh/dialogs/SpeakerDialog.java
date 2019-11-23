@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.elements.Device;
+import ar.edu.itba.hci.hoh.elements.DeviceState;
 
 class SpeakerDialog extends DeviceDialog {
     private AlertDialog dialog;
@@ -31,10 +32,11 @@ class SpeakerDialog extends DeviceDialog {
         super(fragment, device);
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_device_speaker, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+//        this.dialog.setOnDismissListener(dialog -> DialogCreator.closeDialog());
         setDialogHeader(dialogView);
 
         time = dialogView.findViewById(R.id.time);
@@ -46,17 +48,29 @@ class SpeakerDialog extends DeviceDialog {
         setPlayPause();
 
         ImageView stop = dialogView.findViewById(R.id.stop);
-        stop.setOnClickListener(v -> execAction("stop"));
+        stop.setOnClickListener(v -> {
+            device.getState().setStatus("stopped");
+            setPlayPause();
+            execAction("stop");
+        });
         ImageView prev = dialogView.findViewById(R.id.prev);
         prev.setOnClickListener(v -> execAction("previousSong"));
         ImageView next = dialogView.findViewById(R.id.next);
         next.setOnClickListener(v -> execAction("nextSong"));
 
         playPause.setOnClickListener(v -> {
-            boolean state = device.getState().getStatus().equals("playing");
-            device.getState().setStatus(state ? "paused" : "playing");
+            String status = device.getState().getStatus();
+            if (status.equals("playing")) {
+                device.getState().setStatus("paused");
+                execAction("pause");
+            } else {
+                device.getState().setStatus("playing");
+                if (status.equals("stopped"))
+                    execAction("play");
+                else
+                    execAction("resume");
+            }
             setPlayPause();
-            execAction(state ? "pause" : "play");
         });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(fragment.getContext(), android.R.layout.simple_spinner_item, genres);
@@ -96,6 +110,8 @@ class SpeakerDialog extends DeviceDialog {
         });
 
         this.dialog.show();
+
+        return this.dialog;
     }
 
     private void setPlayPause() {
@@ -115,9 +131,11 @@ class SpeakerDialog extends DeviceDialog {
     private void setTextViews() {
         String status = device.getState().getStatus();
         if (status.equals("playing") || status.equals("paused")) {
-            time.setText(device.getState().getSong().getProgress());
-            song.setText(device.getState().getSong().getTitle());
-            artist.setText(device.getState().getSong().getArtist());
+            DeviceState.Song currentSong = device.getState().getSong();
+            Log.e(MainActivity.LOG_TAG, String.format("%s %s", currentSong.getProgress(), status));
+            time.setText(currentSong.getProgress());
+            song.setText(currentSong.getTitle());
+            artist.setText(currentSong.getArtist());
         } else {
             time.setText("-");
             song.setText("-");
@@ -138,7 +156,7 @@ class SpeakerDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-        setPlayPause();
+//        setPlayPause();
         setTextViews();
 //        setVolume();
     }

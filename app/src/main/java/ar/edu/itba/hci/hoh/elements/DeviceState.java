@@ -154,7 +154,6 @@ public class DeviceState implements Serializable {
         return convection;
     }
 
-    // TODO: VER SI TIENE QUE SER UNA CLASE PUBLICA AFUERA O FUNCA ASI
     public class Song {
         private String title;
         private String artist;

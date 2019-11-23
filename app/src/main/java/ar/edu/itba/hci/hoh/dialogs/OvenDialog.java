@@ -31,10 +31,11 @@ class OvenDialog extends DeviceDialog {
         super(fragment, device);
     }
 
-    void openDialog() {
+    AlertDialog openDialog() {
         LayoutInflater inflater = fragment.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_device_oven, null);
         this.dialog = new AlertDialog.Builder(fragment.getContext()).setView(dialogView).create();
+//        this.dialog.setOnDismissListener(dialog -> DialogCreator.closeDialog());
         setDialogHeader(dialogView);
 
         ovenBar = dialogView.findViewById(R.id.oven_temp_bar);
@@ -105,6 +106,7 @@ class OvenDialog extends DeviceDialog {
         });
 
         this.dialog.show();
+        return this.dialog;
     }
 
     void closeDialog() {
@@ -169,10 +171,10 @@ class OvenDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-        swOven.setChecked(device.getState().getStatus().equals("on"));
+//        swOven.setChecked(device.getState().getStatus().equals("on"));
 //        String initTemperature = device.getState().getTemperature() + "°C";
 //        ovenTemp.setText(initTemperature);
 //        ovenBar.setProgress(device.getState().getTemperature() - 90);
-        setButtons();
+//        setButtons();
     }
 }

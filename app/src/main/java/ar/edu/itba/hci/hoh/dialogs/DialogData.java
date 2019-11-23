@@ -42,7 +42,6 @@ class DialogData {
         return Transformations.map(execRequest.getLiveData(), MyApplication.getTransformFunction());
     }
 
-    // TODO: Ver si uso el transform function de siempre o lo cambio (puede que me tire un toast cuando simplemente ya estaba en ese estado, como en la puerta
     LiveData<Boolean> execAction(String id, String action) {
         ApiRequest<Boolean> execRequest = MyApplication.getInstance().getDeviceRepository().execAction(id, action);
         requestTags.add(execRequest.getUuid());
