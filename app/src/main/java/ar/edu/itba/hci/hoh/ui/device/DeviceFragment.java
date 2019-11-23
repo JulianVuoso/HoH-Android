@@ -102,8 +102,11 @@ public class DeviceFragment extends Fragment {
         data.clear();
         adapter.clearDataSet();
         deviceViewModel.getDevicesFromCategory().observe(this, devices -> {
-            if (devices != null)
+            if (devices != null) {
+                data.clear();
+                adapter.clearDataSet();
                 data.addAll(devices);
+            }
             if (!data.isEmpty())
                 emptyCard.setVisibility(View.GONE);
             else

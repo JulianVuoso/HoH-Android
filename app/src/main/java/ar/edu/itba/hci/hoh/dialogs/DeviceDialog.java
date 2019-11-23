@@ -111,7 +111,7 @@ abstract class DeviceDialog extends DataDialog {
 
     protected void execAction(String action) {
         dialogData.execAction(device.getId(), action).observe(fragment, result -> {
-            Log.e(MainActivity.LOG_TAG, "device actioned");
+            Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
             if (result != null) {
                 // TODO: Modify Room for local changes
             }
@@ -120,7 +120,7 @@ abstract class DeviceDialog extends DataDialog {
 
     protected void execAction(String action, String[] param) {
         dialogData.execAction(device.getId(), action, param).observe(fragment, result -> {
-            Log.e(MainActivity.LOG_TAG, "device actioned");
+            Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
             if (result != null) {
                 // TODO: Modify Room for local changes
             }
@@ -129,7 +129,7 @@ abstract class DeviceDialog extends DataDialog {
 
     protected void execAction(String action, Integer[] param) {
         dialogData.execAction(device.getId(), action, param).observe(fragment, result -> {
-            Log.e(MainActivity.LOG_TAG, "device actioned");
+            Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
             if (result != null) {
                 // TODO: Modify Room for local changes
             }
