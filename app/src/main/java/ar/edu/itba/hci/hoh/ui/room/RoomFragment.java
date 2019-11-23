@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,7 @@ public class RoomFragment extends Fragment {
     private List<String> requestTag = new ArrayList<>();
 
     private CardView emptyCard;
+    private ProgressBar loading;
 
     private RestartListener restartListener;
 
@@ -88,6 +90,7 @@ public class RoomFragment extends Fragment {
         emptyCard = root.findViewById(R.id.empty_device_room_card);
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_device_list);
+        loading = root.findViewById(R.id.room_loading_bar);
 
         if (room != null) {
             getDevicesList(room);
@@ -111,6 +114,7 @@ public class RoomFragment extends Fragment {
                     device.setRoom(room);
                 devices.sort(Device.getTypeComparator());
             }
+            loading.setVisibility(View.GONE);
             if (devices != null && !devices.isEmpty())
                 emptyCard.setVisibility(View.GONE);
             else

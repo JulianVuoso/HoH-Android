@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,7 @@ public class HomeFragment extends Fragment {
     private List<String> requestTag = new ArrayList<>();
 
     private CardView emptyDeviceCard, emptyRoomCard, emptyRoutineCard;
+    private ProgressBar loadingDevices, loadingRooms, loadingRoutines;
 
     private RestartListener restartListener;
 
@@ -90,6 +92,7 @@ public class HomeFragment extends Fragment {
         emptyDeviceCard = root.findViewById(R.id.empty_fav_devices_card);
         TextView tvEmptyDevice = emptyDeviceCard.findViewById(R.id.card_no_element_text);
         tvEmptyDevice.setText(R.string.empty_fav_device_list);
+        loadingDevices = root.findViewById(R.id.fav_devices_loading_bar);
 
         leftArrowFavDevices = root.findViewById(R.id.left_arrow_favorite_devices);
         leftArrowFavDevices.setOnClickListener(getLeftArrowListener(managerFavDevices, rvFavDevices));
@@ -113,6 +116,7 @@ public class HomeFragment extends Fragment {
         emptyRoomCard = root.findViewById(R.id.empty_fav_rooms_card);
         TextView tvEmptyRoom = emptyRoomCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_fav_room_list);
+        loadingRooms = root.findViewById(R.id.fav_rooms_loading_bar);
 
         leftArrowFavRooms = root.findViewById(R.id.left_arrow_favorite_rooms);
         leftArrowFavRooms.setOnClickListener(getLeftArrowListener(managerFavRooms, rvFavRooms));
@@ -131,6 +135,7 @@ public class HomeFragment extends Fragment {
         emptyRoutineCard = root.findViewById(R.id.empty_fav_routines_card);
         TextView tvEmptyRoutine = emptyRoutineCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoutine.setText(R.string.empty_fav_routine_list);
+        loadingRoutines = root.findViewById(R.id.fav_routines_loading_bar);
 
         leftArrowFavRoutines = root.findViewById(R.id.left_arrow_favorite_routines);
         leftArrowFavRoutines.setOnClickListener(getLeftArrowListener(managerFavRoutines, rvFavRoutines));
@@ -205,6 +210,7 @@ public class HomeFragment extends Fragment {
                     if (device.getMeta().isFavorite())
                         favDevices.add(device);
             }
+            loadingDevices.setVisibility(View.GONE);
             if (!favDevices.isEmpty())
                 emptyDeviceCard.setVisibility(View.GONE);
             else
@@ -224,6 +230,7 @@ public class HomeFragment extends Fragment {
                     if (room.getMeta().isFavorite())
                         favRooms.add(room);
             }
+            loadingRooms.setVisibility(View.GONE);
             if (!favRooms.isEmpty())
                 emptyRoomCard.setVisibility(View.GONE);
             else
@@ -243,6 +250,7 @@ public class HomeFragment extends Fragment {
                     if (routine.getMeta().isFavorite())
                         favRoutines.add(routine);
             }
+            loadingRoutines.setVisibility(View.GONE);
             if (!favRoutines.isEmpty())
                 emptyRoutineCard.setVisibility(View.GONE);
             else

@@ -51,6 +51,7 @@ public class DevicesFragment extends Fragment {
         if (MainActivity.categories.isEmpty()) {
             TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
             tvEmptyRoom.setText(R.string.empty_category_list);
+            emptyCard.setVisibility(View.VISIBLE);
         } else {
             emptyCard.setVisibility(View.GONE);
         }

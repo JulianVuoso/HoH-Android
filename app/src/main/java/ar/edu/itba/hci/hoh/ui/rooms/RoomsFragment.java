@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class RoomsFragment extends Fragment {
     private RoomsAdapter adapter;
 
     private CardView emptyCard;
+    private ProgressBar loading;
 
     private RestartListener restartListener;
 
@@ -58,6 +60,7 @@ public class RoomsFragment extends Fragment {
         emptyCard = root.findViewById(R.id.empty_rooms_card);
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_room_list);
+        loading = root.findViewById(R.id.rooms_loading_bar);
 
         restartListener = () -> {
             roomsViewModel.reloadRooms();
@@ -71,6 +74,7 @@ public class RoomsFragment extends Fragment {
 
     private void getRoomList() {
         roomsViewModel.getRooms().observe(this, rooms -> {
+            loading.setVisibility(View.GONE);
             if (rooms != null && !rooms.isEmpty())
                 emptyCard.setVisibility(View.GONE);
             else

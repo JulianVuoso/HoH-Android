@@ -10,7 +10,8 @@
     android:layout_marginBottom="@dimen/card_spacing"
     app:cardBackgroundColor="@color/colorImgCardBackground"
     app:cardCornerRadius="@dimen/cardCornerRadius"
-    app:cardElevation="@dimen/cardElevation">
+    app:cardElevation="@dimen/cardElevation"
+    android:visibility="gone">
 
     <TextView
         android:id="@+id/card_no_element_text"

@@ -13,4 +13,11 @@
 
     <include android:id="@+id/empty_device_card"
         layout="@layout/item_no_elements"/>
+
+    <include android:id="@+id/device_loading_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/item_loading"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>

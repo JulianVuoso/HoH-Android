@@ -61,6 +61,12 @@
         <include android:id="@+id/empty_fav_devices_card"
             layout="@layout/item_no_elements" />
 
+        <include android:id="@+id/fav_devices_loading_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_loading"
+            android:layout_gravity="center"/>
+
         <TextView
             android:id="@+id/favorite_rooms_title"
             android:layout_width="wrap_content"
@@ -111,6 +117,12 @@
         <include android:id="@+id/empty_fav_rooms_card"
             layout="@layout/item_no_elements" />
 
+        <include android:id="@+id/fav_rooms_loading_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_loading"
+            android:layout_gravity="center"/>
+
         <TextView
             android:id="@+id/favorite_routines_title"
             android:layout_width="wrap_content"
@@ -160,5 +172,11 @@
 
         <include android:id="@+id/empty_fav_routines_card"
             layout="@layout/item_no_elements"/>
+
+        <include android:id="@+id/fav_routines_loading_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_loading"
+            android:layout_gravity="center"/>
     </LinearLayout>
 </ScrollView>

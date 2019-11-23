@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class RoutinesFragment extends Fragment {
     private RoutinesAdapter adapter;
 
     private CardView emptyCard;
+    private ProgressBar loading;
 
     private RestartListener restartListener;
 
@@ -50,6 +52,7 @@ public class RoutinesFragment extends Fragment {
         emptyCard = root.findViewById(R.id.empty_routines_card);
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_routine_list);
+        loading = root.findViewById(R.id.routines_loading_bar);
 
         restartListener = () -> {
             routinesViewModel.reloadRoutines();
@@ -62,6 +65,7 @@ public class RoutinesFragment extends Fragment {
 
     private void getRoutineList() {
         routinesViewModel.getRoutines().observe(this, routines -> {
+            loading.setVisibility(View.GONE);
             if (routines != null && !routines.isEmpty())
                 emptyCard.setVisibility(View.GONE);
             else

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class DeviceFragment extends Fragment {
     private List<String> requestTag = new ArrayList<>();
 
     private CardView emptyCard;
+    private ProgressBar loading;
 
     private RestartListener restartListener;
 
@@ -79,6 +81,7 @@ public class DeviceFragment extends Fragment {
         emptyCard = root.findViewById(R.id.empty_device_card);
         TextView tvEmptyRoom = emptyCard.findViewById(R.id.card_no_element_text);
         tvEmptyRoom.setText(R.string.empty_device_list);
+        loading = root.findViewById(R.id.device_loading_bar);
 
         if (category != null) {
             for (final DeviceType type : category.getTypes()) {
@@ -108,6 +111,7 @@ public class DeviceFragment extends Fragment {
                 devices.sort(Device.getRoomComparator());
                 data.addAll(devices);
             }
+            loading.setVisibility(View.GONE);
             if (!data.isEmpty())
                 emptyCard.setVisibility(View.GONE);
             else
