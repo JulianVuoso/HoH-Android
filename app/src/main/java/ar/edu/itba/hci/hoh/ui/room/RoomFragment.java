@@ -109,6 +109,7 @@ public class RoomFragment extends Fragment {
             if (devices != null) {
                 for (Device device : devices)
                     device.setRoom(room);
+                devices.sort(Device.getTypeComparator());
             }
             if (devices != null && !devices.isEmpty())
                 emptyCard.setVisibility(View.GONE);

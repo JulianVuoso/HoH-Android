@@ -66,6 +66,8 @@ public class RoutinesFragment extends Fragment {
                 emptyCard.setVisibility(View.GONE);
             else
                 emptyCard.setVisibility(View.VISIBLE);
+            if (routines != null)
+                routines.sort(Routine.getComparator());
             adapter.setRoutines(routines);
             Log.v(MainActivity.LOG_TAG, "ACTUALICE ROUTINES");
         });

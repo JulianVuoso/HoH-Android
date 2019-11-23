@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.hoh.elements;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Routine implements Serializable {
     private String id;
@@ -29,6 +30,15 @@ public class Routine implements Serializable {
 
     public RoutineMeta getMeta() {
         return meta;
+    }
+
+    public static Comparator<Routine> getComparator() {
+        return (r1, r2) -> {
+            int ret = r1.getName().compareTo(r2.getName());
+            if (ret == 0)
+                ret = r1.getId().compareTo(r2.getName());
+            return ret;
+        };
     }
 
     public class RoutineMeta {

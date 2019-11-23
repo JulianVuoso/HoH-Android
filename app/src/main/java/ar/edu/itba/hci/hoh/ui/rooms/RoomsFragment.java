@@ -75,6 +75,8 @@ public class RoomsFragment extends Fragment {
                 emptyCard.setVisibility(View.GONE);
             else
                 emptyCard.setVisibility(View.VISIBLE);
+            if (rooms != null)
+                rooms.sort(Room.getComparator());
             adapter.setRooms(rooms);
             Log.v(MainActivity.LOG_TAG, "ACTUALICE ROOMS");
         });

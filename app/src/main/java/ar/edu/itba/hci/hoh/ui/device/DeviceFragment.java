@@ -87,7 +87,7 @@ public class DeviceFragment extends Fragment {
             getDevicesList();
         }
 
-        restartListener = () -> updateFragment();
+        restartListener = this::updateFragment;
         MainActivity.setRestartListener(restartListener);
 
         return root;
@@ -105,6 +105,7 @@ public class DeviceFragment extends Fragment {
             if (devices != null) {
                 data.clear();
                 adapter.clearDataSet();
+                devices.sort(Device.getRoomComparator());
                 data.addAll(devices);
             }
             if (!data.isEmpty())

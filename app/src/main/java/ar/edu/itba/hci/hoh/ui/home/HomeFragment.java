@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import ar.edu.itba.hci.hoh.MyApplication;
@@ -208,6 +209,7 @@ public class HomeFragment extends Fragment {
                 emptyDeviceCard.setVisibility(View.GONE);
             else
                 emptyDeviceCard.setVisibility(View.VISIBLE);
+            favDevices.sort(Device.getNameComparator());
             adapterFavDevices.notifyDataSetChanged();
             configureInitialArrows(leftArrowFavDevices, rightArrowFavDevices, favDevices.size());
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV DEVICES");
@@ -226,6 +228,7 @@ public class HomeFragment extends Fragment {
                 emptyRoomCard.setVisibility(View.GONE);
             else
                 emptyRoomCard.setVisibility(View.VISIBLE);
+            favRooms.sort(Room.getComparator());
             adapterFavRooms.notifyDataSetChanged();
             configureInitialArrows(leftArrowFavRooms, rightArrowFavRooms, favRooms.size());
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV Rooms");
@@ -244,6 +247,7 @@ public class HomeFragment extends Fragment {
                 emptyRoutineCard.setVisibility(View.GONE);
             else
                 emptyRoutineCard.setVisibility(View.VISIBLE);
+            favRoutines.sort(Routine.getComparator());
             adapterFavRoutines.notifyDataSetChanged();
             configureInitialArrows(leftArrowFavRoutines, rightArrowFavRoutines, favRoutines.size());
             Log.v(MainActivity.LOG_TAG, "ACTUALICE FAV Routines");

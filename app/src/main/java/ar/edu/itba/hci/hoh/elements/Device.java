@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.hoh.elements;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Device implements Serializable {
     private String id;
@@ -62,6 +63,61 @@ public class Device implements Serializable {
 
     public DeviceMeta getMeta() {
         return meta;
+    }
+
+    public static Comparator<Device> getNameComparator() {
+        return (d1, d2) -> {
+            int ret = d1.getName().compareTo(d2.getName());
+            if (ret == 0) {
+                ret = d1.getRoom().getName().compareTo(d2.getRoom().getName());
+                if (ret == 0)
+                    ret = d1.getId().compareTo(d2.getId());
+            }
+            return ret;
+        };
+    }
+
+    public static Comparator<Device> getTypeComparator() {
+        return (d1, d2) -> {
+            int ret = d1.getType().getName().compareTo(d2.getType().getName());
+            if (ret == 0) {
+                ret = d1.getName().compareTo(d2.getName());
+                if (ret == 0) {
+                    ret = d1.getRoom().getName().compareTo(d2.getRoom().getName());
+                    if (ret == 0)
+                        ret = d1.getId().compareTo(d2.getId());
+                }
+            }
+            return ret;
+        };
+    }
+
+    public static Comparator<Device> getRoomComparator() {
+        return (d1, d2) -> {
+            int ret = d1.getRoom().getName().compareTo(d2.getRoom().getName());
+            if (ret == 0) {
+                ret = d1.getType().getName().compareTo(d2.getType().getName());
+                if (ret == 0) {
+                    ret = d1.getName().compareTo(d2.getName());
+                    if (ret == 0)
+                        ret = d1.getId().compareTo(d2.getId());
+                }
+            }
+            return ret;
+        };
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Device)) return false;
+        Device device = (Device) o;
+        return id.equals(device.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     public class DeviceMeta implements Serializable{
