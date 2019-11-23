@@ -12,6 +12,7 @@ MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /home/julian/.gra
 MERGED from [androidx.navigation:navigation-fragment:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/cc7ae7ebe87b238f2347af56f748c080/navigation-fragment-2.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-extensions:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/b1164f656a8fc37f43d198cf3621aa83/lifecycle-extensions-2.1.0/AndroidManifest.xml:17:1-25:12
 MERGED from [com.android.volley:volley:1.1.1] /home/julian/.gradle/caches/transforms-2/files-2.1/a5639622080d3d83ad406797dc6d7ff6/jetified-volley-1.1.1/AndroidManifest.xml:2:1-11:12
+MERGED from [com.larswerkman:HoloColorPicker:1.5] /home/julian/.gradle/caches/transforms-2/files-2.1/c52c47f35663c6a7c2dca9adb04acc1c/HoloColorPicker-1.5/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.fragment:fragment:1.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/ddc7376062e703776181440dc621b3b2/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/1f15a2fa0c1819d0ae51cf0066ad3c76/appcompat-resources-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.recyclerview:recyclerview:1.0.0] /home/julian/.gradle/caches/transforms-2/files-2.1/b9c8b25629e96ec63fb7acfd6b94166e/recyclerview-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -180,6 +181,8 @@ MERGED from [androidx.lifecycle:lifecycle-extensions:2.1.0] /home/julian/.gradle
 MERGED from [androidx.lifecycle:lifecycle-extensions:2.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/b1164f656a8fc37f43d198cf3621aa83/lifecycle-extensions-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [com.android.volley:volley:1.1.1] /home/julian/.gradle/caches/transforms-2/files-2.1/a5639622080d3d83ad406797dc6d7ff6/jetified-volley-1.1.1/AndroidManifest.xml:7:5-43
 MERGED from [com.android.volley:volley:1.1.1] /home/julian/.gradle/caches/transforms-2/files-2.1/a5639622080d3d83ad406797dc6d7ff6/jetified-volley-1.1.1/AndroidManifest.xml:7:5-43
+MERGED from [com.larswerkman:HoloColorPicker:1.5] /home/julian/.gradle/caches/transforms-2/files-2.1/c52c47f35663c6a7c2dca9adb04acc1c/HoloColorPicker-1.5/AndroidManifest.xml:5:5-7:41
+MERGED from [com.larswerkman:HoloColorPicker:1.5] /home/julian/.gradle/caches/transforms-2/files-2.1/c52c47f35663c6a7c2dca9adb04acc1c/HoloColorPicker-1.5/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.fragment:fragment:1.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/ddc7376062e703776181440dc621b3b2/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/ddc7376062e703776181440dc621b3b2/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /home/julian/.gradle/caches/transforms-2/files-2.1/1f15a2fa0c1819d0ae51cf0066ad3c76/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41

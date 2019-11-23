@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorDevCardBackgroundLight"
+        app:cardElevation="@dimen/cardElevation">
+
+        <LinearLayout
+            android:id="@+id/dialog_door_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <include layout="@layout/dialog_device_header"/>
+
+            <LinearLayout
+                android:id="@+id/door_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <Button
+                    android:id="@+id/door_panel_open"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/device_status_open" />
+                <Button
+                    android:id="@+id/door_panel_closed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/device_status_closed" />
+                <Button
+                    android:id="@+id/door_panel_locked"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/device_status_locked" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.core.widget.NestedScrollView>

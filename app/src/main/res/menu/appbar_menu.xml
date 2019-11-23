@@ -14,12 +14,7 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/kebab_help"
-        android:title="@string/option_help"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/kebab_website"
-        android:title="@string/option_website"
+        android:id="@+id/kebab_about_us"
+        android:title="@string/option_about_us"
         app:showAsAction="never"/>
 </menu>

@@ -1,5 +1,6 @@
 package ar.edu.itba.hci.hoh.ui.room;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.hci.hoh.RestartListener;
+import ar.edu.itba.hci.hoh.dialogs.DialogCreator;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.MainActivity;
@@ -69,10 +73,14 @@ public class RoomFragment extends Fragment {
         rvDevices = root.findViewById(R.id.rv_list_room_devices);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
-        adapter = new RoomListAdapter(new OnItemClickListener<Device>() {
-            @Override
-            public void onItemClick(Device element) {
-                // TODO: OPEN DIALOGue
+        adapter = new RoomListAdapter(element -> {
+            Fragment fragment = this;
+            AlertDialog dialog = DialogCreator.createDialog(this, element);
+            if (dialog != null) {
+                dialog.setOnDismissListener(dialog1 -> {
+                    DialogCreator.closeDialog();
+                    updateFragment();
+                });
             }
         });
         rvDevices.setAdapter(adapter);
@@ -85,10 +93,14 @@ public class RoomFragment extends Fragment {
             getDevicesList(room);
         }
 
-        restartListener = () -> getDevicesList(room);
+        restartListener = this::updateFragment;
         MainActivity.setRestartListener(restartListener);
 
         return root;
+    }
+
+    private void updateFragment() {
+        getDevicesList(room);
     }
 
     private void getDevicesList(Room room) {

@@ -10,12 +10,15 @@
 
     <string name="option_settings">Settings</string>
     <string name="option_help">Help</string>
-    <string name="option_website">WebSite</string>
+    <string name="option_about_us">About Us</string>
     <string name="option_search">Search</string>
     <string name="option_favorite">Favorite</string>
 
     <string name="categories_subtitle">Categories</string>
     <string name="img_default_description">Image</string>
+    <string name="dialog_close_description">Close dialog</string>
+    <string name="dialog_favorite_description">Favorite</string>
+    <string name="dialog_not_favorite_description">Not favorite</string>
     <string name="search_hint">Search…</string>
 
     <string name="title_favorite_devices">Favorite Devices</string>
@@ -32,7 +35,7 @@
 
     <string name="device_status_on">On</string>
     <string name="device_status_off">Off</string>
-    <string name="device_status_opened">Opened</string>
+    <string name="device_status_open">Open</string>
     <string name="device_status_opening">Opening</string>
     <string name="device_status_closing">Closing</string>
     <string name="device_status_closed">Closed</string>
@@ -43,8 +46,49 @@
 
     <string name="left_arrow_description">Left Arrow</string>
     <string name="right_arrow_description">Right Arrow</string>
+    <string name="playlist_add_description">Playlist add</string>
+    <string name="previous_song_description">Previous song</string>
+    <string name="next_song_description">Next song</string>
+    <string name="play_pause_description">Play/Pause</string>
+    <string name="stop_description">Stop</string>
 
-    <string name="routine_exec_message">successfully executed!</string>
+    <string name="routine_exec_dialog_message">Are you sure you want to run</string>
+    <string name="routine_exec_dialog_cancel">Cancel</string>
+    <string name="routine_exec_dialog_run">Run</string>
+    <string name="routine_exec_message">Running</string>
+
+    <string name="about_us_title">About Us</string>
+    <string name="about_us_message">
+        House of Hands is an application made by iLuz. We are a student group from ITBA University
+        with the purpose of developing web and android applications applying HCI knowledge.
+    </string>
+
+    <string name="close_dialog_description">Close dialog</string>
+
+    <string name="device_dialog_temperature">Temperature</string>
+    <string name="device_dialog_freezer_temperature">Freezer temperature</string>
+    <string name="device_dialog_heat_source">Heat source</string>
+    <string name="device_dialog_convection_mode">Convection mode</string>
+    <string name="device_dialog_grill_mode">Grill mode</string>
+    <string name="device_dialog_fan_speed">Fan speed</string>
+    <string name="device_dialog_vertical_wings">Vertical wings</string>
+    <string name="device_dialog_horizontal_wings">Horizontal wings</string>
+    <string name="device_dialog_genre">Genre</string>
+    <string name="device_dialog_volume">Volume</string>
+    <string name="device_dialog_brightness">Brightness</string>
+    <string name="device_dialog_color">Color</string>
+    <string name="device_dialog_up">Up</string>
+    <string name="device_dialog_down">Down</string>
+    <string name="device_dialog_full">Full</string>
+    <string name="device_dialog_eco">Eco</string>
+    <string name="device_dialog_mode">Mode</string>
+    <string name="device_dialog_normal">Normal</string>
+    <string name="device_dialog_vacation">Vacation</string>
+    <string name="device_dialog_party">Party</string>
+    <string name="device_dialog_cold">Cold</string>
+    <string name="device_dialog_fan">Fan</string>
+    <string name="device_dialog_heat">Heat</string>
+    <string name="device_dialog_auto">Auto</string>
 
     <string name="error_no_connection">Failed to connect to</string>
     <string name="error_timeout">Timeout error! Could not connect to Ajax!</string>
