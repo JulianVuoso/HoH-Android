@@ -43,25 +43,28 @@ class DoorDialog extends DeviceDialog {
                 toggleButton(openButton, true);
                 toggleButton(closeButton, false);
                 toggleButton(lockButton, false);
+                device.getState().setStatus("opened");
+                device.getState().setLock("unlocked");
                 execAction("unlock");
                 execAction("open");
-                Log.e(MainActivity.LOG_TAG, "open");
             });
             closeButton.setOnClickListener(v -> {
                 toggleButton(openButton, false);
                 toggleButton(closeButton, true);
                 toggleButton(lockButton, false);
+                device.getState().setStatus("closed");
+                device.getState().setLock("unlocked");
                 execAction("unlock");
                 execAction("close");
-                Log.e(MainActivity.LOG_TAG, "close");
             });
             lockButton.setOnClickListener(v -> {
                 toggleButton(openButton, false);
                 toggleButton(closeButton, false);
                 toggleButton(lockButton, true);
+                device.getState().setStatus("closed");
+                device.getState().setLock("locked");
                 execAction("close");
                 execAction("lock");
-                Log.e(MainActivity.LOG_TAG, "lock");
             });
         }
 

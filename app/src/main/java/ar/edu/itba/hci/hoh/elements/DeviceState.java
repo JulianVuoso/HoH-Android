@@ -102,8 +102,16 @@ public class DeviceState implements Serializable {
         return lock;
     }
 
+    public void setLock(String lock) {
+        this.lock = lock;
+    }
+
     public int getLevel() {
         return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getTemperature() {
@@ -138,6 +146,10 @@ public class DeviceState implements Serializable {
         return song;
     }
 
+    public void setSong(Song song) {
+        this.song = song;
+    }
+
     public int getFreezerTemperature() {
         return freezerTemperature;
     }
@@ -152,6 +164,58 @@ public class DeviceState implements Serializable {
 
     public String getConvection() {
         return convection;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setBrightness(int brightness) {
+        this.brightness = brightness;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public void setVerticalSwing(String verticalSwing) {
+        this.verticalSwing = verticalSwing;
+    }
+
+    public void setHorizontalSwing(String horizontalSwing) {
+        this.horizontalSwing = horizontalSwing;
+    }
+
+    public void setFanSpeed(String fanSpeed) {
+        this.fanSpeed = fanSpeed;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setFreezerTemperature(int freezerTemperature) {
+        this.freezerTemperature = freezerTemperature;
+    }
+
+    public void setHeat(String heat) {
+        this.heat = heat;
+    }
+
+    public void setGrill(String grill) {
+        this.grill = grill;
+    }
+
+    public void setConvection(String convection) {
+        this.convection = convection;
     }
 
     public class Song {

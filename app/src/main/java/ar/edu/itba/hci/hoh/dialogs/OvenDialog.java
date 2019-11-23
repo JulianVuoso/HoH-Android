@@ -48,7 +48,10 @@ class OvenDialog extends DeviceDialog {
         ovenBar.setMax(140);
         ovenBar.setProgress(device.getState().getTemperature() - 90);
 
-        swOven.setOnCheckedChangeListener((buttonView, isChecked) -> execAction((isChecked) ? "turnOn" : "turnOff"));
+        swOven.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            device.getState().setStatus((isChecked) ? "on" : "off");
+            execAction((isChecked) ? "turnOn" : "turnOff");
+        });
         ovenBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -61,6 +64,7 @@ class OvenDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setTemperature(seekBar.getProgress() + 90);
                 execAction("setTemperature", getParams(seekBar.getProgress() + 90));
             }
         });
@@ -68,40 +72,49 @@ class OvenDialog extends DeviceDialog {
         initButtons(dialogView);
         heatUp.setOnClickListener(v -> {
             toggleButton(heatDown, false); toggleButton(heatUp, true); toggleButton(heatFull, false);
+            device.getState().setHeat("top");
             execAction("setHeat", getParams("top"));
         });
         heatDown.setOnClickListener(v -> {
             toggleButton(heatDown, true); toggleButton(heatUp, false); toggleButton(heatFull, false);
+            device.getState().setHeat("bottom");
             execAction("setHeat", getParams("bottom"));
         });
         heatFull.setOnClickListener(v -> {
             toggleButton(heatDown, false); toggleButton(heatUp, false); toggleButton(heatFull, true);
+            device.getState().setHeat("conventional");
             execAction("setHeat", getParams("conventional"));
         });
 
         convFull.setOnClickListener(v -> {
             toggleButton(convEco, false); toggleButton(convFull, true); toggleButton(convOff, false);
+            device.getState().setConvection("normal");
             execAction("setConvection", getParams("normal"));
         });
         convEco.setOnClickListener(v -> {
             toggleButton(convEco, true); toggleButton(convFull, false); toggleButton(convOff, false);
+            device.getState().setConvection("eco");
             execAction("setConvection", getParams("eco"));
         });
         convOff.setOnClickListener(v -> {
             toggleButton(convEco, false); toggleButton(convFull, false); toggleButton(convOff, true);
+            device.getState().setConvection("off");
             execAction("setConvection", getParams("off"));
         });
 
         grillFull.setOnClickListener(v -> {
             toggleButton(grillEco, false); toggleButton(grillFull, true); toggleButton(grillOff, false);
+            device.getState().setGrill("large");
             execAction("setGrill", getParams("large"));
         });
         grillEco.setOnClickListener(v -> {
             toggleButton(grillEco, true); toggleButton(grillFull, false); toggleButton(grillOff, false);
+            device.getState().setGrill("eco");
             execAction("setGrill", getParams("eco"));
         });
         grillOff.setOnClickListener(v -> {
             toggleButton(grillEco, false); toggleButton(grillFull, false); toggleButton(grillOff, true);
+            device.getState().setGrill("off");
             execAction("setGrill", getParams("off"));
         });
 

@@ -43,7 +43,10 @@ class LightDialog extends DeviceDialog {
         brightnessText = dialogView.findViewById(R.id.brightness_text);
         picker = dialogView.findViewById(R.id.picker);
 
-        sw.setOnCheckedChangeListener((buttonView, isChecked) -> execAction((isChecked) ? "turnOn" : "turnOff"));
+        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            device.getState().setStatus((isChecked) ? "on" : "off");
+            execAction((isChecked) ? "turnOn" : "turnOff");
+        });
 
         String initBrightness = device.getState().getBrightness() + "%";
         brightnessText.setText(initBrightness);
@@ -61,6 +64,7 @@ class LightDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setBrightness(seekBar.getProgress());
                 execAction("setBrightness", getParams(seekBar.getProgress()));
             }
         });
@@ -74,6 +78,7 @@ class LightDialog extends DeviceDialog {
         picker.getColor();
         picker.setOnColorChangedListener(color -> {
             String hexColor = Integer.toHexString(color).substring(2);
+            device.getState().setColor(hexColor);
             execAction("setColor", getParams(hexColor));
         });
 

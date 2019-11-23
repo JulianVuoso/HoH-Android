@@ -38,7 +38,10 @@ class AcDialog extends DeviceDialog {
 
         swAc = dialogView.findViewById(R.id.ac_switch);
         swAc.setChecked(device.getState().getStatus().equals("on"));
-        swAc.setOnCheckedChangeListener((buttonView, isChecked) -> execAction((isChecked) ? "turnOn" : "turnOff"));
+        swAc.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            device.getState().setStatus((isChecked) ? "on" : "off");
+            execAction((isChecked) ? "turnOn" : "turnOff");
+        });
 
         initTemperature(dialogView);
         initFanSpeed(dialogView);
@@ -48,14 +51,17 @@ class AcDialog extends DeviceDialog {
         initButtons(dialogView);
         modeCold.setOnClickListener(v -> {
             toggleButton(modeCold, true); toggleButton(modeVent, false); toggleButton(modeHeat, false);
+            device.getState().setMode("cold");
             execAction("setMode", getParams("cold"));
         });
         modeVent.setOnClickListener(v -> {
             toggleButton(modeCold, false); toggleButton(modeVent, true); toggleButton(modeHeat, false);
+            device.getState().setMode("fan");
             execAction("setMode", getParams("fan"));
         });
         modeHeat.setOnClickListener(v -> {
             toggleButton(modeCold, false); toggleButton(modeVent, false); toggleButton(modeHeat, true);
+            device.getState().setMode("heat");
             execAction("setMode", getParams("heat"));
         });
 
@@ -110,6 +116,7 @@ class AcDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setTemperature(seekBar.getProgress() + 18);
                 execAction("setTemperature", getParams(seekBar.getProgress() + 18));
             }
         });
@@ -134,17 +141,20 @@ class AcDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setFanSpeed(String.valueOf((seekBar.getProgress() + 1) * 25));
                 execAction("setFanSpeed", getParams(String.valueOf((seekBar.getProgress() + 1) * 25)));
             }
         });
 
         auto_speed.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+                device.getState().setFanSpeed("auto");
                 execAction("setFanSpeed", getParams("auto"));
                 fanSpeed.setEnabled(false);
                 fanSpeedText.setVisibility(View.INVISIBLE);
                 fanSpeed.setProgress(2);
             } else {
+                device.getState().setFanSpeed(String.valueOf(50));
                 execAction("setFanSpeed", getParams(String.valueOf(50)));
                 fanSpeed.setEnabled(true);
                 fanSpeedText.setVisibility(View.VISIBLE);
@@ -190,17 +200,20 @@ class AcDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setVerticalSwing(String.valueOf((seekBar.getProgress() + 1) * 225 / 10));
                 execAction("setVerticalSwing", getParams(String.valueOf((seekBar.getProgress() + 1) * 225 / 10)));
             }
         });
 
         auto_vertical.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+                device.getState().setVerticalSwing("auto");
                 execAction("setVerticalSwing", getParams("auto"));
                 vertWings.setEnabled(false);
                 vertWingsText.setVisibility(View.INVISIBLE);
                 vertWings.setProgress(1);
             } else {
+                device.getState().setVerticalSwing(String.valueOf(45));
                 execAction("setVerticalSwing", getParams(String.valueOf(45)));
                 vertWings.setEnabled(true);
                 vertWingsText.setVisibility(View.VISIBLE);
@@ -246,17 +259,20 @@ class AcDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setHorizontalSwing(String.valueOf(seekBar.getProgress() * 45 - 90));
                 execAction("setHorizontalSwing", getParams(String.valueOf(seekBar.getProgress() * 45 - 90)));
             }
         });
 
         auto_horizontal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+                device.getState().setHorizontalSwing("auto");
                 execAction("setVerticalSwing", getParams("auto"));
                 horizWings.setEnabled(false);
                 horizWingsText.setVisibility(View.INVISIBLE);
                 horizWings.setProgress(2);
             } else {
+                device.getState().setHorizontalSwing(String.valueOf(0));
                 execAction("setVerticalSwing", getParams(String.valueOf(0)));
                 horizWings.setEnabled(true);
                 horizWingsText.setVisibility(View.VISIBLE);

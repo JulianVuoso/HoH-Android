@@ -59,6 +59,7 @@ class RefrigeratorDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setTemperature(seekBar.getProgress() + 2);
                 execAction("setTemperature", getParams(seekBar.getProgress() + 2));
             }
         });
@@ -80,6 +81,7 @@ class RefrigeratorDialog extends DeviceDialog {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                device.getState().setFreezerTemperature(seekBar.getProgress() - 20);
                 execAction("setFreezerTemperature", getParams(seekBar.getProgress() - 20));
             }
         });
@@ -87,14 +89,17 @@ class RefrigeratorDialog extends DeviceDialog {
         initButtons(dialogView);
         modeVacation.setOnClickListener(v -> {
             toggleButton(modeVacation, true); toggleButton(modeParty, false); toggleButton(modeNormal, false);
+            device.getState().setMode("vacation");
             execAction("setMode", getParams("vacation"));
         });
         modeParty.setOnClickListener(v -> {
             toggleButton(modeVacation, false); toggleButton(modeParty, true); toggleButton(modeNormal, false);
+            device.getState().setMode("party");
             execAction("setMode", getParams("party"));
         });
         modeNormal.setOnClickListener(v -> {
             toggleButton(modeVacation, false); toggleButton(modeParty, false); toggleButton(modeNormal, true);
+            device.getState().setMode("default");
             execAction("setMode", getParams("default"));
         });
 

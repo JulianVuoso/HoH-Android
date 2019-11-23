@@ -24,6 +24,9 @@ import ar.edu.itba.hci.hoh.R;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
+import ar.edu.itba.hci.hoh.notifications.DatabaseHandler;
+import ar.edu.itba.hci.hoh.notifications.LocalDatabase;
+import ar.edu.itba.hci.hoh.notifications.Tuple;
 
 abstract class DeviceDialog extends DataDialog {
     protected Fragment fragment;
@@ -112,28 +115,30 @@ abstract class DeviceDialog extends DataDialog {
     protected void execAction(String action) {
         dialogData.execAction(device.getId(), action).observe(fragment, result -> {
             Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
-            if (result != null) {
-                // TODO: Modify Room for local changes
-            }
+            if (result != null)
+                updateLocalDatabase();
         });
     }
 
     protected void execAction(String action, String[] param) {
         dialogData.execAction(device.getId(), action, param).observe(fragment, result -> {
             Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
-            if (result != null) {
-                // TODO: Modify Room for local changes
-            }
+            if (result != null)
+                updateLocalDatabase();
         });
     }
 
     protected void execAction(String action, Integer[] param) {
         dialogData.execAction(device.getId(), action, param).observe(fragment, result -> {
             Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
-            if (result != null) {
-                // TODO: Modify Room for local changes
-            }
+            if (result != null)
+                updateLocalDatabase();
         });
+    }
+
+    private void updateLocalDatabase() {
+        LocalDatabase db = LocalDatabase.getInstance(fragment.getContext());
+        DatabaseHandler.insert(db, new Tuple(device.getId(), device.getState().toString(), device.getName()));
     }
 
     protected String[] getParams(String param) {
