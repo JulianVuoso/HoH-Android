@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HOH</string>
 
@@ -116,10 +117,11 @@
     <string name="changed_notification">has changed its configuration</string>
     <string name="deleted_notification_title"><b>Device Deleted</b></string>
     <string name="deleted_notification">has been deleted</string>
-
+    
     <string name="category_lights">Lights</string>
     <string name="category_doors_blinds">Doors &amp; Blinds</string>
     <string name="category_ac">Air Conditioning</string>
     <string name="category_appliances">Appliances</string>
     <string name="category_entertainment">Entertainment</string>
+
 </resources>

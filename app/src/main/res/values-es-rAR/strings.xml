@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HOH</string>
+
+    <string name="title_rooms">Habitaciones</string>
+    <string name="title_devices">Dispositivos</string>
+    <string name="title_device">Dispositivo</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_routines">Rutinas</string>
+    <string name="title_settings">Configuración</string>
+
+    <string name="option_settings">Configuración</string>
+    <string name="option_help">Ayuda</string>
+    <string name="option_about_us">Quiénes somos</string>
+    <string name="option_search">Buscar</string>
+    <string name="option_favorite">Favorito</string>
+
+    <string name="categories_subtitle">Categorías</string>
+    <string name="img_default_description">Imagen</string>
+    <string name="dialog_close_description">Cerrar Diálogo</string>
+    <string name="dialog_favorite_description">Favorito</string>
+    <string name="dialog_not_favorite_description">No Favorito</string>
+    <string name="search_hint">Buscar…</string>
+    <string name="search_button_message">¡Búsqueda no implementada aún!</string>
+
+    <string name="title_favorite_devices">Dispositivos Favoritos</string>
+    <string name="title_favorite_rooms">Habitaciones Favoritas</string>
+    <string name="title_favorite_routines">Rutinas Favoritas</string>
+
+    <string name="empty_device_list">No se hallaron dispositivos</string>
+    <string name="empty_category_list">No se hallaron categorías</string>
+    <string name="empty_room_list">No se hallaron habitaciones</string>
+    <string name="empty_routine_list">No se hallaron rutinas</string>
+    <string name="empty_fav_device_list">No se hallaron dispositos favoritos</string>
+    <string name="empty_fav_room_list">No se hallaron habitaciones favoritas</string>
+    <string name="empty_fav_routine_list">No se hallaron rutinas favoritas</string>
+
+    <string name="device_status_on">Encendido</string>
+    <string name="device_status_off">Apagado</string>
+    <string name="device_status_open">Abierta</string>
+    <string name="device_status_opening">Abriendo</string>
+    <string name="device_status_closing">Cerrando</string>
+    <string name="device_status_closed">Cerrada</string>
+    <string name="device_status_locked">Bloqueada</string>
+    <string name="device_status_playing">Reproduciendo</string>
+    <string name="device_status_paused">Pausado</string>
+    <string name="device_status_stopped">Detenido</string>
+
+    <string name="left_arrow_description">Flecha Izquierda</string>
+    <string name="right_arrow_description">Flecha Derecha</string>
+    <string name="playlist_add_description">Agregar Lista de Reproducción</string>
+    <string name="previous_song_description">Pista Anterior</string>
+    <string name="next_song_description">Pista Siguiente</string>
+    <string name="play_pause_description">Reproducir/Pausar</string>
+    <string name="stop_description">Detener</string>
+
+    <string name="routine_exec_dialog_message">¿Está seguro que desea ejecutar</string>
+    <string name="routine_exec_dialog_cancel">Cancelar</string>
+    <string name="routine_exec_dialog_run">Ejecutar</string>
+    <string name="routine_exec_message">Ejecutando</string>
+
+    <string name="about_us_title">Quiénes somos</string>
+    <string name="about_us_message">
+        House of Hands es una aplicación realizada por iLuz. Somos un grupo de estudiantes del ITBA
+        con el propósito de desarrollar aplicaciones web y Android que apliquen el conocimiento de HCI.
+    </string>
+
+    <string name="close_dialog_description">Cerrar Diálogo</string>
+
+    <string name="device_dialog_temperature">Temperatura</string>
+    <string name="device_dialog_freezer_temperature">Temperatura del congelador</string>
+    <string name="device_dialog_heat_source">Fuente de calor</string>
+    <string name="device_dialog_convection_mode">Modo de Convección</string>
+    <string name="device_dialog_grill_mode">Modo de Parrilla</string>
+    <string name="device_dialog_fan_speed">Velocidad de Ventilación</string>
+    <string name="device_dialog_vertical_wings">Oscilación Vertical</string>
+    <string name="device_dialog_horizontal_wings">Oscilación Horizontal</string>
+    <string name="device_dialog_genre">Género</string>
+    <string name="device_dialog_volume">Volumen</string>
+    <string name="device_dialog_brightness">Brillo</string>
+    <string name="device_dialog_color">Color</string>
+    <string name="device_dialog_up">Arriba</string>
+    <string name="device_dialog_down">Abajo</string>
+    <string name="device_dialog_full">Completo</string>
+    <string name="device_dialog_eco">Eco</string>
+    <string name="device_dialog_mode">Modo</string>
+    <string name="device_dialog_normal">Normal</string>
+    <string name="device_dialog_vacation">Vacaciones</string>
+    <string name="device_dialog_party">Fiesta</string>
+    <string name="device_dialog_cold">Frío</string>
+    <string name="device_dialog_fan">Ventilación</string>
+    <string name="device_dialog_heat">Calor</string>
+    <string name="device_dialog_auto">Auto</string>
+
+    <string name="error_no_connection">Fallo al conectar con</string>
+    <string name="error_timeout">¡Error de tiempo de espera! ¡No se pudo conectar a Ajax!</string>
+
+    <string name="settings_notifications_category">Notificaciones</string>
+    <string name="settings_notification_switch">Activar Notificaciones</string>
+    <string name="settings_notification_time">Repetir intervalo de tiempo</string>
+    <string name="settings_api_category">API</string>
+    <string name="settings_api_url">Api URL</string>
+
+    <!-- If values are meant to be changed, change them also in arrays.xml notif values -->
+    <string name="settings_notification_time_option_15">15 minutos</string>
+    <string name="settings_notification_time_option_30">30 minutos</string>
+    <string name="settings_notification_time_option_45">45 minutos</string>
+    <string name="settings_notification_time_option_60">60 minutos</string>
+
+    <!--  For notifications  -->
+    <string name="channel_name">Canal de Notificaciones</string>
+    <string name="channel_description">Canal de Notificaciones</string>
+
+    <string name="new_notification_title"><b>Nuevo Dispositivo</b></string>
+    <string name="new_notification">agregado a</string>
+    <string name="changed_notification_title"><b>Dispositivo Modificado</b></string>
+    <string name="changed_notification">ha cambiado su configuración</string>
+    <string name="deleted_notification_title"><b>Dispositivo Eliminado</b></string>
+    <string name="deleted_notification">ha sido removido</string>
+
+    <!-- For Category Names -->
+    <string name="category_lights">Luces</string>
+    <string name="category_doors_blinds">Puertas y Ventanas</string>
+    <string name="category_ac">Equipos de Aire</string>
+    <string name="category_appliances">"&#x20;"Electrodomésticos</string>
+    <string name="category_entertainment">Entretenimiento</string>
+</resources>
