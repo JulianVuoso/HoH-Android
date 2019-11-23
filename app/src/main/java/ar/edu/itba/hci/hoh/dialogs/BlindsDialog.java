@@ -44,15 +44,14 @@ class BlindsDialog extends DeviceDialog {
         pB.setProgress(device.getState().getLevel());
 
         openBtn.setOnClickListener(v -> {
-            toggleButton(closeBtn, false);
-            openBtn.setEnabled(false);
-
+            device.getState().setStatus("opening");
+            setButtons();
             execAction("open");
         });
 
         closeBtn.setOnClickListener(v -> {
-            toggleButton(openBtn, false);
-            closeBtn.setEnabled(false);
+            device.getState().setStatus("closing");
+            setButtons();
             execAction("close");
         });
 
@@ -103,8 +102,17 @@ class BlindsDialog extends DeviceDialog {
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
 //        setButtons();
-        int level = device.getState().getLevel();
-        pB.setProgress(level);
-//        if ()
+        int newlevel = device.getState().getLevel();
+        int currentLevel = pB.getProgress();
+        pB.setProgress(newlevel);
+        if (newlevel != currentLevel) {
+            if (newlevel == 0) {
+                device.getState().setStatus("opened");
+                setButtons();
+            } else if (newlevel == 100) {
+                device.getState().setStatus("closed");
+                setButtons();
+            }
+        }
     }
 }
