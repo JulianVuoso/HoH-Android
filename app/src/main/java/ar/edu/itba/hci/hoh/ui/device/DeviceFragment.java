@@ -68,8 +68,7 @@ public class DeviceFragment extends Fragment {
         rvDevices = root.findViewById(R.id.rv_list_category_devices);
 //        LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         GridLayoutManager manager;
-        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
-        if ((displayMetrics.widthPixels / displayMetrics.density) > 800)
+        if (this.getResources().getConfiguration().smallestScreenWidthDp >= 600)
             manager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
         else
             manager = new GridLayoutManager(this.getContext(), 1, GridLayoutManager.VERTICAL, false);

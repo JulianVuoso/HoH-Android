@@ -78,14 +78,11 @@ public class RoomFragment extends Fragment {
             room = RoomFragmentArgs.fromBundle(getArguments()).getRoom();
 
         rvDevices = root.findViewById(R.id.rv_list_room_devices);
-//        LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         GridLayoutManager manager;
-        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
-        if ((displayMetrics.widthPixels / displayMetrics.density) > 800)
+        if (this.getResources().getConfiguration().smallestScreenWidthDp >= 600)
             manager = new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false);
         else
             manager = new GridLayoutManager(this.getContext(), 1, GridLayoutManager.VERTICAL, false);
-        Log.e(MainActivity.LOG_TAG, String.format("Width %d / %g / DPI %d / scaledD %g", displayMetrics.widthPixels, displayMetrics.density, displayMetrics.densityDpi, displayMetrics.scaledDensity));
         rvDevices.setLayoutManager(manager);
         adapter = new RoomListAdapter(element -> {
             AlertDialog dialog = DialogCreator.createDialog(this, element);
