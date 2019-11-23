@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 Category lights = new Category("Lights", R.drawable.ic_light_black_60dp);
                 // TODO: EN EL INFORME, PONER QUE DOORS & WINDOWS ERA MUY LARGO Y QUE DEBERIAMOS CAMBIARLO TAMBIEN EN LA WEB
                 Category openings = new Category("Doors & Blinds", R.drawable.ic_door_black_60dp);
-                Category ac = new Category("Air Conditioning", R.drawable.ic_ac_black_60dp);
+                Category ac = new Category("Air Conditioning", R.drawable.ic_ac_60dp);
                 Category appliances = new Category("Appliances", R.drawable.ic_fridge_black_60dp);
                 Category entertainment = new Category("Entertainment", R.drawable.ic_entertainment_black_60dp);
 
