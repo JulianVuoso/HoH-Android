@@ -99,7 +99,7 @@
 
     <string name="settings_notifications_category">Notificaciones</string>
     <string name="settings_notification_switch">Activar Notificaciones</string>
-    <string name="settings_notification_time">Repetir intervalo de tiempo</string>
+    <string name="settings_notification_time">Tiempo de intervalo de repetición</string>
     <string name="settings_api_category">API</string>
     <string name="settings_api_url">Api URL</string>
 

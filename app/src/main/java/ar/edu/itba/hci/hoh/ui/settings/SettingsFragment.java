@@ -14,9 +14,13 @@ import ar.edu.itba.hci.hoh.api.Api;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private ListPreference timePreference;
+    private final static String SETTINGS_TAG = SettingsFragment.class.getName();
+    public final static String SETTINGS_SHARED_PREFERENCES = SETTINGS_TAG + ".SETTINGS_SHARED_PREFERENCES_FILE_NAME";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        getPreferenceManager().setSharedPreferencesName(SETTINGS_SHARED_PREFERENCES);
+
         setPreferencesFromResource(R.xml.preferences_settings, rootKey);
 
         boolean initialNotif = MainActivity.isNotifications();

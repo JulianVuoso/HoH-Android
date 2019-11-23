@@ -3,6 +3,7 @@ package ar.edu.itba.hci.hoh;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -50,6 +51,7 @@ import ar.edu.itba.hci.hoh.notifications.LocalDatabase;
 import ar.edu.itba.hci.hoh.notifications.NotificationWorker;
 import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
+import ar.edu.itba.hci.hoh.ui.settings.SettingsFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     public static void setNotifications(boolean notifications) {
         MainActivity.notifications = notifications;
         LocalDatabase db = LocalDatabase.getInstance(instance.getApplicationContext());
+        DatabaseHandler.deleteAll(db);
 
         if (notifications) {
             PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(NotificationWorker.class, notificationsTime, TimeUnit.MINUTES)
@@ -95,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 //            WorkManager.getInstance().enqueueUniqueWork(NotificationWorker.NAME, ExistingWorkPolicy.KEEP, request);
         } else {
             WorkManager.getInstance().cancelUniqueWork(NotificationWorker.NAME);
-            DatabaseHandler.deleteAll(db);
         }
 
     }
@@ -151,6 +153,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        SharedPreferences preferences = getSharedPreferences(SettingsFragment.SETTINGS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        Api.setURL(preferences.getString("api_url", Api.getURL()));
+        MainActivity.notifications = preferences.getBoolean("notifications", MainActivity.notifications);
+        MainActivity.notificationsTime = Integer.valueOf(preferences.getString("notifications_time", String.valueOf(notificationsTime)));
     }
 
     @Override
