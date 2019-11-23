@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                Toast.makeText(this, "Search Selected", Toast.LENGTH_SHORT).show();
+                MyApplication.makeToast(this.getResources().getString(R.string.search_button_message));
                 break;
             case R.id.kebab_settings:
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);

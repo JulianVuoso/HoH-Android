@@ -63,10 +63,7 @@ public class MyApplication extends Application {
         return routineRepository;
     }
 
-    // TODO: VER COMO HACER PARA PARSEAR EL ERROR (Y TRADUCIRLO SI HACE FALTA)
     public static void makeToast(String message) {
-        // 6 --> Could not connect to Ajax!
-
         Toast toast = Toast.makeText(instance, message, Toast.LENGTH_SHORT);
         toast.setMargin(toastHorizontalMargin, toastVerticalMargin);
         toast.show();

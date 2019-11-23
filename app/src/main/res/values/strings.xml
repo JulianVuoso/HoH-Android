@@ -20,6 +20,7 @@
     <string name="dialog_favorite_description">Favorite</string>
     <string name="dialog_not_favorite_description">Not favorite</string>
     <string name="search_hint">Search…</string>
+    <string name="search_button_message">Search not implemented yet!</string>
 
     <string name="title_favorite_devices">Favorite Devices</string>
     <string name="title_favorite_rooms">Favorite Rooms</string>
