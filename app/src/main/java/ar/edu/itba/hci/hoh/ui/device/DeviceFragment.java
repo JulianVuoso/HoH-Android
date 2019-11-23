@@ -67,7 +67,6 @@ public class DeviceFragment extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rvDevices.setLayoutManager(manager);
         adapter = new DeviceListAdapter(data, element -> {
-            Fragment fragment = this;
             AlertDialog dialog = DialogCreator.createDialog(this, element);
             if (dialog != null) {
                 dialog.setOnDismissListener(dialog1 -> {

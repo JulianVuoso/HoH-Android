@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment {
         rvFavDevices.setLayoutManager(managerFavDevices);
         rvFavDevices.addItemDecoration(new MarginItemDecorator((int) getResources().getDimension(R.dimen.home_card_spacing)));
         adapterFavDevices = new DeviceAdapter(element -> {
-            Fragment fragment = this;
             AlertDialog dialog = DialogCreator.createDialog(this, element);
             if (dialog != null) {
                 dialog.setOnDismissListener(dialog1 -> {
