@@ -136,6 +136,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences preferences = getSharedPreferences(SettingsFragment.SETTINGS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        Api.setURL(preferences.getString("api_url", Api.getURL()));
+        MainActivity.notifications = preferences.getBoolean("notifications", MainActivity.notifications);
+        MainActivity.notificationsTime = Integer.valueOf(preferences.getString("notifications_time", String.valueOf(notificationsTime)));
+
         instance = this;
         mainActivityData = new MainActivityData();
 
@@ -154,10 +159,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        SharedPreferences preferences = getSharedPreferences(SettingsFragment.SETTINGS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        Api.setURL(preferences.getString("api_url", Api.getURL()));
-        MainActivity.notifications = preferences.getBoolean("notifications", MainActivity.notifications);
-        MainActivity.notificationsTime = Integer.valueOf(preferences.getString("notifications_time", String.valueOf(notificationsTime)));
     }
 
     @Override

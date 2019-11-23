@@ -113,30 +113,26 @@ abstract class DeviceDialog extends DataDialog {
     }
 
     protected void execAction(String action) {
-        dialogData.execAction(device.getId(), action).observe(fragment, result -> {
-            Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
-            if (result != null)
-                updateLocalDatabase();
-        });
+        dialogData.execAction(device.getId(), action).observe(fragment, getDefaultObserver());
     }
 
     protected void execAction(String action, String[] param) {
-        dialogData.execAction(device.getId(), action, param).observe(fragment, result -> {
-            Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
-            if (result != null)
-                updateLocalDatabase();
-        });
+        dialogData.execAction(device.getId(), action, param).observe(fragment, getDefaultObserver());
     }
 
     protected void execAction(String action, Integer[] param) {
-        dialogData.execAction(device.getId(), action, param).observe(fragment, result -> {
-            Log.e(MainActivity.LOG_TAG, String.format("Action: %s \n %s", action, device.getState().toString()));
-            if (result != null)
-                updateLocalDatabase();
-        });
+        dialogData.execAction(device.getId(), action, param).observe(fragment, getDefaultObserver());
     }
 
-    private void updateLocalDatabase() {
+    protected void execAction(String action, Observer<Boolean> observer) {
+        dialogData.execAction(device.getId(), action).observe(fragment, observer);
+    }
+
+    protected void execAction(String action, String[] param, Observer<String> observer) {
+        dialogData.execAction(device.getId(), action, param).observe(fragment, observer);
+    }
+
+    protected void updateLocalDatabase() {
         LocalDatabase db = LocalDatabase.getInstance(fragment.getContext());
         DatabaseHandler.insert(db, new Tuple(device.getId(), device.getState().toString(), device.getName()));
     }
@@ -151,5 +147,17 @@ abstract class DeviceDialog extends DataDialog {
         Integer[] ret = new Integer[1];
         ret[0] = param;
         return ret;
+    }
+
+    private <T> Observer<T> getDefaultObserver() {
+        return result -> {
+            if (result != null) {
+                dialogData.getDevice(device.getId()).observe(fragment, newDevice -> {
+                    device = newDevice;
+                    reloadData();
+                    updateLocalDatabase();
+                });
+            }
+        };
     }
 }

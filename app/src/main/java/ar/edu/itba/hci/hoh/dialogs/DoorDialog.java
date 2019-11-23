@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import ar.edu.itba.hci.hoh.MainActivity;
 import ar.edu.itba.hci.hoh.R;
@@ -45,8 +46,7 @@ class DoorDialog extends DeviceDialog {
                 toggleButton(lockButton, false);
                 device.getState().setStatus("opened");
                 device.getState().setLock("unlocked");
-                execAction("unlock");
-                execAction("open");
+                execAction("unlock", getDoubleActionObserver("open"));
             });
             closeButton.setOnClickListener(v -> {
                 toggleButton(openButton, false);
@@ -54,8 +54,7 @@ class DoorDialog extends DeviceDialog {
                 toggleButton(lockButton, false);
                 device.getState().setStatus("closed");
                 device.getState().setLock("unlocked");
-                execAction("unlock");
-                execAction("close");
+                execAction("unlock", getDoubleActionObserver("close"));
             });
             lockButton.setOnClickListener(v -> {
                 toggleButton(openButton, false);
@@ -63,8 +62,7 @@ class DoorDialog extends DeviceDialog {
                 toggleButton(lockButton, true);
                 device.getState().setStatus("closed");
                 device.getState().setLock("locked");
-                execAction("close");
-                execAction("lock");
+                execAction("close", getDoubleActionObserver("lock"));
             });
         }
 
@@ -76,6 +74,13 @@ class DoorDialog extends DeviceDialog {
     void closeDialog() {
         super.cancelTimer();
         dialog.dismiss();
+    }
+
+    private Observer<Boolean> getDoubleActionObserver(String action2) {
+        return result -> {
+            if (result != null)
+                execAction(action2);
+        };
     }
 
     private void setButtons() {
@@ -91,6 +96,6 @@ class DoorDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-//        setButtons();
+        setButtons();
     }
 }

@@ -97,10 +97,10 @@ class LightDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-//        sw.setChecked(device.getState().getStatus().equals("on"));
-//        String initBrightness = device.getState().getBrightness() + "%";
-//        brightnessText.setText(initBrightness);
-//        brightness.setProgress(device.getState().getBrightness());
+        sw.setChecked(device.getState().getStatus().equals("on"));
+        String initBrightness = device.getState().getBrightness() + "%";
+        brightnessText.setText(initBrightness);
+        brightness.setProgress(device.getState().getBrightness());
 //        picker.setColor(Color.parseColor("#" + device.getState().getColor()));
     }
 }

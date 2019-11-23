@@ -233,7 +233,7 @@ class AcDialog extends DeviceDialog {
         } else {
             vertWings.setEnabled(true);
             vertWingsText.setVisibility(View.VISIBLE);
-            vertWings.setProgress(Integer.valueOf(device.getState().getVerticalSwing()) * 10 / 225 - 1);
+            vertWings.setProgress(Integer.valueOf(device.getState().getVerticalSwing()) * 10 / 220 - 1);
             String initFanSpeed = device.getState().getVerticalSwing() + "°";
             vertWingsText.setText(initFanSpeed);
         }
@@ -267,13 +267,13 @@ class AcDialog extends DeviceDialog {
         auto_horizontal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 device.getState().setHorizontalSwing("auto");
-                execAction("setVerticalSwing", getParams("auto"));
+                execAction("setHorizontalSwing", getParams("auto"));
                 horizWings.setEnabled(false);
                 horizWingsText.setVisibility(View.INVISIBLE);
                 horizWings.setProgress(2);
             } else {
                 device.getState().setHorizontalSwing(String.valueOf(0));
-                execAction("setVerticalSwing", getParams(String.valueOf(0)));
+                execAction("setHorizontalSwing", getParams(String.valueOf(0)));
                 horizWings.setEnabled(true);
                 horizWingsText.setVisibility(View.VISIBLE);
                 horizWings.setProgress(2);
@@ -301,13 +301,13 @@ class AcDialog extends DeviceDialog {
 
     void reloadData() {
         Log.e(MainActivity.LOG_TAG, "actualizando");
-//        swAc.setChecked(device.getState().getStatus().equals("on"));
-//        setButtons();
-//        String initAcTemp = device.getState().getTemperature() + "°C";
-//        tempAcText.setText(initAcTemp);
-//        tempAc.setProgress(device.getState().getTemperature() - 18);
-//        setFanSpeed();
-//        setVertWings();
-//        setHorizWings();
+        swAc.setChecked(device.getState().getStatus().equals("on"));
+        setButtons();
+        String initAcTemp = device.getState().getTemperature() + "°C";
+        tempAcText.setText(initAcTemp);
+        tempAc.setProgress(device.getState().getTemperature() - 18);
+        setFanSpeed();
+        setVertWings();
+        setHorizWings();
     }
 }
