@@ -16,7 +16,7 @@ import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
 
 public class NotificationCreator {
     public static final String CHANNEL_ID = "ar.edu.itba.hci.hoh.NOTIFICATION_CHANNEL";
-    private static final String INTENT_KEY = "ROOOM";
+    public static final String INTENT_KEY = "ar.edu.itba.hci.hoh.NOTIFICATION_ROOM";
 
     public static void showNotification(Context context, int messageId, Notification notification) {
 

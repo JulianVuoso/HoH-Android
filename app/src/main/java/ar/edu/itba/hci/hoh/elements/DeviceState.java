@@ -2,7 +2,6 @@ package ar.edu.itba.hci.hoh.elements;
 
 import java.io.Serializable;
 
-// TODO: PASARLO A UN GSON DESERIALIZER Y HACER UN STATE GENERICO Y QUE TODOS EXTIENDAN DE EL
 public class DeviceState implements Serializable {
     private String status;
     /* Light: status + */

@@ -9,8 +9,10 @@ import java.util.List;
 
 import ar.edu.itba.hci.hoh.api.Error;
 import ar.edu.itba.hci.hoh.elements.ApiRequest;
+import ar.edu.itba.hci.hoh.elements.Device;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.elements.Result;
+import ar.edu.itba.hci.hoh.elements.Room;
 
 public class MainActivityData {
     private LiveData<Result<ArrayList<DeviceType>>> types;
@@ -29,6 +31,12 @@ public class MainActivityData {
         ApiRequest<ArrayList<DeviceType>> typeRequest = MyApplication.getInstance().getDeviceTypeRepository().getDeviceTypes();
         requestTags.add(typeRequest.getUuid());
         this.types = typeRequest.getLiveData();
+    }
+
+    LiveData<Room> getRoom(String id) {
+        ApiRequest<Room> getRequest = MyApplication.getInstance().getRoomRepository().getRoom(id);
+        requestTags.add(getRequest.getUuid());
+        return Transformations.map(getRequest.getLiveData(), MyApplication.getTransformFunction());
     }
 
     void cancelRequests() {

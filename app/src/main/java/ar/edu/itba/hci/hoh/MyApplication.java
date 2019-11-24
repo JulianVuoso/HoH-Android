@@ -96,8 +96,6 @@ public class MyApplication extends Application {
         return instance.getResources().getDimension(R.dimen.device_card_width);
     }
 
-    // TODO: REVISAR COLORES
-    // TODO: VER SI OFF ES MEDIUM O DARK
     public static int getCardBackgroundColor(DeviceState state) {
         if (state == null || state.getStatus() == null) return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundLight);
 
@@ -119,7 +117,6 @@ public class MyApplication extends Application {
         return ContextCompat.getColor(instance, R.color.colorDevCardBackgroundDark);
     }
 
-    // TODO: El refrigerator no muestra ningun estado?
     public static String getDeviceStatusString(DeviceState state) {
         if (state == null || state.getStatus() == null) return null;
 

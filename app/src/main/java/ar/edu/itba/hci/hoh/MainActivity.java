@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -46,11 +47,14 @@ import ar.edu.itba.hci.hoh.elements.Category;
 import ar.edu.itba.hci.hoh.elements.DeviceType;
 import ar.edu.itba.hci.hoh.api.Api;
 import ar.edu.itba.hci.hoh.api.Error;
+import ar.edu.itba.hci.hoh.elements.Room;
 import ar.edu.itba.hci.hoh.notifications.DatabaseHandler;
 import ar.edu.itba.hci.hoh.notifications.LocalDatabase;
+import ar.edu.itba.hci.hoh.notifications.NotificationCreator;
 import ar.edu.itba.hci.hoh.notifications.NotificationWorker;
 import ar.edu.itba.hci.hoh.ui.devices.DevicesFragment;
 import ar.edu.itba.hci.hoh.ui.room.RoomFragment;
+import ar.edu.itba.hci.hoh.ui.rooms.RoomsFragmentDirections;
 import ar.edu.itba.hci.hoh.ui.settings.SettingsFragment;
 
 
@@ -128,9 +132,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    // TODO: REVISAR MENSAJE I/Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
-    // TODO: CORERGIR SVG DE HORNO Y BLINDS PORQUE LES FALTA MARGEN
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,6 +160,20 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            String roomId = intent.getStringExtra(NotificationCreator.INTENT_KEY);
+            if (roomId != null) {
+                mainActivityData.getRoom(roomId).observe(this, room -> {
+                    if (room != null) {
+                        Log.e(MainActivity.LOG_TAG, room.getName());
+                        navController.navigate(R.id.navigation_rooms);
+                        RoomsFragmentDirections.ActionSelectRoom action = RoomsFragmentDirections.actionSelectRoom(room, room.getName());
+                        navController.navigate(action);
+                    }
+                });
+            }
+        }
     }
 
     @Override
@@ -170,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
         mainActivityData.getDeviceTypes().observe(instance, deviceTypes -> {
             if (deviceTypes != null) {
                 Category lights = new Category(instance.getResources().getString(R.string.category_lights), R.drawable.ic_light_black_60dp);
-                // TODO: EN EL INFORME, PONER QUE DOORS & WINDOWS ERA MUY LARGO Y QUE DEBERIAMOS CAMBIARLO TAMBIEN EN LA WEB
                 Category openings = new Category(instance.getResources().getString(R.string.category_doors_blinds), R.drawable.ic_door_black_60dp);
                 Category ac = new Category(instance.getResources().getString(R.string.category_ac), R.drawable.ic_ac_60dp);
                 Category appliances = new Category(instance.getResources().getString(R.string.category_appliances), R.drawable.ic_fridge_black_60dp);

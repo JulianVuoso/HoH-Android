@@ -22,7 +22,6 @@ public class SearchableActivity extends AppCompatActivity {
         if (actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
 
-        // TODO: VER SI LE TENGO QUE PASAR COMO EXTRA UNA LISTA (DE QUE SERIA LA LISTA? Le mando tambien el tipo aparte?)
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);

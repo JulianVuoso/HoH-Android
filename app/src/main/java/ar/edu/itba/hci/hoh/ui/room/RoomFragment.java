@@ -144,7 +144,6 @@ public class RoomFragment extends Fragment {
         else
             inflater.inflate(R.menu.appbar_room_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        // TODO: VER COMO SETEAR BIEN EL BOTON SEGUN ESTADO DE FAVORITO (ROOM) --> NO PUEDO COMO ABAJO PORQUE AUN NO ESTA CREADO
 //        if (room != null && room.getMeta().isFavorite())
 //            menu.getItem(R.id.action_favorite).setIcon(R.drawable.ic_star_white_24dp);
 //        else
