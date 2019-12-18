@@ -1,0 +1,25 @@
+A continuación, se detallarán los pasos necesarios para modificar de manera exitosa la API de la aplicación. 
+Para poder conectarse a una URL en particular se deberá:
+1.	Ir al archivo HOH/app/src/main/res/xml/network_security_config.xml.
+2.	Agregar un tag llamado domain-config con el atributo cleartextTrafficPermited="true". 
+3.	Dentro de ese tag, incluir un tag domain con el atributo includeSubdomains="true".
+4.	Dentro de este último, la dirección a la que se desea conectar (sin el puerto).
+5.	Una vez habilitado el tráfico a este puerto, compilar y ejecutar el código.
+6.	Dentro de la aplicación, ir a más opciones, settings, y allí escribir la URL completa dónde se encuentra la API corriendo.
+Para ejecutar la aplicación desde un archivo APK
+1.	Transfiera el archivo APK al dispositivo donde se desea instalar la aplicación.
+2.	Abra el archivo APK desde su dispositivo. Presione instalar y siga las instrucciones brindadas por el sistema operativo. Aceptar la instalación, aunque no provenga de una fuente verificada.
+3.	Una vez finalizada la instalación, busque la aplicación HOH en su app drawer y ábrala.
+En caso de que se necesite habilitar tráfico ClearText HTTP hacia la URL, se debe seguir los siguientes pasos:
+1.	Ir al archivo HOH/app/src/main/res/xml/network_security_config.xml.
+2.	Agregar un tag llamado domain-config con el atributo cleartextTrafficPermited=&quot;true&quot;.
+3.	Dentro de ese tag, incluir un tag domain con el atributo includeSubdomains=&quot;true&quot;.. Como contenido, escribir la dirección a la que se desea conectar (sin el puerto).
+Una vez hecho esto, reconstruir el proyecto y correrlo, o construir un nuevo APK.
+Para setear la URL de la API, una vez dentro de la aplicación, ir a más opciones (en la toolbar), configuración (settings), y escribir en el campo Api URL la URL completa donde se esté corriendo la Api.
+Por ejemplo, si queremos conectarnos a la direccion 192.168.0.9:8080/api/ , debemos agregar el tag
+<domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.0.9</domain>
+</domain-config>
+
+Luego, una vez instalada la app, ir a configuraciones y cambiar el API URL por 
+"http://192.168.0.9:8080/api/"
